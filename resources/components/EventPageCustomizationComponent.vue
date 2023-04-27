@@ -45,14 +45,18 @@
                     <select class="form-select form-control" v-model="userData.primary_typeface"
                             aria-label="Default select example">
                         <option disabled value="">Select font</option>
-                        <option v-for="font in PrimaryFonts.concat(SecondaryFonts)" :value="font.replaceAll(' ','-')">{{ font }}</option>
+                        <option v-for="font in PrimaryFonts.concat(SecondaryFonts)" :value="font.replaceAll(' ','-')">
+                            {{ font }}
+                        </option>
                     </select></div>
                 <div class="col-6">
                     <label class="form-label">Secondary Font</label>
                     <select class="form-select form-control" v-model="userData.secondary_typeface"
                             aria-label="Default select example">
                         <option disabled value="">Select font</option>
-                        <option v-for="font in PrimaryFonts.concat(SecondaryFonts)" :value="font.replaceAll(' ','-')">{{ font }}</option>
+                        <option v-for="font in PrimaryFonts.concat(SecondaryFonts)" :value="font.replaceAll(' ','-')">
+                            {{ font }}
+                        </option>
                     </select>
                 </div>
             </div>
@@ -63,7 +67,7 @@
             <div class="bottom w-100 py-3">
                 <div class="container">
                     <div class="row justify-content-center">
-                        <div class="col-md-7">
+                        <div class="col-md-10 col-lg-9 col-xl-7">
                             <h6 class="">Theme Customization</h6>
                             <div class="d-flex justify-content-between w-100 mt-4">
                                 <button @click="goToPreviousSection" class="btn btn-secondary btn-lg rounded-1">
@@ -73,7 +77,8 @@
                                     <button @click="gotoSection" class="btn btn-secondary btn-lg rounded-1 mx-2">
                                         <i class="fa-regular fa-eye"></i>
                                     </button>
-                                    <button @click="goToNextSection" class="btn btn-primary btn-lg px-5 rounded-2">
+                                    <button @click="goToNextSection"
+                                            :class="[isButtonActive ? '' : 'disabled','btn btn-primary btn-lg px-5 rounded-2']">
                                         Next <i class="fa-solid fa-caret-right"></i>
                                     </button>
                                 </div>
@@ -93,7 +98,10 @@ import {PrimaryFonts, SecondaryFonts} from "../js/utils";
 import {ComponentEventObject} from "../js/network/Models";
 import LineUpCard from "./sections/LineUpCard";
 import moment from "moment";
+import debounce from "lodash.debounce";
+import {checkIfArrayHasValues} from "../js/helper";
 
+const isButtonActive = ref(false)
 const emit = defineEmits(['next', 'previous'])
 const props = defineProps(['eventStore'])
 const event = props.eventStore.event
@@ -131,6 +139,11 @@ const eventDate = computed(() => {
 watch(userData.value, (name) => {
     persistUserData()
 })
+
+//Watch if the inputs are all filled
+watch(() => [userData.value.secondary_typeface, userData.value.text_color, userData.value.primary_typeface, userData.value.background_color], debounce((fields) => {
+    isButtonActive.value = fields.every(checkIfArrayHasValues)
+}, 300))
 
 
 </script>

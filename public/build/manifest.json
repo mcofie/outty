@@ -1,0 +1,44 @@
+{
+  "resources/js/app.js": {
+    "file": "assets/app.97eda802.js",
+    "src": "resources/js/app.js",
+    "isEntry": true,
+    "imports": [
+      "_vuex.esm-bundler.c2ef8b37.js"
+    ],
+    "css": [
+      "assets/app.ba287348.css"
+    ]
+  },
+  "resources/js/get-started.js": {
+    "file": "assets/get-started.9cb98ae1.js",
+    "src": "resources/js/get-started.js",
+    "isEntry": true,
+    "imports": [
+      "_vuex.esm-bundler.c2ef8b37.js"
+    ],
+    "css": [
+      "assets/get-started.dfe61e18.css",
+      "assets/app.ba287348.css"
+    ]
+  },
+  "_vuex.esm-bundler.c2ef8b37.js": {
+    "file": "assets/vuex.esm-bundler.c2ef8b37.js",
+    "css": [
+      "assets/vuex.9181f7c4.css"
+    ]
+  },
+  "resources/js/get-started.css": {
+    "file": "assets/get-started.dfe61e18.css",
+    "src": "resources/js/get-started.css"
+  },
+  "resources/css/app.css": {
+    "file": "assets/app.ba287348.css",
+    "src": "resources/css/app.css",
+    "isEntry": true
+  },
+  "vuex.css": {
+    "file": "assets/vuex.9181f7c4.css",
+    "src": "vuex.css"
+  }
+}

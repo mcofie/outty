@@ -18,7 +18,8 @@ class LineUpResource extends JsonResource
             'id' => $this->id,
             'title' => $this->title,
             'description' => $this->description,
-            'time' => $this->date_time,
+            'start_time' => $this->start_time,
+            'end_time' => $this->end_time,
             'status' => $this->status,
             'created' => $this->created_at,
             'updated' => $this->updated_at

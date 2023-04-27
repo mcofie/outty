@@ -76,24 +76,33 @@ a {
 }
 
 
-.accordion-button:not(.collapsed){
+.accordion-button:not(.collapsed) {
     background-color: transparent;
     box-shadow: none;
     color: #050505;
 }
 
-.bottom{
+.btn-danger {
+    background-color: #ececec;
+    color: #dfb6b6;
+}
+
+.bottom {
     background-color: #eeeeee;
 }
 
-.accordion-button:focus{
+hr {
+    border-color: #e0e0e0;
+}
+
+.accordion-button:focus {
     border-color: transparent !important;
     box-shadow: none;
 }
 
 .btn.disabled, .btn:disabled, fieldset:disabled .btn {
-    background-color: $accentColor;
-    color: #050505;
+    background-color: #ddc6bf;
+    color: #a47464;
 }
 
 .form-control:focus {
@@ -130,7 +139,7 @@ a {
 form {
     width: 100%;
     float: left;
-    margin: 7rem 0;
+    margin: 0rem 0;
 }
 
 
@@ -151,7 +160,7 @@ form {
 }
 
 .form-control {
-    background-color: #f6f5f6;
+    background-color: #f9f9f9;
 }
 
 input {

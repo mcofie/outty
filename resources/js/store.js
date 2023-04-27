@@ -1,11 +1,13 @@
 import {createStore} from 'vuex'
 import {CreateEventLineUp} from "./network/Models";
+import {formatTime, reverseTimeFormat} from "./helper";
 
 // root state object.
 // each Vuex instance is just a single state tree.
 const state = {
     count: 0,
-    event: CreateEventLineUp
+    event: CreateEventLineUp,
+    proposedEventName: ''
 }
 
 // mutations are operations that actually mutate the state.
@@ -22,6 +24,10 @@ const mutations = {
     },
     storeEventDetails(state, n) {
         state.event = n
+        localStorage.setItem('eventStore', JSON.stringify(state.event))
+    },
+    storeProposedEventName(state, name) {
+        state.proposedEventName = name
     }
 }
 
@@ -48,7 +54,17 @@ const actions = {
 // getters are functions.
 const getters = {
     evenOrOdd: state => state.count % 2 === 0 ? 'even' : 'odd',
-    eventStore: state => state.event
+    proposedEventName: state => state.proposedEventName,
+    eventStore: state => {
+        let store = JSON.parse(localStorage.getItem('eventStore'))
+        if (store) {
+            store.lineups.map((lineup) => {
+                lineup.start_time = reverseTimeFormat(lineup.start_time)
+                lineup.end_time = reverseTimeFormat(lineup.end_time)
+            })
+        }
+        return Object.assign(state.event, store)
+    }
 }
 
 // A Vuex instance is created by combining the state, mutations, actions,

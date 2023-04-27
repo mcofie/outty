@@ -36,10 +36,10 @@ class EventController extends Controller
         $validator = Validator::make($request->all(), [
             'user.name' => 'required|string',
             'user.email' => 'required|string',
-            'user.phone_number' => 'required|int',
+            'user.phone_number' => 'required|string',
             'event.name' => 'required|string',
             'event.description' => 'required|string',
-            'event.slug' => 'required|string',
+            'event.slug' => 'required|unique:event,slug|string',
             'event.theme_color' => 'required|string',
             'event.background_color' => 'required|string',
             'event.category' => 'required|string',
@@ -48,33 +48,35 @@ class EventController extends Controller
             'event.secondary_typeface' => 'required|string',
             'event.date' => 'required|string',
             'lineups.*.title' => 'required|string',
-            'lineups.*.description' => 'required|string',
-            'lineups.*.date_time' => 'required|string',
+//            'lineups.*.description' => 'required|string',
+            'lineups.*.start_time' => 'required|string',
+            'lineups.*.end_time' => 'required|string'
         ]);
 
         if (!$validator->fails()) {
             //TODO: Payment - Abstract this
             $response = Http::withBasicAuth(env('PAYMENT_CLIENT_KEY'), env('PAYMENT_CLIENT_SECRET'))
                 ->post(env('PAYMENT_URL'), [
-                    'amount' => 50,
+                    'amount' => (0.99 * env('PAYMENT_DOLLAR_RATE')),
                     'title' => 'Payment for event: ' . $request->event['name'],
-                    'description' => 'Outty Checkout',
+                    'description' => 'outty.co Checkout',
                     'clientReference' => $clientReference,
-                    'callbackUrl' => 'http://example.com',
-                    'cancellationUrl' => 'http://example.com',
-                    'returnUrl' => 'http://example.com',
+                    'callbackUrl' => env('PAYMENT_CALLBACK_URL'),
+                    'cancellationUrl' => env('PAYMENT_CANCELLATION_URL'),
+                    'returnUrl' => env('PAYMENT_RETURN_URL'),
                     'logo' => 'https://hubtel.com/wp-content/themes/hubtel/dist/images/logo.png'
                 ]);
 
             $deserialisedResponse = json_decode($response->body());
+
 
             if ($response->successful()) {
                 $user = new Organizer;
 
                 //Creating User
                 if ($user->where('email', $request->user['email'])->first() == null) {
-                    $user->email = $request->user['email'];;
-                    $user->name = $request->user['name'];;
+                    $user->email = $request->user['email'];
+                    $user->name = $request->user['name'];
                     $user->phone_number = $request->user['phone_number'];
                     $user->token = $userToken;
 
@@ -96,7 +98,7 @@ class EventController extends Controller
                         "slug" => Str::slug($request->event['slug'], '-'),
                         "event_theme_color" => $request->event['theme_color'],
                         "category" => $request->event['category'],
-                        "event_image_id" => $request->event['image_id'],
+//                        "event_image_id" => $request->event['image_id'],
                         "event_date" => $request->event['date'],
                         "background_color" => $request->event['background_color'],
                         "text_color" => $request->event['text_color'],
@@ -104,6 +106,8 @@ class EventController extends Controller
                         "secondary_typeface" => $request->event['secondary_typeface'],
                     ]
                 );
+
+
                 $lineups = $events->lineups()->createMany($request->lineups);
 
                 //Payment
@@ -114,7 +118,7 @@ class EventController extends Controller
                 $payment->save();
 
                 return new MainResource(["data" => new EventCreationWrapperResource([$events,
-                    ["amount" => 500,
+                    ["amount" => (0.99 * env('PAYMENT_DOLLAR_RATE')),
                         "payment_url" => $deserialisedResponse->data->paylinkUrl]]),
                     "message" => "",
                     "status" => 200]);

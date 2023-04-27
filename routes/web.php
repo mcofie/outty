@@ -14,6 +14,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/zs',function (){
+   return "hhju";
+});
+
 //Send Email
 Route::get('/mail', function () {
 

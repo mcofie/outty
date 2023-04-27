@@ -26,7 +26,7 @@
                 </div>
                 <div class="col-6">
                     <label class="form-label">Event Type</label>
-                    <select class="form-select form-control" v-model="userData.event_type"
+                    <select class="form-select form-control" v-model="userData.category"
                             aria-label="Default select example">
                         <option disabled value="">Select Event Type</option>
                         <option v-for="type in EventTypes" :value="type">{{ type }}</option>
@@ -54,13 +54,15 @@
             <div class="bottom w-100 py-3">
                 <div class="container">
                     <div class="row justify-content-center">
-                        <div class="col-md-7">
+                        <div class="col-md-10 col-lg-9 col-xl-7">
                             <h6 class="mx-4">Event Details</h6>
                             <div class="d-flex justify-content-end w-100 mt-4">
                                 <button class="btn btn-secondary btn-lg rounded-1 d-none">
                                     <i class="fa-solid fa-caret-left"></i>
                                 </button>
-                                <button @click="goToNextSection" class="btn btn-primary btn-lg px-5 rounded-2">
+                                <button @click="goToNextSection"
+                                        :class="[isButtonActive ? '' : 'disabled','btn btn-primary btn-lg px-5 rounded-2']"
+                                >
                                     Next <i class="fa-solid fa-caret-right"></i>
                                 </button>
                             </div>
@@ -73,26 +75,29 @@
 </template>
 
 <script setup>
-import {ref, computed, onMounted, reactive, watch} from 'vue'
+import {ref, computed, onMounted, onUpdated, reactive, watch, onActivated} from 'vue'
 import debounce from 'lodash.debounce'
+import {useRoute, useRouter} from "vue-router";
 
 import VueDatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css'
 import {ComponentEventObject} from "../js/network/Models";
 import {useStore} from 'vuex'
 import {EventTypes, slugify} from "../js/utils";
-import {format} from "../js/helper";
+import {checkIfArrayHasValues, format} from "../js/helper";
 import Requester from "../js/network/Requester";
 import {APIs} from "../js/network/APIs";
 
-
 const store = useStore()
+
+
 const emit = defineEmits(['next'])
 const props = defineProps(['eventStore'])
 const event = props.eventStore.event
 
 const currentEventData = computed(() => store.state.event)
 const getFile = ref(null)
+const isButtonActive = ref(true)
 const slugLookup = ref({
     message: '',
     state: -1
@@ -102,8 +107,7 @@ const userData = ref(
     {
         name: event.name,
         description: event.description,
-        slug: slugify(event.name),
-        event_type: event.event_type,
+        category: event.category,
         date: event.date
     }
 );
@@ -128,6 +132,11 @@ watch(() => userData.value.name, (name) => {
     }
 })
 
+//Watch if the inputs are all filled
+// watch(() => [userData.value.name, userData.value.description, userData.value.date, userData.value.category], debounce((fields) => {
+//     isButtonActive.value = fields.every(checkIfArrayHasValues)
+// }, 300))
+
 
 const persistUserData = () => {
     const obj = ComponentEventObject
@@ -138,9 +147,25 @@ const persistUserData = () => {
 
 const goToNextSection = () => emit('next', persistUserData())
 
+const hasProposedName = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const myParam = urlParams.get('event_name');
+    if (myParam != null) {
+        return {status: true, value: myParam}
+    }
+    return {status: false, value: ''}
+}
+
 onMounted(() => {
-    // console.log(props.eventStore.event)
-    // some++
+
+    if (hasProposedName().status) {
+        userData.value.name = hasProposedName().value
+        checkSlugAvailability(hasProposedName().value)
+    }
+})
+
+onActivated(() => {
+    console.log('Activate')
 })
 
 </script>

@@ -1,14 +1,15 @@
 <template>
     <div class="card border border-opacity-10 rounded mb-3"
          :style="{backgroundColor:event.background_color}">
-        <div class="card-body p-0" :style="{color:event.text_color}">
+        <div class="card-body p-0 text-start" :style="{color:event.text_color}">
             <a>
                 <div class="d-flex w-100 justify-content-between">
                     <ul class="list-unstyled w-100 mb-0">
                         <li class="w-100">
                             <div class="d-flex w-100 justify-content-between">
                                 <small>{{ startTime(lineup.start_time) }} - {{ endTime(lineup.end_time) }}</small>
-                                <span class="badge text-bg-dark">Live</span>
+                                <span v-show="isLive"
+                                      class="badge text-bg-dark animate__animated animate__pulse animate__infinite infinite">Live</span>
                             </div>
                         </li>
                         <li>
@@ -28,7 +29,7 @@
 <script setup>
 import {computed} from 'vue'
 import moment from 'moment'
-import {formatTime} from "../../js/helper";
+import {diffs, formatTime} from "../../js/helper";
 
 const props = defineProps(['lineup', 'event'])
 const lineup = props.lineup
@@ -42,8 +43,16 @@ const endTime = (time) => {
     return moment(formatTime(time)).format('LT');
 }
 
+const isLive = computed(() => {
+    return diffs({startTIme: lineup.start_time, endTime: lineup.end_time})
+})
+
 </script>
 
 <style scoped>
+
+.active_lineup {
+
+}
 
 </style>

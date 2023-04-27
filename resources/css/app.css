@@ -65,8 +65,17 @@ a {
   color: #050505;
 }
 
+.btn-danger {
+  background-color: #ececec;
+  color: #dfb6b6;
+}
+
 .bottom {
   background-color: #eeeeee;
+}
+
+hr {
+  border-color: #e0e0e0;
 }
 
 .accordion-button:focus {
@@ -75,8 +84,8 @@ a {
 }
 
 .btn.disabled, .btn:disabled, fieldset:disabled .btn {
-  background-color: #ffe7d0;
-  color: #050505;
+  background-color: #ddc6bf;
+  color: #a47464;
 }
 
 .form-control:focus {
@@ -109,7 +118,7 @@ a {
 form {
   width: 100%;
   float: left;
-  margin: 7rem 0;
+  margin: 0rem 0;
 }
 
 .primary-color {
@@ -129,7 +138,7 @@ form {
 }
 
 .form-control {
-  background-color: #f6f5f6;
+  background-color: #f9f9f9;
 }
 
 input.form-control {
