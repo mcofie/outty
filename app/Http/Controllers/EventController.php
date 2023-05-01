@@ -57,7 +57,7 @@ class EventController extends Controller
             //TODO: Payment - Abstract this
             $response = Http::withBasicAuth(env('PAYMENT_CLIENT_KEY'), env('PAYMENT_CLIENT_SECRET'))
                 ->post(env('PAYMENT_URL'), [
-                    'amount' => (0.99 * env('PAYMENT_DOLLAR_RATE')),
+                    'amount' => (1.99 * env('PAYMENT_DOLLAR_RATE')),
                     'title' => 'Payment for event: ' . $request->event['name'],
                     'description' => 'outty.co Checkout',
                     'clientReference' => $clientReference,
@@ -118,7 +118,7 @@ class EventController extends Controller
                 $payment->save();
 
                 return new MainResource(["data" => new EventCreationWrapperResource([$events,
-                    ["amount" => (0.99 * env('PAYMENT_DOLLAR_RATE')),
+                    ["amount" => (1.99 * env('PAYMENT_DOLLAR_RATE')),
                         "payment_url" => $deserialisedResponse->data->paylinkUrl]]),
                     "message" => "",
                     "status" => 200]);

@@ -3,16 +3,19 @@
         <form @submit.prevent="$event.preventDefault()">
             <div class="mb-3">
                 <label for="exampleFormControlInput1" class="form-label">Event name</label>
-                <input type="text" v-model="userData.name" class="form-control" id="exampleFormControlInput1"
+                <input type="text" name="name" v-model="userData.name" class="form-control"
+                       id="exampleFormControlInput1"
                        placeholder="">
                 <div class="">
                     <small v-show="slugLookup.state === 1" class="text-success"> {{ slugLookup.message }}</small>
                     <small v-show="slugLookup.state === 0" class="text-danger"> {{ slugLookup.message }}</small>
                 </div>
+
             </div>
             <div class="mb-3">
                 <label for="exampleFormControlTextarea1" class="form-label">Description</label>
-                <textarea class="form-control" v-model="userData.description" id="exampleFormControlTextarea1"
+                <textarea class="form-control" name="description" v-model="userData.description"
+                          id="exampleFormControlTextarea1"
                           rows="3"></textarea>
             </div>
 
@@ -75,9 +78,9 @@
 </template>
 
 <script setup>
-import {ref, computed, onMounted, onUpdated, reactive, watch, onActivated} from 'vue'
+import {ref, computed, onMounted, watch} from 'vue'
 import debounce from 'lodash.debounce'
-import {useRoute, useRouter} from "vue-router";
+import * as yup from 'yup';
 
 import VueDatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css'
@@ -87,6 +90,7 @@ import {EventTypes, slugify} from "../js/utils";
 import {checkIfArrayHasValues, format} from "../js/helper";
 import Requester from "../js/network/Requester";
 import {APIs} from "../js/network/APIs";
+import {useField, useForm} from "vee-validate";
 
 const store = useStore()
 
@@ -112,6 +116,7 @@ const userData = ref(
     }
 );
 
+
 const checkSlugAvailability = debounce((n) => {
     Requester.makeRequest({path: `${APIs.slug}${slugify(n)}`})
         .then((response) => {
@@ -131,12 +136,6 @@ watch(() => userData.value.name, (name) => {
         slugLookup.value.state = -1
     }
 })
-
-//Watch if the inputs are all filled
-// watch(() => [userData.value.name, userData.value.description, userData.value.date, userData.value.category], debounce((fields) => {
-//     isButtonActive.value = fields.every(checkIfArrayHasValues)
-// }, 300))
-
 
 const persistUserData = () => {
     const obj = ComponentEventObject
@@ -164,8 +163,13 @@ onMounted(() => {
     }
 })
 
-onActivated(() => {
-    console.log('Activate')
+const formSchema = yup.object({
+    name: yup.string().required().min(3),
+    description: yup.string().required()
+})
+
+useForm({
+    validationSchema: formSchema
 })
 
 </script>

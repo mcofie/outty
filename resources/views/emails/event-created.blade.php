@@ -1,174 +1,449 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional //EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml" xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:v="urn:schemas-microsoft-com:vml" lang="en">
+<!doctype html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>Simple Transactional Email</title>
+    <style>
+        /* -------------------------------------
+            GLOBAL RESETS
+        ------------------------------------- */
 
-<head><link rel="stylesheet" type="text/css" hs-webfonts="true" href="https://fonts.googleapis.com/css?family=Lato|Lato:i,b,bi">
-    <title>Email template</title>
-    <meta property="og:title" content="Email template">
+        /*All the styling goes here*/
 
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <style type="text/css">
-
-        a{
-            text-decoration: underline;
-            color: inherit;
-            font-weight: bold;
-            color: #253342;
+        img {
+            border: none;
+            -ms-interpolation-mode: bicubic;
+            max-width: 100%;
         }
 
-        h1 {
-            font-size: 56px;
+        body {
+            background-color: #f9f9eb;
+            font-family: sans-serif;
+            -webkit-font-smoothing: antialiased;
+            font-size: 14px;
+            line-height: 1.4;
+            margin: 0;
+            padding: 0;
+            -ms-text-size-adjust: 100%;
+            -webkit-text-size-adjust: 100%;
         }
 
-        h2{
-            font-size: 28px;
-            font-weight: 900;
+        table {
+            border-collapse: separate;
+            mso-table-lspace: 0pt;
+            mso-table-rspace: 0pt;
+            width: 100%;
         }
 
-        p {
-            font-weight: 100;
-        }
-
-        td {
+        table td {
+            font-family: sans-serif;
+            font-size: 14px;
             vertical-align: top;
         }
 
-        #email {
-            margin: auto;
-            width: 600px;
-            background-color: white;
+        /* -------------------------------------
+            BODY & CONTAINER
+        ------------------------------------- */
+
+        .body {
+            background-color: #f9f9eb;
+            width: 100%;
         }
 
-        button{
-            font: inherit;
-            background-color: #FF7A59;
-            border: none;
+        /* Set a max-width, and make it display as block so it will automatically stretch to that width, but will also shrink down on a phone or something */
+        .container {
+            display: block;
+            margin: 0 auto !important;
+            /* makes it centered */
+            max-width: 580px;
             padding: 10px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            font-weight: 900;
-            color: white;
-            border-radius: 5px;
-            box-shadow: 3px 3px #d94c53;
+            width: 580px;
         }
 
-        .subtle-link {
-            font-size: 9px;
-            text-transform:uppercase;
-            letter-spacing: 1px;
-            color: #CBD6E2;
+        /* This should also be a block element, so that it will fill 100% of the .container */
+        .content {
+            box-sizing: border-box;
+            display: block;
+            margin: 0 auto;
+            max-width: 580px;
+            padding: 10px;
+        }
+
+        /* -------------------------------------
+            HEADER, FOOTER, MAIN
+        ------------------------------------- */
+        .main {
+            background: #ffffff;
+            border-radius: 3px;
+            width: 100%;
+        }
+
+        .wrapper {
+            box-sizing: border-box;
+            padding: 20px;
+        }
+
+        .content-block {
+            padding-bottom: 10px;
+            padding-top: 10px;
+        }
+
+        .footer {
+            clear: both;
+            margin-top: 10px;
+            text-align: center;
+            width: 100%;
+        }
+
+        .footer td,
+        .footer p,
+        .footer span,
+        .footer a {
+            color: #999999;
+            font-size: 12px;
+            text-align: center;
+        }
+
+        /* -------------------------------------
+            TYPOGRAPHY
+        ------------------------------------- */
+        h1,
+        h2,
+        h3,
+        h4 {
+            color: #000000;
+            font-family: sans-serif;
+            font-weight: 400;
+            line-height: 1.4;
+            margin: 0;
+            margin-bottom: 30px;
+        }
+
+        h1 {
+            font-size: 35px;
+            font-weight: 300;
+            text-align: center;
+            text-transform: capitalize;
+        }
+
+        p,
+        ul,
+        ol {
+            font-family: sans-serif;
+            font-size: 14px;
+            font-weight: normal;
+            margin: 0;
+            margin-bottom: 15px;
+        }
+
+        p li,
+        ul li,
+        ol li {
+            list-style-position: inside;
+            margin-left: 5px;
+        }
+
+        a {
+            color: #3498db;
+            text-decoration: underline;
+        }
+
+        /* -------------------------------------
+            BUTTONS
+        ------------------------------------- */
+        .btn {
+            box-sizing: border-box;
+            width: 100%;
+        }
+
+        .btn > tbody > tr > td {
+            padding-bottom: 15px;
+        }
+
+        .btn table {
+            width: auto;
+        }
+
+        .btn table td {
+            background-color: #ffffff;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        .btn a {
+            background-color: #ffffff;
+            border: solid 1px #E24E1B;
+            border-radius: 5px;
+            box-sizing: border-box;
+            color: #3498db;
+            cursor: pointer;
+            display: inline-block;
+            font-size: 14px;
+            font-weight: bold;
+            margin: 0;
+            padding: 12px 25px;
+            text-decoration: none;
+            text-transform: capitalize;
+        }
+
+        .btn-primary table td {
+            background-color: #3498db;
+        }
+
+        .btn-primary a {
+            background-color: #E24E1B;
+            border-color: #E24E1B;
+            color: #ffffff;
+        }
+
+        /* -------------------------------------
+            OTHER STYLES THAT MIGHT BE USEFUL
+        ------------------------------------- */
+        .last {
+            margin-bottom: 0;
+        }
+
+        .first {
+            margin-top: 0;
+        }
+
+        .align-center {
+            text-align: center;
+        }
+
+        .align-right {
+            text-align: right;
+        }
+
+        .align-left {
+            text-align: left;
+        }
+
+        .clear {
+            clear: both;
+        }
+
+        .mt0 {
+            margin-top: 0;
+        }
+
+        .mb0 {
+            margin-bottom: 0;
+        }
+
+        .preheader {
+            color: transparent;
+            display: none;
+            height: 0;
+            max-height: 0;
+            max-width: 0;
+            opacity: 0;
+            overflow: hidden;
+            mso-hide: all;
+            visibility: hidden;
+            width: 0;
+        }
+
+        .powered-by a {
+            text-decoration: none;
+        }
+
+        hr {
+            border: 0;
+            border-bottom: 1px solid #f6f6f6;
+            margin: 20px 0;
+        }
+
+        /* -------------------------------------
+            RESPONSIVE AND MOBILE FRIENDLY STYLES
+        ------------------------------------- */
+        @media only screen and (max-width: 620px) {
+            table.body h1 {
+                font-size: 28px !important;
+                margin-bottom: 10px !important;
+            }
+
+            table.body p,
+            table.body ul,
+            table.body ol,
+            table.body td,
+            table.body span,
+            table.body a {
+                font-size: 16px !important;
+            }
+
+            table.body .wrapper,
+            table.body .article {
+                padding: 10px !important;
+            }
+
+            table.body .content {
+                padding: 0 !important;
+            }
+
+            table.body .container {
+                padding: 0 !important;
+                width: 100% !important;
+            }
+
+            table.body .main {
+                border-left-width: 0 !important;
+                border-radius: 0 !important;
+                border-right-width: 0 !important;
+            }
+
+            table.body .btn table {
+                width: 100% !important;
+            }
+
+            table.body .btn a {
+                width: 100% !important;
+            }
+
+            table.body .img-responsive {
+                height: auto !important;
+                max-width: 100% !important;
+                width: auto !important;
+            }
+        }
+
+        /* -------------------------------------
+            PRESERVE THESE STYLES IN THE HEAD
+        ------------------------------------- */
+        @media all {
+            .ExternalClass {
+                width: 100%;
+            }
+
+            .ExternalClass,
+            .ExternalClass p,
+            .ExternalClass span,
+            .ExternalClass font,
+            .ExternalClass td,
+            .ExternalClass div {
+                line-height: 100%;
+            }
+
+            .apple-link a {
+                color: inherit !important;
+                font-family: inherit !important;
+                font-size: inherit !important;
+                font-weight: inherit !important;
+                line-height: inherit !important;
+                text-decoration: none !important;
+            }
+
+            #MessageViewBody a {
+                color: inherit;
+                text-decoration: none;
+                font-size: inherit;
+                font-family: inherit;
+                font-weight: inherit;
+                line-height: inherit;
+            }
+
+            .btn-primary table td:hover {
+                background-color: #E24E1B !important;
+            }
+
+            .btn-primary a:hover {
+                background-color: #E24E1B !important;
+                border-color: #E24E1B !important;
+            }
         }
 
     </style>
-
 </head>
+<body>
+<span class="preheader">This is preheader text. Some clients will show this text as a preview.</span>
+<table role="presentation" border="0" cellpadding="0" cellspacing="0" class="body">
+    <tr>
+        <td>&nbsp;</td>
+        <td class="container">
+            <div class="content">
 
-<body bgcolor="#F5F8FA" style="width: 100%; margin: auto 0; padding:0; font-family:Lato, sans-serif; font-size:18px; color:#33475B; word-break:break-word">
+                <!-- START CENTERED WHITE CONTAINER -->
+                <table role="presentation" class="main">
 
-<! View in Browser Link -->
+                    <!-- START MAIN CONTENT AREA -->
+                    <tr>
+                        <td class="wrapper">
+                            <table role="presentation" border="0" cellpadding="0" cellspacing="0">
+                                <tr>
+                                    <td>
+                                        <p>Hi {{ $organizerName }},</p>
+                                        <p>
+                                            We are pleased to confirm that your recent purchase and creation
+                                            at {{$product}} has
+                                            been successfully processed.
+                                        </p>
+                                        <p>
+                                            Thank you for choosing our
+                                            product to help you organize and manage your upcoming events.
+                                        </p>
+                                        <p>
+                                            Your purchase details are as follows:
+                                        </p>
+                                        <ul>
+                                            <li>Order Number: {{$orderNumber}}</li>
+                                            <li>Product: {{$product}}</li>
+                                            <li>Price: ${{$price}}</li>
+                                            <li>Event Name: <a href="https://outty.co/{{$slug}}">{{$event_name}}</a>
+                                            </li>
+                                            <li>Date of Purchase: {{$date}}</li>
+                                        </ul>
 
-<div id="email">
-    <table align="right" role="presentation">
-        <tr>
-            <td>
-                <a class="subtle-link" href="#">View in Browser</a>
-            </td>
-        <tr>
-    </table>
+                                        <p>To make edits to the event, kindly click on the button below.</p>
+                                        <table role="presentation" border="0" cellpadding="0" cellspacing="0"
+                                               class="btn btn-primary">
+                                            <tbody>
+                                            <tr>
+                                                <td align="left">
+                                                    <table role="presentation" border="0" cellpadding="0"
+                                                           cellspacing="0">
+                                                        <tbody>
+                                                        <tr>
+                                                            <td><a href="https://outty.co/account?token={{$token}}"
+                                                                   target="_blank">Log in</a></td>
+                                                        </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                        <p>We hope you find our product valuable and useful in planning and executing
+                                            your events.</p>
+                                        <p> Thank you for choosing {{$product}}</p>
+                                        <p>Good luck! Hope it works.</p>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
 
+                    <!-- END MAIN CONTENT AREA -->
+                </table>
+                <!-- END CENTERED WHITE CONTAINER -->
 
-    <! Banner -->
-    <table role="presentation" width="100%">
-        <tr>
+                <!-- START FOOTER -->
+                <div class="footer">
+                    <table role="presentation" border="0" cellpadding="0" cellspacing="0">
+                        <tr>
+                            <td class="content-block">
+                                <span class="apple-link">Company Inc, 3 Abbey Road, San Francisco CA 94102</span>
+                                <br> Made in Ghana 🇬🇭 with ❤️
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <!-- END FOOTER -->
 
-            <td bgcolor="#00A4BD" align="center" style="color: white;">
-
-                <img alt="Flower" src="https://hs-8886753.f.hubspotemail.net/hs/hsstatic/TemplateAssets/static-1.60/img/hs_default_template_images/email_dnd_template_images/ThankYou-Flower.png" width="400px" align="middle">
-
-                <h1> Welcome! </h1>
-
-            </td>
-    </table>
-
-
-
-
-    <! First Row -->
-
-    <table role="presentation" border="0" cellpadding="0" cellspacing="10px" style="padding: 30px 30px 30px 60px;">
-        <tr>
-            <td>
-                <h2> Lorem ipsum dolor sit amet</h2>
-                <p>
-                    Ut eget semper libero. Vestibulum non maximus nisl, ut iaculis ante. Nunc arcu elit, cursus eget urna et, tempus aliquam eros. Ut eget semper libero. Vestibulum non maximus nisl, ut iaculis ante. Nunc arcu elit, cursus eget urna et, tempus aliquam eros.
-                </p>
-                <button>
-                    Button 1
-                </button>
-            </td>
-        </tr>
-    </table>
-
-    <! Second Row with Two Columns-->
-
-    <table role="presentation" border="0" cellpadding="0" cellspacing="10px" width="100%" style="padding: 30px 30px 30px 60px;">
-        <tr>
-            <td>
-                <img alt="Blog" src="https://www.hubspot.com/hubfs/assets/hubspot.com/style-guide/brand-guidelines/guidelines_sample-illustration-3.svg" width="200px" align="middle">
-
-                <h2> Vivamus ac elit eget </h2>
-                <p>
-                    Vivamus ac elit eget dolor placerat tristique et vulputate nibh. Sed in elementum nisl, quis mollis enim. Etiam gravida dui vel est euismod, at aliquam ipsum euismod.
-
-                </p>
-
-            </td>
-
-            <td>
-
-                <img alt="Shopping" src="https://www.hubspot.com/hubfs/assets/hubspot.com/style-guide/brand-guidelines/guidelines_sample-illustration-5.svg" width="200px" align="middle">
-                <h2> Suspendisse tincidunt iaculis </h2>
-                <p>
-                    Suspendisse tincidunt iaculis fringilla. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Cras laoreet elit purus, quis pulvinar ipsum pulvinar et.
-
-                </p>
-            </td>
-        </tr>
-
-        <tr>
-            <td> <button> Button 2 </button> </td>
-            <td> <button> Button 3 </button> </td>
-
-    </table>
-
-    <! Banner Row -->
-    <table role="presentation" bgcolor="#EAF0F6" width="100%" style="margin-top: 50px;" >
-        <tr>
-            <td align="center" style="padding: 30px 30px;">
-
-                <h2> Nullam porta arcu </h2>
-                <p>
-                    Nam vel lobortis lorem. Nunc facilisis mauris at elit pulvinar, malesuada condimentum erat vestibulum. Pellentesque eros tellus, finibus eget erat at, tempus rutrum justo.
-
-                </p>
-                <a href="#"> Ask us a question</a>
-            </td>
-        </tr>
-    </table>
-
-    <! Unsubscribe Footer -->
-
-    <table role="presentation" bgcolor="#F5F8FA" width="100%" >
-        <tr>
-            <td align="left" style="padding: 30px 30px;">
-                <p style="color:#99ACC2"> Made with &hearts; at HubSpot HQ </p>
-                <a class="subtle-link" href="#"> Unsubscribe </a>
-            </td>
-        </tr>
-    </table>
-</div>
+            </div>
+        </td>
+        <td>&nbsp;</td>
+    </tr>
+</table>
 </body>
 </html>

@@ -27,9 +27,11 @@
         "lodash.debounce": "^4.0.8",
         "moment": "^2.29.4",
         "qrcode.vue": "^3.3.3",
+        "vee-validate": "^4.8.6",
         "vue": "^3.2.36",
         "vue-moment": "^4.1.0",
         "vue-router": "^4.1.6",
-        "vuex": "^4.0.2"
+        "vuex": "^4.0.2",
+        "yup": "^1.1.1"
     }
 }

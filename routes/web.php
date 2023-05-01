@@ -14,18 +14,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/zs',function (){
-   return "hhju";
+Route::get('/zs', function () {
+    return "hhju";
 });
 
 //Send Email
 Route::get('/mail', function () {
 
-    Mail::to('maxcofie@gmail.com')->queue(new \App\Mail\EventCreated());
+    Mail::send(new \App\Mail\EventCreated());
 
 //    return view('');
 });
-
 
 Route::get('/mailable', function () {
     return new App\Mail\EventCreated();
@@ -41,6 +40,12 @@ Route::get('/get-started', function () {
     return view('get-started');
 });
 
+//Payment
+Route::get('/payment-feedback', function () {
+    return view('payment-feedback');
+});
+
+
 //Client/Customer facing screen
 Route::get('/{id}', function ($id) {
     return view('event');
@@ -51,9 +56,5 @@ Route::get('/p/{id}/edit', function ($id) {
     return "$id";
 })->where('id', '[A-Za-z]+');
 
-//Payment
-Route::get('/payment', function () {
-
-});
 
 

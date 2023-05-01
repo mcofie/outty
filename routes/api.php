@@ -36,6 +36,7 @@ Route::post('organizer/request-token', [OrganizerController::class, 'request_tok
 Route::get('events/{id}', [EventController::class, 'show'])->withoutMiddleware([AuthenticateEventUser::class]);
 //Create Event & LineUp
 Route::post('events', [EventController::class, 'store'])->withoutMiddleware([AuthenticateEventUser::class]);
+Route::get('',)->withoutMiddleware([AuthenticateEventUser::class]);
 
 //Slug lookup
 Route::get('events/slug-lookup/{slug}', [EventController::class, 'slug_look_up'])->withoutMiddleware([AuthenticateEventUser::class]);
@@ -44,6 +45,8 @@ Route::put('events/{id}', [EventController::class, 'update']);
 
 //Payment Webhook
 Route::post('payments/webhook', [PaymentController::class, 'webhook'])->withoutMiddleware([AuthenticateEventUser::class]);
+Route::get('payments/tryout', [PaymentController::class, 'tryout'])->withoutMiddleware([AuthenticateEventUser::class]);
+Route::get('payments/{client_reference_id}', [PaymentController::class, 'payment_confirmation'])->withoutMiddleware([AuthenticateEventUser::class]);
 
 
 //LineUps

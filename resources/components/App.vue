@@ -47,7 +47,9 @@
                                            aria-label="Username"
                                            v-model="eventName"
                                            aria-describedby="basic-addon1">
-                                    <button class="btn btn-primary rounded-5" @click="startCreateEvent" type="button">
+                                    <button
+                                        :class="[eventName.length !== 0 ? 'btn btn-primary rounded-5': 'btn btn-primary rounded-5 disabled']"
+                                        @click="startCreateEvent" type="button">
                                         Create Event
                                     </button>
                                 </div>
@@ -227,7 +229,6 @@ const startCreateEvent = () => {
     }
 
 }
-
 
 
 </script>
