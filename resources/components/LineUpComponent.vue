@@ -45,8 +45,7 @@
                 </div>
                 <div class="row justify-content-center my-3">
                     <div class="col-12 g-0">
-                        <input type="text" v-model="lineup.title" class="form-control" required
-                               @keyup="checkIfNotEmpty(lineup.title)">
+                        <input type="text" v-model="lineup.title" class="form-control" required>
                     </div>
                 </div>
 
@@ -89,7 +88,7 @@
                                     <i class="fa-solid fa-caret-left"></i>
                                 </button>
                                 <button @click="goToNextSection"
-                                        :class="[isButtonActive ? '' : 'disabled','btn btn-primary btn-lg px-5 rounded-2']">
+                                        :class="[!v$.$invalid ? '' : 'disabled','btn btn-primary btn-lg px-5 rounded-2']">
                                     Next <i class="fa-solid fa-caret-right"></i>
                                 </button>
                             </div>
@@ -107,7 +106,8 @@ import VueDatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css'
 import {ComponentEventObject} from "../js/network/Models";
 import {checkIfArrayHasValues, formatTime} from "../js/helper";
-import debounce from "lodash.debounce";
+import {alpha, minLength, required} from "@vuelidate/validators";
+import {useVuelidate} from "@vuelidate/core";
 
 const emit = defineEmits(['next', 'previous'])
 const props = defineProps(['eventStore'])
@@ -150,9 +150,22 @@ const deleteLineUp = (index) => {
 const goToNextSection = () => emit('next', persistUserData())
 const goToPreviousSection = () => emit('previous', persistUserData())
 
-const checkIfNotEmpty = (data) => {
-    isButtonActive.value = data.length !== 0;
+
+const rules = {
+    lineups: {
+        required,
+        $each: {
+            start_time: {
+                required
+            },
+            end_time: {required},
+            title: {required},
+            description: {required}
+        }
+    }
 }
+
+const v$ = useVuelidate(rules, {lineups})
 
 
 </script>

@@ -3,18 +3,33 @@
         <form @submit.prevent="$event.preventDefault()">
             <div class="mb-3">
                 <label for="exampleFormControlInput1" class="form-label">Organized By:</label>
-                <input type="text" v-model="userData.name" class="form-control" id="exampleFormControlInput1"
+                <input type="text" v-model="userData.name"
+                       :class="[v$.name.$error ? 'form-control is-invalid' : 'form-control' ]"
+                       id="exampleFormControlInput1"
                        placeholder="">
+                <small v-if="v$.name.$error" class="text-danger"> {{
+                        v$.name.$errors[0].$message
+                    }}</small>
             </div>
 
             <div class="row justify-content-between">
                 <div class="col-6">
                     <label for="exampleFormControlInput1" class="form-label">Email address</label>
-                    <input type="email" v-model="userData.email" class="form-control" placeholder="">
+                    <input type="email" v-model="userData.email" class="form-control"
+                           :class="[v$.email.$error ? 'form-control is-invalid' : 'form-control' ]"
+                           placeholder="">
+                    <small v-if="v$.email.$error" class="text-danger"> {{
+                            v$.email.$errors[0].$message
+                        }}</small>
                 </div>
                 <div class="col-6">
                     <label for="exampleFormControlInput1" class="form-label">Contact number</label>
-                    <input type="text" v-model="userData.phone_number" class="form-control" placeholder="">
+                    <input type="text" v-model="userData.phone_number"
+                           :class="[v$.phone_number.$error ? 'form-control is-invalid' : 'form-control' ]"
+                           placeholder="">
+                    <small v-if="v$.phone_number.$error" class="text-danger"> {{
+                            v$.phone_number.$errors[0].$message
+                        }}</small>
                 </div>
             </div>
 
@@ -32,7 +47,7 @@
                                 </button>
 
                                 <button v-if="!isCheckoutSuccessful" @click="goToNextSection"
-                                        :class="[isButtonActive ? '' : 'disabled','btn btn-primary btn-lg px-5 rounded-2']"
+                                        :class="[ !v$.$invalid ? '' : 'disabled','btn btn-primary btn-lg px-5 rounded-2']"
                                 >
                                     Checkout <i class="fa-solid fa-caret-right"></i>
                                 </button>
@@ -54,13 +69,13 @@
 </template>
 
 <script setup>
-import {ref, computed, watch} from 'vue'
+import {ref} from 'vue'
 import {useStore} from 'vuex'
 
 const store = useStore()
 import {ComponentEventObject} from "../js/network/Models";
-import debounce from "lodash.debounce";
-import {checkIfArrayHasValues} from "../js/helper";
+import {email, minLength, numeric, required} from "@vuelidate/validators";
+import {useVuelidate} from "@vuelidate/core";
 
 const emit = defineEmits(['checkout', 'previous'])
 const props = defineProps(['eventStore'])
@@ -91,12 +106,17 @@ const goToNextSection = () => {
 }
 const goToPreviousSection = () => emit('previous', persistUserData())
 
-const currentEventData = computed(() => store.state.event)
 
-//Watch if the inputs are all filled
-watch(() => [userData.value.name, userData.value.email, userData.value.phone_number], debounce((fields) => {
-    isButtonActive.value = fields.every(checkIfArrayHasValues)
-}, 300))
+const rules = {
+    name: {
+        required, minLengthValue: minLength(5), $autoDirty: true,
+    },
+    email: {required, email, $autoDirty: true},
+    phone_number: {required, numeric, minLengthValue: minLength(10), $autoDirty: true},
+}
+
+const v$ = useVuelidate(rules, userData)
+
 
 </script>
 

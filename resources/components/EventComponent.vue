@@ -3,29 +3,40 @@
         <form @submit.prevent="$event.preventDefault()">
             <div class="mb-3">
                 <label for="exampleFormControlInput1" class="form-label">Event name</label>
-                <input type="text" name="name" v-model="userData.name" class="form-control"
+                <input type="text" v-model="userData.name"
+                       :class="[v$.name.$error ? 'form-control is-invalid' : 'form-control' ]"
                        id="exampleFormControlInput1"
                        placeholder="">
                 <div class="">
-                    <small v-show="slugLookup.state === 1" class="text-success"> {{ slugLookup.message }}</small>
+                    <small v-if="!v$.name.$error" v-show="slugLookup.state === 1" class="text-success"> {{ slugLookup.message }}</small>
                     <small v-show="slugLookup.state === 0" class="text-danger"> {{ slugLookup.message }}</small>
+                    <small v-if="v$.name.$error" class="text-danger"> {{
+                            v$.name.$errors[0].$message
+                        }}</small>
                 </div>
-
             </div>
             <div class="mb-3">
                 <label for="exampleFormControlTextarea1" class="form-label">Description</label>
-                <textarea class="form-control" name="description" v-model="userData.description"
+                <textarea :class="[v$.description.$error ? 'form-control is-invalid' : 'form-control' ]"
+                          v-model="userData.description"
                           id="exampleFormControlTextarea1"
                           rows="3"></textarea>
+                <small v-if="v$.description.$error" class="text-danger"> {{
+                        v$.description.$errors[0].$message
+                    }}</small>
             </div>
 
             <div class="row justify-content-between">
                 <div class="col-6">
                     <label for="exampleFormControlInput1" class="form-label">Event Date</label>
-                    <VueDatePicker v-model="userData.date" class="form-control"
+                    <VueDatePicker v-model="userData.date"
+                                   :class="[v$.date.$error ? 'form-control is-invalid' : 'form-control' ]"
                                    :format="format"
                                    :min-date="new Date()"
                                    placeholder="00/00/0000" text-input auto-apply :enable-time-picker="false"/>
+                    <small v-if="v$.date.$error" class="text-danger"> {{
+                            v$.date.$errors[0].$message
+                        }}</small>
                 </div>
                 <div class="col-6">
                     <label class="form-label">Event Type</label>
@@ -34,6 +45,9 @@
                         <option disabled value="">Select Event Type</option>
                         <option v-for="type in EventTypes" :value="type">{{ type }}</option>
                     </select>
+                    <small v-if="v$.category.$error" class="text-danger"> {{
+                            v$.category.$errors[0].$message
+                        }}</small>
                 </div>
                 <div class="col-4 d-none">
                     <label for="exampleFormControlInput1" class="form-label">Event image</label>
@@ -64,7 +78,7 @@
                                     <i class="fa-solid fa-caret-left"></i>
                                 </button>
                                 <button @click="goToNextSection"
-                                        :class="[isButtonActive ? '' : 'disabled','btn btn-primary btn-lg px-5 rounded-2']"
+                                        :class="[!v$.$invalid ? '' : 'disabled','btn btn-primary btn-lg px-5 rounded-2']"
                                 >
                                     Next <i class="fa-solid fa-caret-right"></i>
                                 </button>
@@ -80,7 +94,7 @@
 <script setup>
 import {ref, computed, onMounted, watch} from 'vue'
 import debounce from 'lodash.debounce'
-import * as yup from 'yup';
+import {useVuelidate} from '@vuelidate/core'
 
 import VueDatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css'
@@ -90,6 +104,7 @@ import {EventTypes, slugify} from "../js/utils";
 import {checkIfArrayHasValues, format} from "../js/helper";
 import Requester from "../js/network/Requester";
 import {APIs} from "../js/network/APIs";
+import {alpha, minLength, required} from "@vuelidate/validators";
 import {useField, useForm} from "vee-validate";
 
 const store = useStore()
@@ -118,15 +133,17 @@ const userData = ref(
 
 
 const checkSlugAvailability = debounce((n) => {
-    Requester.makeRequest({path: `${APIs.slug}${slugify(n)}`})
-        .then((response) => {
-            slugLookup.value.state = 1
-            slugLookup.value.message = response.data.message
-        })
-        .catch((error) => {
-            slugLookup.value.state = 0
-            slugLookup.value.message = error.response.data.message
-        })
+    if (n.length >= 5) {
+        Requester.makeRequest({path: `${APIs.slug}${slugify(n)}`})
+            .then((response) => {
+                slugLookup.value.state = 1
+                slugLookup.value.message = response.data.message
+            })
+            .catch((error) => {
+                slugLookup.value.state = 0
+                slugLookup.value.message = error.response.data.message
+            })
+    }
 }, 500)
 
 watch(() => userData.value.name, (name) => {
@@ -163,14 +180,18 @@ onMounted(() => {
     }
 })
 
-const formSchema = yup.object({
-    name: yup.string().required().min(3),
-    description: yup.string().required()
-})
 
-useForm({
-    validationSchema: formSchema
-})
+const rules = {
+    name: {
+        required, minLengthValue: minLength(5), $autoDirty: true,
+    },
+    description: {required, minLengthValue: minLength(20), $autoDirty: true},
+    date: {required, $autoDirty: true},
+    category: {required, alpha, $autoDirty: true}
+}
+
+const v$ = useVuelidate(rules, userData)
+
 
 </script>
 

@@ -78,7 +78,7 @@
                                         <i class="fa-regular fa-eye"></i>
                                     </button>
                                     <button @click="goToNextSection"
-                                            :class="[isButtonActive ? '' : 'disabled','btn btn-primary btn-lg px-5 rounded-2']">
+                                            :class="[!v$.$invalid ? '' : 'disabled','btn btn-primary btn-lg px-5 rounded-2']">
                                         Next <i class="fa-solid fa-caret-right"></i>
                                     </button>
                                 </div>
@@ -100,6 +100,8 @@ import LineUpCard from "./sections/LineUpCard";
 import moment from "moment";
 import debounce from "lodash.debounce";
 import {checkIfArrayHasValues} from "../js/helper";
+import {alpha, minLength, required} from "@vuelidate/validators";
+import {useVuelidate} from "@vuelidate/core";
 
 const isButtonActive = ref(false)
 const emit = defineEmits(['next', 'previous'])
@@ -140,10 +142,16 @@ watch(userData.value, (name) => {
     persistUserData()
 })
 
-//Watch if the inputs are all filled
-watch(() => [userData.value.secondary_typeface, userData.value.text_color, userData.value.primary_typeface, userData.value.background_color], debounce((fields) => {
-    isButtonActive.value = fields.every(checkIfArrayHasValues)
-}, 300))
+const rules = {
+    text_color: {
+        required, $autoDirty: true,
+    },
+    background_color: {required, $autoDirty: true},
+    primary_typeface: {required, $autoDirty: true},
+    secondary_typeface: {required, $autoDirty: true}
+}
+
+const v$ = useVuelidate(rules, userData)
 
 
 </script>
