@@ -40,19 +40,24 @@
                     <div class="row justify-content-center">
                         <div class="col-xl-8 col-lg-8 col-md-10 mb-5">
                             <div class="get-started-section p-2 rounded-5">
-
                                 <div class="input-group input-group-lg">
                                     <span class="input-group-text" id="inputGroup-sizing-lg"><h4>outty.co/</h4></span>
-                                    <input type="text" class="form-control" placeholder="your event name"
+                                    <input type="text" class="form-control"
+                                           placeholder="your event name"
                                            aria-label="Username"
                                            v-model="eventName"
                                            aria-describedby="basic-addon1">
                                     <button
-                                        :class="[eventName.length !== 0 ? 'btn btn-primary rounded-5': 'btn btn-primary rounded-5 disabled']"
+                                        :class="[!v$.$invalid ? 'btn btn-primary rounded-5': 'btn btn-primary rounded-5 disabled']"
                                         @click="startCreateEvent" type="button">
                                         Create Event
                                     </button>
                                 </div>
+                            </div>
+                            <div class="w-100 text-start">
+                                <small v-if="v$.eventName.$error" class="text-danger text-center w-100"> {{
+                                        v$.eventName.$errors[0].$message
+                                    }}</small>
                             </div>
                         </div>
                     </div>
@@ -220,6 +225,8 @@
 
 <script setup>
 import {ref} from 'vue'
+import {alpha, minLength, required} from "@vuelidate/validators";
+import {useVuelidate} from "@vuelidate/core";
 
 const eventName = ref('')
 
@@ -229,6 +236,14 @@ const startCreateEvent = () => {
     }
 
 }
+
+const rules = {
+    eventName: {
+        required, minLengthValue: minLength(5), $autoDirty: true,
+    }
+}
+
+const v$ = useVuelidate(rules, {eventName})
 
 
 </script>
