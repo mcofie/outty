@@ -19,20 +19,28 @@ class PaymentController extends Controller
 
     public function webhook(Request $request)
     {
-        $clientReferenceId = $request['data']['clientReference'];
+
+
+        $clientReferenceId = $request['Data']['ClientReference'];
         $payment = Payment::where('reference_id', $clientReferenceId)->first();
 
-        $payment->amount = $request['data']['amount'];
-        $payment->payment_type = $request['data']['paymentType'];
-        $payment->phone_number = $request['data']['phoneNumber'];
-        $payment->transaction_id = $request['data']['paylinkId'];
-        $payment->status = "successful";
+        $payment->amount = $request['Data']['Amount'];
+        $payment->payment_type = $request['Data']['PaymentType'];
+        $payment->phone_number = $request['Data']['MobileNumber'];
+        $payment->transaction_id = $request['Data']['PaylinkId'];
+        $payment->status = '1';
         $payment->save();
 
         if ($payment->wasChanged()) {
             $event = Event::where('id', $payment->event_id)->first();
             $event->status = '1';
             $event->save();
+
+            //Send Email
+            $payment = Payment::where('event_id', $payment->event_id)->where('status', '1')->first();
+            $organizer = Organizer::where('id', $payment->event->user_id)->first();
+
+            Mail::send(new \App\Mail\EventCreated($payment->event, $payment, $organizer));
         }
 
     }
@@ -54,15 +62,4 @@ class PaymentController extends Controller
 
     }
 
-
-    public function tryout()
-    {
-        $payment = Payment::where('id', 31)->where('status', '1')->first();
-        $organizer = Organizer::where('id', $payment->event->user_id)->first();
-
-//        $mail = new EventCreated($payment->event, $payment, $organizer);
-        Mail::send(new \App\Mail\EventCreated($payment->event, $payment, $organizer));
-
-//        dd($payment->event);
-    }
 }

@@ -3,13 +3,13 @@
         <form @submit.prevent="$event.preventDefault()">
             <div v-for="(lineup,index) in lineups" class="mb-5">
                 <div class="row justify-content-end">
-                    <div class="col-1 g-0">
+                    <div class="col-1 g-0 col-lg-1 col-xl-1 col-md-1">
                         <button class="btn btn-secondary btn-lg disabled rounded-1 w-100"
                                 style="height: 50px;" disabled>
                             <h4>{{ index + 1 }}</h4>
                         </button>
                     </div>
-                    <div class="col-5 g-0">
+                    <div class="col-12 col-lg-5 col-xl-5 col-md-5 g-0">
                         <div class="d-flex justify-content-between">
                             <h6 class="text-center">
                                 Start time

@@ -1,5 +1,5 @@
 <template>
-    <div class="card">
+    <div class="">
         <form @submit.prevent="$event.preventDefault()">
             <div class="mb-3">
                 <label for="exampleFormControlInput1" class="form-label">Organized By:</label>

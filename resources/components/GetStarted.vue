@@ -5,21 +5,21 @@
                 <div class="container">
                     <div class="row">
                         <nav class="navbar py-3 px-2">
-                            <div class="container">
+                            <div class="container p-0">
                                 <div class="d-flex justify-content-start text-start w-100">
                                     <ul class="list-unstyled pb-0 mb-0">
                                         <li class="mb-1">
                                             <h4><a class="navbar-brand text-decoration-underline fs-3"
-                                                   href="/">outty.co</a>
+                                                   href="/"> <i class="fa-solid fa-caret-right"></i> outty.co</a>
                                             </h4>
                                         </li>
-                                        <li>
-                                            <p class="text-secondary opacity-75">
-                                                Their appearance, alignment, and sizing can be easily customized with
-                                                our
-                                                <br/>amazing utility classes.
-                                            </p>
-                                        </li>
+<!--                                        <li>-->
+<!--                                            <small class="text-secondary opacity-75">-->
+<!--                                                Their appearance, alignment, and sizing can be easily customized with-->
+<!--                                                our-->
+<!--                                                <br/>amazing utility classes.-->
+<!--                                            </small>-->
+<!--                                        </li>-->
                                     </ul>
                                 </div>
                             </div>

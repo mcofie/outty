@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 
@@ -26,9 +27,24 @@ Route::get('/mail', function () {
 //    return view('');
 });
 
-Route::get('/mailable', function () {
-    return new App\Mail\EventCreated();
+Route::get('check-download', function (){
+    return view('payment');
 });
+
+Route::get('/download', function () {
+    $pdf = App::make('dompdf.wrapper');
+//    $pdf->loadHTML('<h1>Test</h1>');
+    $data = [
+        'title' => 'Example PDF',
+        'content' => 'This is an example PDF generated in Laravel using Dompdf'
+    ];
+
+    $pdf->loadView('payment', $data);
+//    return $pdf->download('outty.pdf');
+    return $pdf->stream();
+
+});
+
 
 //Landing page
 Route::get('/', function () {

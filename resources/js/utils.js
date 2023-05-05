@@ -37,7 +37,10 @@ export const SecondaryFonts = [
 export const EventTypes = [
     "Wedding",
     "Conference",
-    "Church"
+    "Church",
+    "Trade show",
+    "Workshop",
+    ""
 ]
 
 export const slugify = text =>

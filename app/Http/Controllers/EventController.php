@@ -57,13 +57,13 @@ class EventController extends Controller
             //TODO: Payment - Abstract this
             $response = Http::withBasicAuth(env('PAYMENT_CLIENT_KEY'), env('PAYMENT_CLIENT_SECRET'))
                 ->post(env('PAYMENT_URL'), [
-                    'amount' => (1.99 * env('PAYMENT_DOLLAR_RATE')),
+                    'amount' => (1 * env('PAYMENT_DOLLAR_RATE')),
                     'title' => 'Payment for event: ' . $request->event['name'],
                     'description' => 'outty.co Checkout',
                     'clientReference' => $clientReference,
                     'callbackUrl' => env('PAYMENT_CALLBACK_URL'),
                     'cancellationUrl' => env('PAYMENT_CANCELLATION_URL'),
-                    'returnUrl' => env('PAYMENT_RETURN_URL'),
+                    'returnUrl' => env('PAYMENT_RETURN_URL') . "?referenceId=" . $clientReference,
                     'logo' => 'https://hubtel.com/wp-content/themes/hubtel/dist/images/logo.png'
                 ]);
 
@@ -118,7 +118,7 @@ class EventController extends Controller
                 $payment->save();
 
                 return new MainResource(["data" => new EventCreationWrapperResource([$events,
-                    ["amount" => (1.99 * env('PAYMENT_DOLLAR_RATE')),
+                    ["amount" => (1 * env('PAYMENT_DOLLAR_RATE')),
                         "payment_url" => $deserialisedResponse->data->paylinkUrl]]),
                     "message" => "",
                     "status" => 200]);

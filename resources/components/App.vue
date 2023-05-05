@@ -4,11 +4,11 @@
             <div class="col-lg-9 col-xl-8 col-md-12 col-sm-12">
                 <div class="container">
                     <!-- As a link -->
-                    <nav class="navbar bg-body-tertiary py-3 px-2">
+                    <nav class="navbar bg-body-tertiary p-4">
                         <div class="container">
-                            <div class="d-flex justify-content-between w-100">
-                                <h6><a class="navbar-brand" href="#">outty.co</a></h6>
-                                <ul class="list-inline">
+                            <div class="d-flex justify-content-between align-content-center w-100">
+                                <h6><a class="navbar-brand" href="#"><i class="fa-solid fa-caret-right"></i> outty.co</a></h6>
+                                <ul class="list-inline mb-0">
                                     <li class="list-inline-item mx-4"><a href="#">pricing</a></li>
                                     <li class="list-inline-item ml-5"><a href="#">about</a></li>
                                 </ul>

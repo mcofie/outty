@@ -1,5 +1,5 @@
 <template>
-    <div class="card">
+    <div class="">
         <form @submit.prevent="$event.preventDefault()">
             <div class="row justify-content-center">
                 <div class="container">

@@ -45,7 +45,6 @@ Route::put('events/{id}', [EventController::class, 'update']);
 
 //Payment Webhook
 Route::post('payments/webhook', [PaymentController::class, 'webhook'])->withoutMiddleware([AuthenticateEventUser::class]);
-Route::get('payments/tryout', [PaymentController::class, 'tryout'])->withoutMiddleware([AuthenticateEventUser::class]);
 Route::get('payments/{client_reference_id}', [PaymentController::class, 'payment_confirmation'])->withoutMiddleware([AuthenticateEventUser::class]);
 
 

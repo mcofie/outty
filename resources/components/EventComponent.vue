@@ -1,5 +1,5 @@
 <template>
-    <div class="card">
+    <div class="">
         <form @submit.prevent="$event.preventDefault()">
             <div class="mb-3">
                 <label for="exampleFormControlInput1" class="form-label">Event name</label>
@@ -8,7 +8,8 @@
                        id="exampleFormControlInput1"
                        placeholder="">
                 <div class="">
-                    <small v-if="!v$.name.$error" v-show="slugLookup.state === 1" class="text-success"> {{ slugLookup.message }}</small>
+                    <small v-if="!v$.name.$error" v-show="slugLookup.state === 1" class="text-success">
+                        {{ slugLookup.message }}</small>
                     <small v-show="slugLookup.state === 0" class="text-danger"> {{ slugLookup.message }}</small>
                     <small v-if="v$.name.$error" class="text-danger"> {{
                             v$.name.$errors[0].$message
@@ -27,20 +28,24 @@
             </div>
 
             <div class="row justify-content-between">
-                <div class="col-6">
+                <div class="col-12 col-md-6 col-lg-6 col-xl-6">
                     <label for="exampleFormControlInput1" class="form-label">Event Date</label>
                     <VueDatePicker v-model="userData.date"
                                    :class="[v$.date.$error ? 'form-control is-invalid' : 'form-control' ]"
                                    :format="format"
                                    :min-date="new Date()"
                                    placeholder="00/00/0000" text-input auto-apply :enable-time-picker="false"/>
+                    <InfoTip message="(NB: Event date can't be edited once created!)"/>
+                    <br>
                     <small v-if="v$.date.$error" class="text-danger"> {{
                             v$.date.$errors[0].$message
                         }}</small>
                 </div>
-                <div class="col-6">
+                <div class="col-12 col-md-6 col-lg-6 col-xl-6">
                     <label class="form-label">Event Type</label>
-                    <select class="form-select form-control" v-model="userData.category"
+                    <select
+                        :class="[v$.date.$error ? 'form-control form-select is-invalid' : 'form-select form-control' ]"
+                        v-model="userData.category"
                             aria-label="Default select example">
                         <option disabled value="">Select Event Type</option>
                         <option v-for="type in EventTypes" :value="type">{{ type }}</option>
@@ -72,13 +77,10 @@
                 <div class="container">
                     <div class="row justify-content-center">
                         <div class="col-md-10 col-lg-9 col-xl-7">
-                            <h6 class="mx-4">Event Details</h6>
-                            <div class="d-flex justify-content-end w-100 mt-4">
-                                <button class="btn btn-secondary btn-lg rounded-1 d-none">
-                                    <i class="fa-solid fa-caret-left"></i>
-                                </button>
+                            <h6 class="mx-lg-4 mx-md-5 mx-0">Event Details</h6>
+                            <div class="d-flex justify-content-lg-end justify-content-md-end justify-content-center w-100 mt-4">
                                 <button @click="goToNextSection"
-                                        :class="[!v$.$invalid ? '' : 'disabled','btn btn-primary btn-lg px-5 rounded-2']"
+                                        :class="[!v$.$invalid ? '' : 'disabled','btn btn-primary btn-lg px-5 justify-content-lg-end w-auto rounded-2']"
                                 >
                                     Next <i class="fa-solid fa-caret-right"></i>
                                 </button>
@@ -106,6 +108,7 @@ import Requester from "../js/network/Requester";
 import {APIs} from "../js/network/APIs";
 import {alpha, minLength, required} from "@vuelidate/validators";
 import {useField, useForm} from "vee-validate";
+import InfoTip from "./sections/InfoTip";
 
 const store = useStore()
 
