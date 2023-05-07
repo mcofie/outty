@@ -42,11 +42,11 @@
                         }}</small>
                 </div>
                 <div class="col-12 col-md-6 col-lg-6 col-xl-6">
-                    <label class="form-label">Event Type</label>
+                    <label class="form-label mt-3 mt-lg-0 mt-xl-0 mt-xxl-0 mt-md-0">Event Type</label>
                     <select
-                        :class="[v$.date.$error ? 'form-control form-select is-invalid' : 'form-select form-control' ]"
+                        :class="[v$.category.$error ? 'form-control form-select is-invalid' : 'form-select form-control' ]"
                         v-model="userData.category"
-                            aria-label="Default select example">
+                        aria-label="Default select example">
                         <option disabled value="">Select Event Type</option>
                         <option v-for="type in EventTypes" :value="type">{{ type }}</option>
                     </select>
@@ -77,10 +77,11 @@
                 <div class="container">
                     <div class="row justify-content-center">
                         <div class="col-md-10 col-lg-9 col-xl-7">
-                            <h6 class="mx-lg-4 mx-md-5 mx-0">Event Details</h6>
-                            <div class="d-flex justify-content-lg-end justify-content-md-end justify-content-center w-100 mt-4">
+                            <h6 class="mx-0">Event Details</h6>
+                            <div
+                                class="d-flex justify-content-lg-end justify-content-md-end justify-content-center w-100 mt-4">
                                 <button @click="goToNextSection"
-                                        :class="[!v$.$invalid ? '' : 'disabled','btn btn-primary btn-lg px-5 justify-content-lg-end w-auto rounded-2']"
+                                        :class="[!v$.$invalid && slugLookup.state !== 0 ? '' : 'disabled','btn btn-primary btn-lg flex-sm-grow-0 px-5 justify-content-lg-end flex-fill flex-sm-fill rounded-2']"
                                 >
                                     Next <i class="fa-solid fa-caret-right"></i>
                                 </button>

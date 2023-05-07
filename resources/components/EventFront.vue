@@ -23,8 +23,8 @@
 
                 <div class="row justify-content-center">
                     <div class="col-md-8 col-lg-8 col-xl-6 col-md-7 col-11">
-                        <LineUpCard v-for="(lineup,index) in eventResponse.data.line_ups" :lineup="lineup"
-                                    :event="eventResponse.data" :key="index"/>
+                        <LineUpCardAlt v-for="(lineup,index) in eventResponse.data.line_ups" :lineup="lineup"
+                                       :event="eventResponse.data" :key="index"/>
                     </div>
                 </div>
             </div>
@@ -48,11 +48,11 @@ import Requester from "../js/network/Requester";
 import {GetEvent} from "../js/network/Models";
 import {computed, onBeforeMount, onMounted, ref, toRaw, watch} from "vue";
 import {useRoute, useRouter} from 'vue-router'
-import LineUpCard from "./sections/LineUpCard";
 import moment from "moment";
 import Footer from "./sections/Footer";
 import {APIs} from "../js/network/APIs";
 import EmptyState from "./sections/EmptyState";
+import LineUpCardAlt from "./sections/LineUpCardAlt";
 
 
 const eventResponse = ref(GetEvent)
@@ -90,7 +90,7 @@ const getEvent = ({slug}) => {
 
 
 onMounted(() => {
-    // console.log(route)
+    console.log(route)
 })
 
 

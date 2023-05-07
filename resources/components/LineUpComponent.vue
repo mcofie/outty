@@ -1,51 +1,54 @@
 <template>
-    <div class="card">
+    <div class="w-100">
         <form @submit.prevent="$event.preventDefault()">
-            <div v-for="(lineup,index) in lineups" class="mb-5">
-                <div class="row justify-content-end">
-                    <div class="col-1 g-0 col-lg-1 col-xl-1 col-md-1">
-                        <button class="btn btn-secondary btn-lg disabled rounded-1 w-100"
-                                style="height: 50px;" disabled>
-                            <h4>{{ index + 1 }}</h4>
-                        </button>
+            <div v-for="(lineup,index) in lineups" class="mb-2">
+                <div class="row justify-content-center">
+                    <!--                    <div class="col-12 text-start col-lg-1 col-xl-1 col-md-1 d-none d-sm-block">-->
+                    <!--                        <button class="btn btn-outline-secondary btn-lg border-3 rounded-1 w-100"-->
+                    <!--                                style="height: 50px;">-->
+                    <!--                            <h4>{{ index + 1 }}</h4>-->
+                    <!--                        </button>-->
+                    <!--                    </div>-->
+
+                    <div class="d-flex justify-content-evenly">
+                        <h4 class="text-start py-2">#{{ index + 1 }}</h4>
+
+                        <div class="w-100 d-flex justify-content-end">
+                            <button @click="deleteLineUp(index)"
+                                    style="height: 50px;" type="button" class="btn text-danger text-end opacity-25"><i
+                                class="fa-solid fa-eraser"></i> Delete
+                            </button>
+                        </div>
                     </div>
-                    <div class="col-12 col-lg-5 col-xl-5 col-md-5 g-0">
-                        <div class="d-flex justify-content-between">
-                            <h6 class="text-center">
-                                Start time
-                            </h6>
-                            <VueDatePicker v-model="lineup.start_time" time-picker class="form-control mx-2"
+
+                    <div class="col-12 mt-1 col-lg-6 col-xl-6 col-md-6 ">
+                        <div class="w-100">
+                            <VueDatePicker
+                                v-model="lineup.start_time" time-picker
+                                class="form-control line-up-start border-start-4"
+                                placeholder="00:00"
+                                :is-24="false"
+                                auto-apply
+                                text-input/>
+                        </div>
+                    </div>
+
+
+                    <div class="col-12 mt-1 col-lg-6 col-xl-6 col-md-6">
+                        <div class="w-100">
+                            <VueDatePicker v-model="lineup.end_time" time-picker class="form-control line-up-end"
                                            placeholder="00:00"
                                            :is-24="false"
                                            auto-apply
                                            text-input/>
                         </div>
-                    </div>
-
-
-                    <div class="col-5 g-0">
-                        <div class="d-flex justify-content-between">
-                            <h6 class="text-center">
-                                End time
-                            </h6>
-                            <VueDatePicker v-model="lineup.end_time" time-picker class="form-control mx-2"
-                                           placeholder="00:00"
-                                           :is-24="false"
-                                           auto-apply
-                                           text-input/>
-                        </div>
-                    </div>
-
-                    <div class="col-1 g-0 text-end">
-                        <button @click="deleteLineUp(index)" class="btn btn-danger btn-lg rounded-1"
-                                style="height: 50px;">
-                            <i class="fa-solid fa-trash"></i>
-                        </button>
                     </div>
                 </div>
                 <div class="row justify-content-center my-3">
-                    <div class="col-12 g-0">
-                        <input type="text" v-model="lineup.title" class="form-control" required>
+                    <div class="col-12">
+                        <!--                        <label class="form-label">Title</label>-->
+                        <input type="text" placeholder="Programme title" v-model="lineup.title" class="form-control"
+                               required>
                     </div>
                 </div>
 
@@ -55,11 +58,12 @@
                             <button class="accordion-button px-0" type="button" data-bs-toggle="collapse"
                                     :data-bs-target="`#collapse${index}`" aria-expanded="true"
                                     aria-controls="collapseOne">
-                                Description
+                                <!--                                Description-->
                             </button>
                         </h2>
                         <div :id="`collapse${index}`" class="accordion-collapse collapse" aria-labelledby="headingOne"
                              :data-bs-parent="`#accordion${index}`">
+                            <p>Description</p>
                             <div class="accordion-body p-0">
                                 <textarea v-model="lineup.description" class="form-control" rows="3"></textarea>
                             </div>
@@ -101,7 +105,7 @@
 </template>
 
 <script setup>
-import {ref, toRaw, watch, computed} from 'vue'
+import {ref, toRaw, watch, computed, inject, onMounted} from 'vue'
 import VueDatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css'
 import {ComponentEventObject} from "../js/network/Models";
@@ -118,6 +122,8 @@ const time = {
     hours: new Date().getHours(),
     minutes: new Date().getMinutes()
 };
+
+const swal = inject('$swal')
 
 
 const lineups = ref(pLineups)
@@ -140,11 +146,22 @@ const persistUserData = () => {
     const obj = ComponentEventObject
     obj.page = 'LineUpComponent'
     obj.data.lineups = Object.assign(obj.data.lineups, toRaw(lineups.value))
+    console.log(toRaw(lineups.value))
     return obj
 }
 const deleteLineUp = (index) => {
     if (lineups.value.length >= 2) {
-        lineups.value.splice(index, 1)
+        swal({
+            icon: 'question', title: 'Are you sure you want to delete this?', showDenyButton: true,
+            confirmButtonText: 'YES',
+            denyButtonText: `No, Cancel`
+        }).then((result) => {
+            if (result.isConfirmed) {
+                lineups.value.splice(index, 1)
+            } else {
+                this.close()
+            }
+        });
     }
 }
 const goToNextSection = () => emit('next', persistUserData())
@@ -166,6 +183,10 @@ const rules = {
 }
 
 const v$ = useVuelidate(rules, {lineups})
+
+onMounted(() => {
+    console.log(props.eventStore.lineups)
+})
 
 
 </script>

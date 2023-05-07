@@ -21,13 +21,13 @@ class PaymentController extends Controller
     {
 
 
-        $clientReferenceId = $request['Data']['ClientReference'];
+        $clientReferenceId = $request['data']['reference'];
         $payment = Payment::where('reference_id', $clientReferenceId)->first();
 
-        $payment->amount = $request['Data']['Amount'];
-        $payment->payment_type = $request['Data']['PaymentType'];
-        $payment->phone_number = $request['Data']['MobileNumber'];
-        $payment->transaction_id = $request['Data']['PaylinkId'];
+        $payment->amount = $request['data']['amount'];
+        $payment->payment_type = $request['data']['channel'];
+        $payment->phone_number = $request['data']['customer']['phone'];
+        $payment->transaction_id = "";
         $payment->status = '1';
         $payment->save();
 

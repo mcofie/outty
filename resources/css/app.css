@@ -19,6 +19,13 @@ a {
   text-decoration: none;
 }
 
+.line-up-start {
+  border-left: 3px solid #8ec160 !important;
+}
+.line-up-end {
+  border-left: 3px solid #fc9d9d !important;
+}
+
 .navbar {
   margin-top: 2rem;
   border-radius: 3rem;
@@ -99,6 +106,33 @@ hr {
   border: 0;
 }
 
+.progress-bar {
+  background-color: #000 !important;
+}
+
+.progress, .progress-stacked {
+  height: 0.5rem !important;
+}
+
+.swal2-styled.swal2-confirm {
+  background-color: #ffe7d0 !important;
+  color: #050505 !important;
+  border: none !important;
+}
+
+.swal2-styled.swal2-deny {
+  background-color: #E24E1B !important;
+  border: none !important;
+}
+
+.swal2-container.swal2-backdrop-show, .swal2-container.swal2-noanimation {
+  background: rgba(15, 6, 4, 0.75) !important;
+}
+
+.swal2-popup {
+  border-radius: 38px !important;
+}
+
 .card {
   border: 0;
   border-radius: 1rem;
@@ -118,7 +152,7 @@ hr {
 form {
   width: 100%;
   float: left;
-  margin: 0rem 0;
+  margin-bottom: 150px;
 }
 
 .primary-color {

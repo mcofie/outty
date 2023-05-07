@@ -3,9 +3,9 @@
         <form @submit.prevent="$event.preventDefault()">
             <div class="row justify-content-center">
                 <div class="container">
-                    <div class="row justify-content-center" :class="event.primary_typeface">
+                    <div class="row justify-content-center" :class="userData.primary_typeface">
                         <div class="col-md-8">
-                            <ul class="list-unstyled" :style="{color:event.text_color }">
+                            <ul class="list-unstyled" :style="{color:userData.text_color }">
                                 <li class="py-3 text-center">
                                     <h1 :class="userData.secondary_typeface">{{
                                             event.name
@@ -28,12 +28,12 @@
             <hr/>
             <div class="row justify-content-between">
                 <div class="col-6">
-                    <label class="form-label">Text Color picker</label>
+                    <label class="form-label">Text Color</label>
                     <input type="color" v-model="userData.text_color" class="form-control form-control-color"
                            title="Choose your color">
                 </div>
                 <div class="col-6">
-                    <label class="form-label">Background Color picker</label>
+                    <label class="form-label">Background Color</label>
                     <input type="color" v-model="userData.background_color" class="form-control form-control-color"
                            title="Choose your color">
                 </div>
@@ -92,7 +92,7 @@
 </template>
 
 <script setup>
-import {ref, watch, computed} from 'vue'
+import {ref, watch, computed, onMounted} from 'vue'
 
 import {PrimaryFonts, SecondaryFonts} from "../js/utils";
 import {ComponentEventObject} from "../js/network/Models";
@@ -103,7 +103,6 @@ import {checkIfArrayHasValues} from "../js/helper";
 import {alpha, minLength, required} from "@vuelidate/validators";
 import {useVuelidate} from "@vuelidate/core";
 
-const isButtonActive = ref(false)
 const emit = defineEmits(['next', 'previous'])
 const props = defineProps(['eventStore'])
 const event = props.eventStore.event
@@ -152,6 +151,10 @@ const rules = {
 }
 
 const v$ = useVuelidate(rules, userData)
+
+onMounted(()=>{
+    console.log(props.eventStore)
+})
 
 
 </script>

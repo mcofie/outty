@@ -6,6 +6,7 @@ use App\Http\Resources\EventCreationWrapperResource;
 use App\Http\Resources\EventResource;
 use App\Http\Resources\EventWrapperResource;
 use App\Http\Resources\MainResource;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Http;
 
@@ -55,16 +56,12 @@ class EventController extends Controller
 
         if (!$validator->fails()) {
             //TODO: Payment - Abstract this
-            $response = Http::withBasicAuth(env('PAYMENT_CLIENT_KEY'), env('PAYMENT_CLIENT_SECRET'))
-                ->post(env('PAYMENT_URL'), [
+            $response = Http::withToken(env('PAYSTACK_SECRET_KEY'))
+                ->post(env('PAYSTACK_PAYMENT_URL'), [
                     'amount' => (1 * env('PAYMENT_DOLLAR_RATE')),
-                    'title' => 'Payment for event: ' . $request->event['name'],
-                    'description' => 'outty.co Checkout',
-                    'clientReference' => $clientReference,
-                    'callbackUrl' => env('PAYMENT_CALLBACK_URL'),
-                    'cancellationUrl' => env('PAYMENT_CANCELLATION_URL'),
-                    'returnUrl' => env('PAYMENT_RETURN_URL') . "?referenceId=" . $clientReference,
-                    'logo' => 'https://hubtel.com/wp-content/themes/hubtel/dist/images/logo.png'
+                    'email' => $request->user['email'],
+                    'callback_url' => env('PAYSTACK_PAYMENT_CALLBACK_URL') . "?referenceId=" . $clientReference,
+                    'reference' => $clientReference
                 ]);
 
             $deserialisedResponse = json_decode($response->body());
@@ -114,12 +111,12 @@ class EventController extends Controller
                 $payment = new Payment;
                 $payment->event_id = $events->id;
                 $payment->reference_id = $clientReference;
-                $payment->payment_url = $deserialisedResponse->data->paylinkUrl;
+                $payment->payment_url = $deserialisedResponse->data->authorization_url;
                 $payment->save();
 
                 return new MainResource(["data" => new EventCreationWrapperResource([$events,
                     ["amount" => (1 * env('PAYMENT_DOLLAR_RATE')),
-                        "payment_url" => $deserialisedResponse->data->paylinkUrl]]),
+                        "payment_url" => $deserialisedResponse->data->authorization_url]]),
                     "message" => "",
                     "status" => 200]);
 
@@ -135,18 +132,37 @@ class EventController extends Controller
 
     }
 
+    public function isEventActive(Event $event): bool
+    {
+        $eventDate = Carbon::create($event->event_date);
+        $todaysDate = Carbon::today();
+
+        if ($eventDate->greaterThan($todaysDate) || $eventDate->equalTo($todaysDate)) {
+            return true;
+        }
+
+        return false;
+    }
 
     public function show($id)
     {
         $events = Event::where('slug', $id)->where('status', '1')->first();
+
         if ($events === null) {
             return new MainResource(['data' => new stdClass(), 'message' => '', 'status' => 404]);
         } else {
-            $lineups = $events->lineups;
-            $organizer = Organizer::find($events->user_id);
-            return new MainResource(['data' => new EventWrapperResource([$events, $organizer]),
-                'message' => __('messages.get_event'),
-                'status' => 200]);
+            if ($this->isEventActive($events)) {
+                $lineups = $events->lineups;
+                $organizer = Organizer::find($events->user_id);
+                return new MainResource(['data' => new EventWrapperResource([$events, $organizer]),
+                    'message' => __('messages.get_event'),
+                    'status' => 200]);
+            } else {
+                return new MainResource(['data' => new StdClass(),
+                    'message' => 'Sorry!, the event is either old or not found',
+                    'status' => 404]);
+            }
+
         }
 
     }

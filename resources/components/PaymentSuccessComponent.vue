@@ -6,12 +6,14 @@
                     <div v-if="hasData">
                         <ul class="list-unstyled text-center">
                             <li><h1>{{ event.name }}</h1></li>
-                            <li></li>
+                            <li>
+                                <p>{{ formatDate(event.date) }}</p>
+                            </li>
                             <li></li>
                             <li></li>
                         </ul>
                         <div class="card">
-                            <form>
+                            <form @submit.prevent="$event.preventDefault()">
                                 <div class="row justify-content-center">
                                     <div class="col-md-8 text-center">
                                         <ul class="list-unstyled">
@@ -24,12 +26,29 @@
                                                     <input type="text"
                                                            class="form-control text-center align-self-center w-50"
                                                            :value="'https://outty.co/'+event.slug" disabled/>
-                                                    <button class="btn btn-secondary btn-lg rounded-1 mx-2">
-                                                        <i class="fa-solid fa-arrow-up-from-bracket"></i>
-                                                    </button>
+                                                    <a :href="'https://outty.co/'+event.slug" target="_blank">
+                                                        <button class="btn btn-secondary btn-lg rounded-1 mx-2">
+                                                            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                                                        </button>
+                                                    </a>
                                                 </div>
                                             </li>
+                                            <li>
+                                            </li>
                                         </ul>
+                                    </div>
+                                </div>
+
+                                <div class="row justify-content-center">
+                                    <div class="col-md-10">
+                                        <div class="d-flex justify-content-center mt-3">
+                                            <button type="button" class="btn btn-primary btn-lg mx-3">Download
+                                                QR Code
+                                            </button>
+                                            <button type="button" class="btn btn-secondary btn-lg mx-3">Download
+                                                QR PDF
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
 
@@ -39,7 +58,7 @@
                                             <div class="card-body">
                                                 <div class="row justify-content-center">
                                                     <div class="col-md-10 text-center">
-                                                        <ul class="list-unstyled mt-5">
+                                                        <ul class="list-unstyled mt-2">
                                                             <li class="mb-3">
                                                                 <h4>Lorem ipsum dolor sit ametdolor sit amet,</h4>
                                                             </li>
@@ -82,6 +101,7 @@ import Requester from "../js/network/Requester";
 import {APIs} from "../js/network/APIs";
 import {CreateEventLineUp, GetEvent} from "../js/network/Models";
 import EmptyState from "./sections/EmptyState";
+import moment from "moment";
 
 const isLoading = ref(false)
 const hasData = ref(true)
@@ -100,6 +120,10 @@ const getReferenceId = () => {
         return {status: true, value: myParam}
     }
     return {status: false, value: ''}
+}
+
+const formatDate = (date) => {
+    return moment(date).format("Do MMMM YYYY")
 }
 
 

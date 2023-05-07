@@ -13,7 +13,7 @@
             </div>
 
             <div class="row justify-content-between">
-                <div class="col-6">
+                <div class="col-12 col-md-6 col-xxl-6 col-xl-6 col-lg-6">
                     <label for="exampleFormControlInput1" class="form-label">Email address</label>
                     <input type="email" v-model="userData.email" class="form-control"
                            :class="[v$.email.$error ? 'form-control is-invalid' : 'form-control' ]"
@@ -22,7 +22,7 @@
                             v$.email.$errors[0].$message
                         }}</small>
                 </div>
-                <div class="col-6">
+                <div class="col-12 col-md-6 col-xxl-6 col-xl-6 col-lg-6 mt-2 mt-lg-0 mt-md-0 mt-xl-0">
                     <label for="exampleFormControlInput1" class="form-label">Contact number</label>
                     <input type="text" v-model="userData.phone_number"
                            :class="[v$.phone_number.$error ? 'form-control is-invalid' : 'form-control' ]"

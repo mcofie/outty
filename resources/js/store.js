@@ -57,12 +57,12 @@ const getters = {
     proposedEventName: state => state.proposedEventName,
     eventStore: state => {
         let store = JSON.parse(localStorage.getItem('eventStore'))
-        if (store) {
-            store.lineups.map((lineup) => {
-                lineup.start_time = reverseTimeFormat(lineup.start_time)
-                lineup.end_time = reverseTimeFormat(lineup.end_time)
-            })
-        }
+        // if (store) {
+        //     store.lineups.map((lineup) => {
+        //         lineup.start_time = reverseTimeFormat(lineup.start_time)
+        //         lineup.end_time = reverseTimeFormat(lineup.end_time)
+        //     })
+        // }
         return Object.assign(state.event, store)
     }
 }

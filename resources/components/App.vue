@@ -1,13 +1,14 @@
 <template>
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-lg-9 col-xl-8 col-md-12 col-sm-12">
+            <div class="col-lg-10 col-xl-8 col-md-12 col-sm-12">
                 <div class="container">
                     <!-- As a link -->
                     <nav class="navbar bg-body-tertiary p-4">
                         <div class="container">
                             <div class="d-flex justify-content-between align-content-center w-100">
-                                <h6><a class="navbar-brand" href="#"><i class="fa-solid fa-caret-right"></i> outty.co</a></h6>
+                                <h6><a class="navbar-brand" href="#"><i class="fa-solid fa-caret-right"></i>
+                                    outty.co</a></h6>
                                 <ul class="list-inline mb-0">
                                     <li class="list-inline-item mx-4"><a href="#">pricing</a></li>
                                     <li class="list-inline-item ml-5"><a href="#">about</a></li>
@@ -48,11 +49,18 @@
                                            v-model="eventName"
                                            aria-describedby="basic-addon1">
                                     <button
-                                        :class="[!v$.$invalid ? 'btn btn-primary rounded-5': 'btn btn-primary rounded-5 disabled']"
+                                        :class="[!v$.$invalid ? 'btn btn-primary rounded-5 d-none d-sm-block': 'btn btn-primary rounded-5 disabled d-none d-sm-block']"
                                         @click="startCreateEvent" type="button">
                                         Create Event
                                     </button>
                                 </div>
+                            </div>
+                            <div class="w-100 my-2 d-block d-sm-none">
+                                <button
+                                    :class="[!v$.$invalid ? 'btn btn-primary rounded-5 btn-lg w-100 py-3': 'btn btn-primary rounded-5 disabled w-100 btn-lg py-3']"
+                                    @click="startCreateEvent" type="button">
+                                    Create Event
+                                </button>
                             </div>
                             <div class="w-100 text-start">
                                 <small v-if="v$.eventName.$error" class="text-danger text-center w-100"> {{
@@ -122,6 +130,13 @@
                                 <div class="card secondary-color my-4">
                                     <div class="card-body">
                                         <div class="row">
+                                            <div class="col-md-4 d-flex justify-content-center d-block d-sm-none">
+                                                <div
+                                                    class="circle-large rounded-circle bg-white border-1 text-center">
+                                                    <img class="img-fluid w-50 align-self-center text-center mt-5"
+                                                         src="../imgs/information.png"/>
+                                                </div>
+                                            </div>
                                             <div class="col-md-8">
                                                 <ul class="list-unstyled mt-5">
                                                     <li class="mb-3">
@@ -136,7 +151,7 @@
                                                     </li>
                                                 </ul>
                                             </div>
-                                            <div class="col-md-4">
+                                            <div class="col-md-4 d-none d-sm-block">
                                                 <div
                                                     class="circle-large rounded-circle bg-white border-1 text-center">
                                                     <img class="img-fluid w-50 align-self-center text-center mt-5"
@@ -165,7 +180,7 @@
                                     <li><p>Create an inclusive event line-up that matter.</p></li>
                                     <li>
                                         <a href="get-started">
-                                            <button class="btn btn-primary rounded-5 btn-lg" type="button">
+                                            <button class="btn btn-primary rounded-5 btn-lg py-3 px-5" type="button">
                                                 Create
                                                 Event
                                             </button>

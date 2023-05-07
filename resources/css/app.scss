@@ -11,6 +11,8 @@ $primaryColorDark: #c6491e;
 $secondaryColor: #f9f9eb;
 $accentColor: #ffe7d0;
 $grey: #f2f2f2;
+$start-color: #fc9d9d;
+$end-color: #8ec160;
 
 body {
     font-family: 'KoHo', sans-serif;
@@ -25,6 +27,16 @@ h1, h2, h3, h4, h5, h6 {
 a {
     color: #050505;
     text-decoration: none;
+}
+
+.line-up {
+    &-start {
+        border-left: 3px solid $end-color !important;
+    }
+
+    &-end {
+        border-left: 3px solid $start-color !important;
+    }
 }
 
 //Nav
@@ -117,6 +129,33 @@ hr {
     border: 0;
 }
 
+.progress-bar {
+    background-color: #000 !important;
+}
+
+.progress, .progress-stacked{
+    height: 0.5rem !important;
+}
+
+.swal2-styled.swal2-confirm {
+    background-color: $accentColor !important;
+    color: #050505 !important;
+    border: none !important;
+}
+
+.swal2-styled.swal2-deny {
+    background-color: $primaryColor !important;
+    border: none !important;
+}
+
+.swal2-container.swal2-backdrop-show, .swal2-container.swal2-noanimation {
+    background: rgb(15 6 4 / 75%) !important;
+}
+
+.swal2-popup {
+    border-radius: 38px !important;
+}
+
 //Card
 .card {
     border: 0;
@@ -139,7 +178,7 @@ hr {
 form {
     width: 100%;
     float: left;
-    margin: 0rem 0;
+    margin-bottom: 150px;
 }
 
 
@@ -192,6 +231,7 @@ textarea {
         padding-left: 0.5rem;
     }
 }
+
 
 //Footer
 footer {

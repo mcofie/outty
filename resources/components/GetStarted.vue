@@ -9,21 +9,26 @@
                                 <div class="d-flex justify-content-start text-start w-100">
                                     <ul class="list-unstyled pb-0 mb-0">
                                         <li class="mb-1">
-                                            <h4><a class="navbar-brand text-decoration-underline fs-3"
-                                                   href="/"> <i class="fa-solid fa-caret-right"></i> outty.co</a>
+                                            <h4><a class="navbar-brand fs-3"
+                                                   href="/" target="_blank"> <i class="fa-solid fa-caret-right"></i>
+                                                outty.co/<span class="fs-5"
+                                                               style="color: #a0a0a0 !important; font-weight: normal !important;">
+                                                    {{ slugify(store.getters.eventStore.event.name) }}
+                                                </span></a>
                                             </h4>
                                         </li>
-<!--                                        <li>-->
-<!--                                            <small class="text-secondary opacity-75">-->
-<!--                                                Their appearance, alignment, and sizing can be easily customized with-->
-<!--                                                our-->
-<!--                                                <br/>amazing utility classes.-->
-<!--                                            </small>-->
-<!--                                        </li>-->
                                     </ul>
                                 </div>
                             </div>
                         </nav>
+
+                        <div class="col-md-12 mb-5">
+                            <div class="progress" role="progressbar" aria-label="Basic example"
+                                 aria-valuenow="15"
+                                 aria-valuemin="0" aria-valuemax="100">
+                                <div class="progress-bar" :style="{ width: pageProgress + '%'}"></div>
+                            </div>
+                        </div>
                     </div>
                     <div class="row">
                         <component :is="sections[currentSection]"
@@ -72,6 +77,7 @@ const sections = {
     EventOrganizerComponent,
     EventPreviewComponent
 }
+const pageProgress = ref(20)
 
 
 const findSection = (section, navigation) => {
@@ -95,6 +101,24 @@ const findSection = (section, navigation) => {
         currentSection.value = section.page
     }
     currentSection.value = appSections[index]
+
+    switch (currentSection.value) {
+        case appSections[0]:
+            pageProgress.value = 20;
+            break;
+        case  appSections[1]:
+            pageProgress.value = 45;
+            break;
+        case appSections[2]:
+            pageProgress.value = 65;
+            break;
+        case appSections[3]:
+            pageProgress.value = 85;
+            break;
+        case appSections[4]:
+            pageProgress.value = 97;
+            break;
+    }
 }
 
 const onNextSection = (n) => {
