@@ -17,6 +17,7 @@ use App\Models\Organizer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
+use SimpleSoftwareIO\QrCode\Generator;
 use stdClass;
 
 class EventController extends Controller
@@ -147,24 +148,7 @@ class EventController extends Controller
     public function show($id)
     {
         $events = Event::where('slug', $id)->where('status', '1')->first();
-
-        if ($events === null) {
-            return new MainResource(['data' => new stdClass(), 'message' => '', 'status' => 404]);
-        } else {
-            if ($this->isEventActive($events)) {
-                $lineups = $events->lineups;
-                $organizer = Organizer::find($events->user_id);
-                return new MainResource(['data' => new EventWrapperResource([$events, $organizer]),
-                    'message' => __('messages.get_event'),
-                    'status' => 200]);
-            } else {
-                return new MainResource(['data' => new StdClass(),
-                    'message' => 'Sorry!, the event is either old or not found',
-                    'status' => 404]);
-            }
-
-        }
-
+        return $this->return_event_found($events);
     }
 
 
@@ -197,6 +181,7 @@ class EventController extends Controller
                     $event->secondary_typeface = $request->secondary_typeface;
                     $event->save();
 
+
                     if ($event->wasChanged()) {
                         return new MainResource(['data' => new EventResource($event),
                             'message' => '',
@@ -220,6 +205,13 @@ class EventController extends Controller
 
         //
 
+    }
+
+
+    public function get_event_by_id(int $id)
+    {
+        $event = Event::where('id', $id)->where('status', '1')->first();
+        return $this->return_event_found($event);
     }
 
 
@@ -261,6 +253,29 @@ class EventController extends Controller
             return new MainResource(['data' => new stdClass(),
                 'message' => '',
                 'status' => 404]);
+        }
+    }
+
+
+    public function return_event_found($events)
+    {
+        if ($events === null) {
+            return new MainResource(['data' => new stdClass(), 'message' => '', 'status' => 404]);
+        } else {
+            //Make room for a demo event, that's always active
+
+            if ($this->isEventActive($events)) {
+                $lineups = $events->lineups;
+                $organizer = Organizer::find($events->user_id);
+                return new MainResource(['data' => new EventWrapperResource([$events, $organizer]),
+                    'message' => __('messages.get_event'),
+                    'status' => 200]);
+            } else {
+                return new MainResource(['data' => new StdClass(),
+                    'message' => 'Sorry!, the event is either old or not found',
+                    'status' => 404]);
+            }
+
         }
     }
 }

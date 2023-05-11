@@ -2,7 +2,7 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-10 col-lg-9 col-xl-7">
-                <div class="container">
+                <div v-if="!isLoading" class="container">
                     <div class="row">
                         <nav class="navbar py-3 px-2">
                             <div class="container p-0">
@@ -37,7 +37,15 @@
                                    @next="onNextSection"
                                    :event-store="currentEventData"
                                    :event-response="eventResponse"
+                                   :is-edit="isEdit"
                                    @previous="onPreviousSection"></component>
+                    </div>
+                </div>
+                <div v-else class="container">
+                    <div class="d-flex justify-content-center">
+                        <div class="spinner-grow text-secondary mt-5" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -46,8 +54,7 @@
 </template>
 
 <script setup>
-import {ref, onMounted, computed} from 'vue'
-import {useRoute} from 'vue-router';
+import {computed, onBeforeMount, ref} from 'vue'
 import moment from "moment";
 import Requester from "../js/network/Requester";
 import EventComponent from "./EventComponent";
@@ -60,14 +67,17 @@ import EventPreviewComponent from "./EventPreviewComponent";
 
 import {useStore} from 'vuex'
 import {APIs} from "../js/network/APIs";
-import {formatTime} from "../js/helper";
-import {CreateEventResponse} from "../js/network/Models";
+import {formatTime, reverseTimeFormat} from "../js/helper";
+import {CreateEventLineUp, CreateEventResponse, GetEvent} from "../js/network/Models";
 import {slugify} from "../js/utils";
 
+const eventId = ref('')
+const isLoading = ref(true)
 const store = useStore()
 
 const currentSection = ref('EventComponent')
 const eventResponse = ref(CreateEventResponse.data)
+const eventApiResponse = ref(GetEvent.data)
 const sections = {
     EventComponent,
     LineUpComponent,
@@ -78,6 +88,8 @@ const sections = {
     EventPreviewComponent
 }
 const pageProgress = ref(20)
+const isEdit = ref('false')
+const currentEventData = ref(store.getters.eventStore)
 
 
 const findSection = (section, navigation) => {
@@ -140,17 +152,13 @@ const gotoCheckout = (name) => {
         lineup.start_time = moment(formatTime(lineup.start_time)).format('h:mm')
         lineup.end_time = moment(formatTime(lineup.end_time)).format('h:mm')
     })
-    console.log(currentEventData.value)
     createEvent({data: currentEventData.value})
-    //
 }
 
 const onPreviousSection = (n) => {
     persistEvent(n.data)
     findSection(n, 'previous')
 }
-
-const currentEventData = computed(() => store.getters.eventStore)
 
 
 const createEvent = ({data}) => {
@@ -168,6 +176,71 @@ const createEvent = ({data}) => {
 
 const persistEvent = (data) => {
     store.commit('storeEventDetails', data)
+}
+
+onBeforeMount(() => {
+    const url = location.pathname;
+    const urlParams = new URLSearchParams(window.location.search);
+    const token = urlParams.get('token');
+
+
+    if (url.includes('/edit')) {
+        isEdit.value = true
+        eventId.value = url.replace('/the-outline/', '').replace('/edit', '')
+        getEvent({id: eventId.value})
+    }
+
+})
+
+const getEvent = ({id}) => {
+    Requester.makeRequest({path: `${APIs.getEventById}/${id}`, method: 'GET'})
+        .then((response) => {
+            isLoading.value = false
+            eventApiResponse.value = Object.assign(GetEvent, response.data.data);
+            let eventLineUp = {}
+            eventLineUp.event = {
+                id: eventApiResponse.value.id,
+                name: eventApiResponse.value.name,
+                date: eventApiResponse.value.date,
+                slug: eventApiResponse.value.slug,
+                category: eventApiResponse.value.category,
+                description: eventApiResponse.value.description,
+                primary_typeface: eventApiResponse.value.primary_typeface,
+                secondary_typeface: eventApiResponse.value.secondary_typeface,
+                text_color: eventApiResponse.value.text_color,
+                background_color: eventApiResponse.value.background_color,
+            }
+            eventLineUp.user = eventApiResponse.value.organizer
+
+            let lineupsArray = []
+            eventApiResponse.value.line_ups.forEach((event) => {
+                lineupsArray.push({
+                    id: event.id,
+                    title: event.title,
+                    description: event.description,
+                    start_time: {
+                        hours: moment(event.start_time, 'HH:mm').hours(),
+                        minutes: moment(event.start_time, 'HH:mm').minutes()
+                    },
+                    end_time: {
+                        hours: moment(event.end_time, 'HH:mm').hours(),
+                        minutes: moment(event.end_time, 'HH:mm').minutes()
+                    }
+                })
+            })
+            eventLineUp.lineups = lineupsArray
+            console.log(eventLineUp)
+            //Set in store and persist
+            //Then call values to events
+            persistEvent(eventLineUp)
+            console.log(store.getters.eventStore)
+            currentEventData.value = store.getters.eventStore
+
+        })
+        .catch((error) => {
+            isLoading.value = false
+            // console.log(error)
+        })
 }
 
 </script>

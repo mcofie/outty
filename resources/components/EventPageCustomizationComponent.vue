@@ -104,7 +104,7 @@ import {alpha, minLength, required} from "@vuelidate/validators";
 import {useVuelidate} from "@vuelidate/core";
 
 const emit = defineEmits(['next', 'previous'])
-const props = defineProps(['eventStore'])
+const props = defineProps(['eventStore', 'isEdit'])
 const event = props.eventStore.event
 const lineup = props.eventStore.lineups[0]
 

@@ -76,7 +76,6 @@ const getEvent = ({slug}) => {
     Requester.makeRequest({path: `${APIs.getEvent}/${slug}`, method: 'GET'})
         .then((response) => {
             eventResponse.value = Object.assign(GetEvent, response.data);
-            console.log(eventResponse.value);
             isLoading.value = false
         })
         .catch((error) => {

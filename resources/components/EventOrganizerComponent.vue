@@ -78,7 +78,7 @@ import {email, minLength, numeric, required} from "@vuelidate/validators";
 import {useVuelidate} from "@vuelidate/core";
 
 const emit = defineEmits(['checkout', 'previous'])
-const props = defineProps(['eventStore'])
+const props = defineProps(['eventStore', 'isEdit'])
 const user = props.eventStore.user
 const isButtonActive = ref(false)
 const isCheckoutSuccessful = ref(false)

@@ -21,6 +21,7 @@ class EventResource extends JsonResource
             'theme_color' => $this->event_theme_color,
             'background_color' => $this->background_color,
             'text_color' => $this->text_color,
+            'category' => $this->category,
             'slug' => $this->slug,
             'primary_typeface' => $this->primary_typeface,
             'secondary_typeface' => $this->secondary_typeface,

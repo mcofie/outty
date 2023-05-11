@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\QrCodeController;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
@@ -15,40 +16,49 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/zs', function () {
-    return "hhju";
-});
-
-//Send Email
-Route::get('/mail', function () {
-
-    Mail::send(new \App\Mail\EventCreated());
-
-//    return view('');
-});
-
-Route::get('check-download', function (){
-    return view('payment');
-});
-
-Route::get('/download', function () {
-    $pdf = App::make('dompdf.wrapper');
-//    $pdf->loadHTML('<h1>Test</h1>');
-    $data = [
-        'title' => 'Example PDF',
-        'content' => 'This is an example PDF generated in Laravel using Dompdf'
-    ];
-
-    $pdf->loadView('payment', $data);
-//    return $pdf->download('outty.pdf');
-    return $pdf->stream();
-
-});
+//Route::get('/download-qr', [QrCodeController::class, 'downloadQrCode']);
+//
+//
+//Route::get('/zs', function () {
+//    return "hhju";
+//});
+//
+////Send Email
+//Route::get('/mail', function () {
+//
+//    Mail::send(new \App\Mail\EventCreated());
+//
+////    return view('');
+//});
+//
+//Route::get('check-download', function () {
+//    return view('payment');
+//});
+//
+//Route::get('/download', function () {
+//    $pdf = App::make('dompdf.wrapper');
+////    $pdf->loadHTML('<h1>Test</h1>');
+//    $data = [
+//        'title' => 'Example PDF',
+//        'content' => 'This is an example PDF generated in Laravel using Dompdf'
+//    ];
+//
+//    $pdf->loadView('payment', $data);
+////    return $pdf->download('outty.pdf');
+//    return $pdf->stream();
+//
+//});
 
 
 //Landing page
 Route::get('/', function () {
     return view('app');
+});
+
+
+//Landing page
+Route::get('/account', function () {
+    return view('account');
 });
 
 //Registration
@@ -67,10 +77,12 @@ Route::get('/{id}', function ($id) {
     return view('event');
 })->where('id', '[A-Za-z-]+');
 
+
 //Edit
-Route::get('/p/{id}/edit', function ($id) {
-    return "$id";
-})->where('id', '[A-Za-z]+');
+Route::get('/{id}/edit', function ($id) {
+    return view('edit');
+});
 
 
+//Experiments
 

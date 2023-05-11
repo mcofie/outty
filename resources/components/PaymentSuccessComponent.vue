@@ -147,10 +147,7 @@ const getEventByReference = () => {
 
     }
 
-
 }
-
-
 </script>
 
 <style scoped>

@@ -194,16 +194,42 @@
                     <div>
                         <div class="row justify-content-center my-4">
                             <div class="col-md-12">
-                                <div class="card grey">
+                                <h3 class="text-center lh-base">
+                                    Simply create event line up for your <br>
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-primary dropdown-toggle"
+                                                data-bs-toggle="dropdown" data-bs-display="static"
+                                                aria-expanded="false">
+                                            <h3> #Weddings</h3>
+                                        </button>
+                                        <ul class="dropdown-menu dropdown-menu-lg-end">
+                                            <li>
+                                                <button class="dropdown-item" type="button">Action</button>
+                                            </li>
+                                            <li>
+                                                <button class="dropdown-item" type="button">Another action</button>
+                                            </li>
+                                            <li>
+                                                <button class="dropdown-item" type="button">Something else here</button>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    in minutes
+                                </h3>
+                                <div class="card grey mt-5">
                                     <div class="card-body">
                                         <div class="row justify-content-center">
                                             <div class="col-md-8 text-center">
                                                 <ul class="list-unstyled mt-5">
-                                                    <li class="mb-3">
-                                                        <a href="https://telegra.ph/Streamline-your-event-planning-and-elevate-the-attendee-experience-with-Outty-04-26">
-                                                            <h4>Learn more on how people are using Outty to power their
-                                                                in-person events</h4>
-                                                        </a>
+                                                    <li>
+
+                                                    </li>
+                                                    <li>
+                                                        <qrcode-vue :value="qrCode.value" :size="qrCode.size"
+                                                                    level="H"/>
+                                                    </li>
+                                                    <li class="my-2">
+                                                        <h4>Afrifa Marrys Abena</h4>
                                                     </li>
                                                     <li>
                                                         <p>One of the most effective ways to cut down on printing costs
@@ -212,11 +238,45 @@
                                                             physical copies of the program lineup, saving you printing
                                                             and shipping costs.</p>
                                                     </li>
+                                                    <li>
+                                                        <small>
+                                                            13th March 2023
+                                                        </small>
+                                                    </li>
+
+                                                    <li>
+                                                        <hr/>
+                                                    </li>
+                                                    <li>
+                                                        <div class="d-flex justify-content-evenly">
+                                                            <button type="button"
+                                                                    class="btn btn-primary rounded-5 btn-lg py-3 px-5">
+                                                                Large
+                                                                button
+                                                            </button>
+                                                            <button type="button"
+                                                                    class="btn btn-secondary rounded-5 btn-lg py-3 px-5">
+                                                                Large
+                                                                button
+                                                            </button>
+                                                        </div>
+                                                    </li>
                                                 </ul>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+                            </div>
+                        </div>
+                        <div class="row justify-content-center">
+                            <div class="col-md-10 text-center">
+                                <small class="mt-3 text-muted ">Read more about how outty.co is helping
+                                    streamline events
+                                    and engage audiences <br>
+                                    <a target="_blank"
+                                       href="https://telegra.ph/Streamline-your-event-planning-and-elevate-the-attendee-experience-with-Outty-04-26">
+                                        here </a>
+                                </small>
                             </div>
                         </div>
                     </div>
@@ -240,10 +300,12 @@
 
 <script setup>
 import {ref} from 'vue'
-import {alpha, minLength, required} from "@vuelidate/validators";
+import QrcodeVue from 'qrcode.vue'
+import {minLength, required} from "@vuelidate/validators";
 import {useVuelidate} from "@vuelidate/core";
 
 const eventName = ref('')
+const qrCode = ref({value: "https://outty.co", size: 180})
 
 const startCreateEvent = () => {
     if (eventName.value.length !== 0) {

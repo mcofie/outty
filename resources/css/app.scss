@@ -129,11 +129,15 @@ hr {
     border: 0;
 }
 
+.dropdown-toggle:after {
+    content: none
+}
+
 .progress-bar {
     background-color: #000 !important;
 }
 
-.progress, .progress-stacked{
+.progress, .progress-stacked {
     height: 0.5rem !important;
 }
 
@@ -195,7 +199,8 @@ form {
 }
 
 .grey {
-    background-color: $grey;
+    background-color: #FFF;
+    border: 2px solid $grey;
 }
 
 .form-control {

@@ -16,12 +16,27 @@
                         }}</small>
                 </div>
             </div>
+
             <div class="mb-3">
-                <label for="exampleFormControlTextarea1" class="form-label">Description</label>
-                <textarea :class="[v$.description.$error ? 'form-control is-invalid' : 'form-control' ]"
-                          v-model="userData.description"
-                          id="exampleFormControlTextarea1"
-                          rows="3"></textarea>
+                <label class="form-label">Description</label>
+                <editor
+                    api-key="nk8g6c7xozd3yhhs5pd5xdpp0crzp65g5hdxd8fs4oixl2mz"
+                    :class="[v$.description.$error ? 'form-control is-invalid' : 'form-control' ]"
+                    v-model="userData.description"
+                    :init="{
+                         height: 350,
+                         menubar: false,
+                         plugins: [
+                           'advlist autolink lists link image charmap print preview anchor',
+                           'searchreplace visualblocks code fullscreen',
+                           'insertdatetime media table paste code help wordcount'
+                         ],
+                         toolbar:
+                           'undo redo | formatselect | bold italic backcolor | \
+                           alignleft aligncenter alignright alignjustify | \
+                           bullist numlist outdent indent | removeformat | help'
+                       }"
+                />
                 <small v-if="v$.description.$error" class="text-danger"> {{
                         v$.description.$errors[0].$message
                     }}</small>
@@ -34,6 +49,7 @@
                                    :class="[v$.date.$error ? 'form-control is-invalid' : 'form-control' ]"
                                    :format="format"
                                    :min-date="new Date()"
+                                   :disabled="isEdit"
                                    placeholder="00/00/0000" text-input auto-apply :enable-time-picker="false"/>
                     <InfoTip message="(NB: Event date can't be edited once created!)"/>
                     <br>
@@ -83,7 +99,8 @@
                                 <button @click="goToNextSection"
                                         :class="[!v$.$invalid && slugLookup.state !== 0 ? '' : 'disabled','btn btn-primary btn-lg flex-sm-grow-0 px-5 justify-content-lg-end flex-fill flex-sm-fill rounded-2']"
                                 >
-                                    Next <i class="fa-solid fa-caret-right"></i>
+                                    Next
+                                    <i class="fa-solid fa-caret-right"></i>
                                 </button>
                             </div>
                         </div>
@@ -96,6 +113,7 @@
 
 <script setup>
 import {ref, computed, onMounted, watch} from 'vue'
+import Editor from '@tinymce/tinymce-vue'
 import debounce from 'lodash.debounce'
 import {useVuelidate} from '@vuelidate/core'
 
@@ -108,15 +126,15 @@ import {checkIfArrayHasValues, format} from "../js/helper";
 import Requester from "../js/network/Requester";
 import {APIs} from "../js/network/APIs";
 import {alpha, minLength, required} from "@vuelidate/validators";
-import {useField, useForm} from "vee-validate";
 import InfoTip from "./sections/InfoTip";
 
 const store = useStore()
 
 
 const emit = defineEmits(['next'])
-const props = defineProps(['eventStore'])
+const props = defineProps(['eventStore', 'isEdit'])
 const event = props.eventStore.event
+const isEdit = props.isEdit
 
 const currentEventData = computed(() => store.state.event)
 const getFile = ref(null)
@@ -177,7 +195,6 @@ const hasProposedName = () => {
 }
 
 onMounted(() => {
-
     if (hasProposedName().status) {
         userData.value.name = hasProposedName().value
         checkSlugAvailability(hasProposedName().value)

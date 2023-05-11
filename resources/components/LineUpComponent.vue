@@ -65,7 +65,25 @@
                              :data-bs-parent="`#accordion${index}`">
                             <p>Description</p>
                             <div class="accordion-body p-0">
-                                <textarea v-model="lineup.description" class="form-control" rows="3"></textarea>
+                                <editor
+                                    api-key="nk8g6c7xozd3yhhs5pd5xdpp0crzp65g5hdxd8fs4oixl2mz"
+                                    :class="'form-control'"
+                                    v-model="lineup.description"
+                                    :init="{
+                         height: 250,
+                         menubar: false,
+                         plugins: [
+                           'advlist autolink lists link image charmap print preview anchor',
+                           'searchreplace visualblocks code fullscreen',
+                           'insertdatetime media table paste code help wordcount'
+                         ],
+                         toolbar:
+                           'undo redo | formatselect | bold italic backcolor | \
+                           alignleft aligncenter alignright alignjustify | \
+                           bullist numlist outdent indent | removeformat | help'
+                       }"
+                                />
+
                             </div>
                         </div>
                     </div>
@@ -112,9 +130,11 @@ import {ComponentEventObject} from "../js/network/Models";
 import {checkIfArrayHasValues, formatTime} from "../js/helper";
 import {alpha, minLength, required} from "@vuelidate/validators";
 import {useVuelidate} from "@vuelidate/core";
+import Editor from '@tinymce/tinymce-vue'
+
 
 const emit = defineEmits(['next', 'previous'])
-const props = defineProps(['eventStore'])
+const props = defineProps(['eventStore', 'isEdit'])
 const pLineups = props.eventStore.lineups
 const isButtonActive = ref(true)
 
@@ -185,7 +205,7 @@ const rules = {
 const v$ = useVuelidate(rules, {lineups})
 
 onMounted(() => {
-    console.log(props.eventStore.lineups)
+    console.log(props.eventStore)
 })
 
 

@@ -22,6 +22,31 @@ const time = {
     minutes: new Date().getMinutes()
 };
 
+export const ListOfEvents = {
+    events: [
+        {
+            id: 0,
+            name: "",
+            description: "",
+            slug: "",
+            background_color: "#FFFFFF",
+            text_color: "#222222",
+            primary_typeface: "",
+            secondary_typeface: "",
+            theme_color: "#CECECE",
+            category: '',
+            image_id: "",
+            date: ""
+        }
+    ],
+    organizer: {
+        id: 0,
+        name: "",
+        email: "",
+        phone_number: ""
+    }
+}
+
 export const CreateEventLineUp = {
     user: {
         name: "",

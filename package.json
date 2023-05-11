@@ -20,6 +20,7 @@
         "@headlessui/vue": "^1.7.3",
         "@heroicons/vue": "^2.0.12",
         "@popperjs/core": "^2.11.6",
+        "@tinymce/tinymce-vue": "^5.1.0",
         "@vitejs/plugin-vue": "^3.1.2",
         "@vuelidate/core": "^2.0.2",
         "@vuelidate/validators": "^2.0.2",
