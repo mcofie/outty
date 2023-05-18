@@ -74,6 +74,7 @@ import {slugify} from "../js/utils";
 const eventId = ref('')
 const isLoading = ref(true)
 const store = useStore()
+const token = ref('')
 
 const currentSection = ref('EventComponent')
 const eventResponse = ref(CreateEventResponse.data)
@@ -114,6 +115,13 @@ const findSection = (section, navigation) => {
     }
     currentSection.value = appSections[index]
 
+    console.log(section)
+
+    //Update Event details
+    if (appSections[index] === "LineUpComponent" && navigation === 'next' || appSections[index] === "EventComponent" && navigation === 'previous') {
+        updateData()
+    }
+
     switch (currentSection.value) {
         case appSections[0]:
             pageProgress.value = 20;
@@ -136,11 +144,31 @@ const findSection = (section, navigation) => {
 const onNextSection = (n) => {
     persistEvent(n.data)
     findSection(n, 'next')
+    currentEventData.value = store.getters.eventStore
+}
+
+const updateData = () => {
+    convert()
+    const [data, id] = [currentEventData.value.event, eventId.value]
+    updateEvent({data, id})
 }
 
 const gotoSection = (name) => {
     persistEvent(name.data)
     currentSection.value = name.page
+}
+
+const convert = () => {
+    currentEventData.value.event.slug = slugify(currentEventData.value.event.name)
+    currentEventData.value.event.date = moment(currentEventData.value.event.date).format("YYYY-MM-DD");
+    currentEventData.value.lineups.map((lineup) => {
+        lineup.start_time = moment(formatTime(lineup.start_time)).format('h:mm')
+        lineup.end_time = moment(formatTime(lineup.end_time)).format('h:mm')
+    })
+
+    console.log(currentEventData.value)
+    console.log(currentEventData.value.event)
+
 }
 
 
@@ -152,7 +180,6 @@ const gotoCheckout = (name) => {
         lineup.start_time = moment(formatTime(lineup.start_time)).format('h:mm')
         lineup.end_time = moment(formatTime(lineup.end_time)).format('h:mm')
     })
-    createEvent({data: currentEventData.value})
 }
 
 const onPreviousSection = (n) => {
@@ -161,7 +188,7 @@ const onPreviousSection = (n) => {
 }
 
 
-const createEvent = ({data}) => {
+const updateLineups = ({data}) => {
     Requester.makeRequest({data: data, path: `${APIs.createEvent}`, method: 'POST'})
         .then((response) => {
             localStorage.removeItem('eventStore')
@@ -173,6 +200,26 @@ const createEvent = ({data}) => {
         })
 }
 
+const updateEvent = ({data, id}) => {
+    Requester.makeRequest({
+        data: data,
+        path: `${APIs.editEvent}/${id}`,
+        setAuthorization: true,
+        authToken: token.value,
+        method: 'PUT'
+    })
+        .then((response) => {
+            // localStorage.removeItem('eventStore')
+            eventResponse.value = Object.assign(CreateEventResponse.data, response.data.data)
+            // currentSection.value = 'PaymentRedirectionComponent'
+        })
+        .catch((error) => {
+            console.log(error.response.data)
+        })
+}
+
+const updateOrganizer = ({data, id}) => {
+}
 
 const persistEvent = (data) => {
     store.commit('storeEventDetails', data)
@@ -181,7 +228,7 @@ const persistEvent = (data) => {
 onBeforeMount(() => {
     const url = location.pathname;
     const urlParams = new URLSearchParams(window.location.search);
-    const token = urlParams.get('token');
+    token.value = urlParams.get('token');
 
 
     if (url.includes('/edit')) {
@@ -229,11 +276,9 @@ const getEvent = ({id}) => {
                 })
             })
             eventLineUp.lineups = lineupsArray
-            console.log(eventLineUp)
             //Set in store and persist
             //Then call values to events
             persistEvent(eventLineUp)
-            console.log(store.getters.eventStore)
             currentEventData.value = store.getters.eventStore
 
         })

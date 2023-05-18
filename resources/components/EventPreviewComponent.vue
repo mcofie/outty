@@ -15,7 +15,7 @@
                             <h1 :class="event.secondary_typeface">{{ event.name }}</h1>
                         </li>
                         <li>
-                            <p class="px-4">{{ event.description }}</p>
+                            <p class="px-4"><span v-html="event.description"></span></p>
                         </li>
                         <li>
                             <small>{{ eventDate }}</small>
@@ -32,14 +32,7 @@
             </div>
         </div>
 
-        <div class="fixed-bottom">
-            <div class="row justify-content-center text-center mt-5">
-                <ul class="list-unstyled opacity-50">
-                    <li><h6>Outty.co 🇬🇭</h6></li>
-                    <li><small>&copy; All Rights Reserved</small></li>
-                </ul>
-            </div>
-        </div>
+        <Footer/>
     </div>
 </template>
 
@@ -49,6 +42,7 @@ import {onMounted, onUpdated, ref, computed, toRefs} from 'vue'
 import {useStore} from 'vuex'
 import LineUpCard from "./sections/LineUpCard";
 import moment from 'moment'
+import Footer from "./sections/Footer";
 
 
 const store = useStore()
@@ -57,6 +51,7 @@ const emit = defineEmits(['previous'])
 const props = defineProps(['eventStore'])
 const event = props.eventStore.event
 const lineups = props.eventStore.lineups
+
 
 const persistUserData = () => {
     const obj = ComponentEventObject

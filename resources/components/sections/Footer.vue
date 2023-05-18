@@ -1,5 +1,5 @@
 <template>
-    <div class="fixed-bottom">
+    <div class="container">
         <div class="row justify-content-center text-center mt-5">
             <ul class="list-unstyled opacity-50">
                 <li><h6>outty.co 🇬🇭</h6></li>

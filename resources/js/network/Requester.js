@@ -12,9 +12,12 @@ let instance = axios;
 // const authToken = hubtel.consumer_token;
 
 
-const getRequestType = (method = "GET", basePath, relativePath, data, authorization, type) => {
+const getRequestType = (method = "GET", basePath, relativePath, data, authorization, token, type) => {
 
-    // instance.defaults.headers.common['Authorization'] = "Bearer " + authToken;
+
+    // if (authorization) {
+        instance.defaults.headers.common['token'] =  token;
+    // }
 
     if (type.toLowerCase() === "url-encoded") {
         instance.defaults.headers.post['Content-Type'] = ContentType.URL_ENCODED;
@@ -47,7 +50,7 @@ const makeRequest = ({
                          type = "json"
                      }) => {
     baseUrl = baseUrl.length !== 0 ? baseUrl : BASEURL;
-    return getRequestType(method, baseUrl, path, data, setAuthorization, type)
+    return getRequestType(method, baseUrl, path, data, setAuthorization, authToken, type)
 };
 
 const requestMethods = {

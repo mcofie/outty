@@ -12,7 +12,7 @@
                                         }}</h1>
                                 </li>
                                 <li>
-                                    <p class="px-4 text-center pb-0 mb-1">{{ event.description }}</p>
+                                    <p class="px-4 text-center pb-0 mb-1"><span v-html="event.description"></span></p>
                                 </li>
                                 <li class="text-center">
                                     <small>{{ eventDate }}</small>
@@ -152,7 +152,7 @@ const rules = {
 
 const v$ = useVuelidate(rules, userData)
 
-onMounted(()=>{
+onMounted(() => {
     console.log(props.eventStore)
 })
 

@@ -1,44 +1,92 @@
 {
+  "resources/imgs/money.png": {
+    "file": "assets/money.04dd895e.png",
+    "src": "resources/imgs/money.png"
+  },
+  "resources/imgs/information.png": {
+    "file": "assets/information.67dc0407.png",
+    "src": "resources/imgs/information.png"
+  },
+  "resources/imgs/flower.png": {
+    "file": "assets/flower.89b542ce.png",
+    "src": "resources/imgs/flower.png"
+  },
   "resources/js/app.js": {
-    "file": "assets/app.97eda802.js",
+    "file": "assets/app.6574075d.js",
     "src": "resources/js/app.js",
     "isEntry": true,
     "imports": [
-      "_vuex.esm-bundler.c2ef8b37.js"
+      "_store.6c6e0a70.js",
+      "_main.7220f592.js"
     ],
     "css": [
-      "assets/app.ba287348.css"
+      "assets/app.0ba0cd0b.css"
+    ],
+    "assets": [
+      "assets/money.04dd895e.png",
+      "assets/flower.89b542ce.png",
+      "assets/information.67dc0407.png"
     ]
   },
   "resources/js/get-started.js": {
-    "file": "assets/get-started.9cb98ae1.js",
+    "file": "assets/get-started.138d5c99.js",
     "src": "resources/js/get-started.js",
     "isEntry": true,
     "imports": [
-      "_vuex.esm-bundler.c2ef8b37.js"
+      "_store.6c6e0a70.js",
+      "__plugin-vue_export-helper.63570c20.js",
+      "_main.7220f592.js"
     ],
     "css": [
-      "assets/get-started.dfe61e18.css",
-      "assets/app.ba287348.css"
+      "assets/get-started.12d3b7cc.css",
+      "assets/app.0ba0cd0b.css"
     ]
   },
-  "_vuex.esm-bundler.c2ef8b37.js": {
-    "file": "assets/vuex.esm-bundler.c2ef8b37.js",
+  "resources/js/event.js": {
+    "file": "assets/event.76e9fc54.js",
+    "src": "resources/js/event.js",
+    "isEntry": true,
+    "imports": [
+      "_store.6c6e0a70.js",
+      "__plugin-vue_export-helper.63570c20.js"
+    ],
     "css": [
-      "assets/vuex.9181f7c4.css"
+      "assets/event.a23c3863.css"
     ]
   },
-  "resources/js/get-started.css": {
-    "file": "assets/get-started.dfe61e18.css",
-    "src": "resources/js/get-started.css"
+  "_store.6c6e0a70.js": {
+    "file": "assets/store.6c6e0a70.js"
+  },
+  "_main.7220f592.js": {
+    "file": "assets/main.7220f592.js",
+    "imports": [
+      "_store.6c6e0a70.js"
+    ],
+    "css": [
+      "assets/main.9181f7c4.css"
+    ]
+  },
+  "__plugin-vue_export-helper.63570c20.js": {
+    "file": "assets/_plugin-vue_export-helper.63570c20.js",
+    "imports": [
+      "_store.6c6e0a70.js"
+    ]
+  },
+  "main.css": {
+    "file": "assets/main.9181f7c4.css",
+    "src": "main.css"
   },
   "resources/css/app.css": {
-    "file": "assets/app.ba287348.css",
+    "file": "assets/app.0ba0cd0b.css",
     "src": "resources/css/app.css",
     "isEntry": true
   },
-  "vuex.css": {
-    "file": "assets/vuex.9181f7c4.css",
-    "src": "vuex.css"
+  "resources/js/event.css": {
+    "file": "assets/event.a23c3863.css",
+    "src": "resources/js/event.css"
+  },
+  "resources/js/get-started.css": {
+    "file": "assets/get-started.12d3b7cc.css",
+    "src": "resources/js/get-started.css"
   }
 }

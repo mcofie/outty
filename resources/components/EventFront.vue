@@ -4,12 +4,22 @@
             <div v-if="hasData">
                 <div class="row justify-content-center mt-5 mb-3">
                     <div class="col-md-8 col-lg-8 col-xl-6 col-md-7 col-11 text-center">
+                        <div class="d-flex justify-content-end">
+                            <i class="fa-solid fa-language fs-2"></i>
+                        </div>
                         <ul class="list-unstyled" :style="{color:eventResponse.data.text_color }">
-                            <li class="py-3">
+                            <li class="pt-3">
                                 <h1 :class="eventResponse.data.secondary_typeface">{{ eventResponse.data.name }}</h1>
                             </li>
+                            <li class="mb-3">
+                                <small>
+                                    <span class="badge text-bg-dark">
+                                        {{eventResponse.data.organizer.name}}
+                                    </span>
+                                </small>
+                            </li>
                             <li>
-                                <p class="px-4">{{ eventResponse.data.description }}</p>
+                                <p class="px-4"><span v-html="eventResponse.data.description"></span></p>
                             </li>
                             <li>
                                 <small>{{ eventDate }}</small>
@@ -53,6 +63,7 @@ import Footer from "./sections/Footer";
 import {APIs} from "../js/network/APIs";
 import EmptyState from "./sections/EmptyState";
 import LineUpCardAlt from "./sections/LineUpCardAlt";
+// import { useMeta } from 'vue-meta';
 
 
 const eventResponse = ref(GetEvent)
@@ -60,6 +71,15 @@ const isLoading = ref(true)
 const route = useRoute()
 const router = useRouter()
 const hasData = ref(true)
+// const metaInfo = useMeta();
+
+
+// Set the meta tags
+// metaInfo.value.title = 'Page Title';
+// metaInfo.value.metaTags.push({
+//     name: 'description',
+//     content: 'Page description',
+// });
 
 
 onBeforeMount(() => {
@@ -91,6 +111,10 @@ const getEvent = ({slug}) => {
 onMounted(() => {
     console.log(route)
 })
+
+const x = () => {
+
+}
 
 
 </script>

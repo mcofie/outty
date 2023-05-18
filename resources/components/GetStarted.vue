@@ -137,8 +137,13 @@ const gotoCheckout = (name) => {
     currentEventData.value.event.slug = slugify(currentEventData.value.event.name)
     currentEventData.value.event.date = moment(currentEventData.value.event.date).format("YYYY-MM-DD");
     currentEventData.value.lineups.map((lineup) => {
-        lineup.start_time = moment(formatTime(lineup.start_time)).format('h:mm')
-        lineup.end_time = moment(formatTime(lineup.end_time)).format('h:mm')
+        lineup.start_time = moment(formatTime(lineup.start_time)).format('HH:mm')
+        if (lineup.end_time !== null) {
+            lineup.end_time = moment(formatTime(lineup.end_time)).format('HH:mm')
+        } else {
+            lineup.end_time = null;
+        }
+
     })
     console.log(currentEventData.value)
     createEvent({data: currentEventData.value})

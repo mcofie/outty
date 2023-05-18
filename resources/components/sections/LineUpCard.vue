@@ -16,7 +16,7 @@
                             <h6 class="mb-1" style="font-weight: bolder">{{ lineup.title }}</h6>
                         </li>
                         <li>
-                            <p class="my-2">{{ lineup.description }}</p>
+                            <p class="my-2"><span v-html="lineup.description"></span></p>
                         </li>
                     </ul>
 
@@ -40,7 +40,10 @@ const startTime = (time) => {
 }
 
 const endTime = (time) => {
-    return moment(formatTime(time)).format('LT');
+    if(time !== null){
+        return moment(formatTime(time)).format('LT');
+    }
+    return "";
 }
 
 const isLive = computed(() => {

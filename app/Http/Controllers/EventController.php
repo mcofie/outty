@@ -52,7 +52,7 @@ class EventController extends Controller
             'lineups.*.title' => 'required|string',
 //            'lineups.*.description' => 'required|string',
             'lineups.*.start_time' => 'required|string',
-            'lineups.*.end_time' => 'required|string'
+//            'lineups.*.end_time' => 'required|string'
         ]);
 
         if (!$validator->fails()) {
@@ -156,9 +156,8 @@ class EventController extends Controller
     {
 
         $validator = Validator::make($request->all(), [
-            'event_name' => 'required|string',
-            'event_description' => 'required|string',
-            'event_theme_color' => 'required',
+            'name' => 'required|string',
+            'description' => 'required|string',
             'background_color' => 'required',
             'category' => 'required',
             'text_color' => 'required',
@@ -166,14 +165,14 @@ class EventController extends Controller
             'secondary_typeface' => 'required'
         ]);
 
+
         if (!$validator->fails()) {
             $event = Event::find($id);
             // The user can update the post...
             if ($event !== null) {
                 if (Gate::forUser($request->organizer)->allows('update-event', $event)) {
-                    $event->event_name = $request->event_name;
-                    $event->event_description = $request->event_description;
-                    $event->event_theme_color = $request->event_theme_color;
+                    $event->event_name = $request->name;
+                    $event->event_description = $request->description;
                     $event->background_color = $request->background_color;
                     $event->text_color = $request->text_color;
                     $event->category = $request->category;
