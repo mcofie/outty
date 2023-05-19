@@ -1,5 +1,8 @@
 import moment from "moment";
 
+
+export const appURL = "https://outty.co/";
+
 export const format = (date) => {
     const day = date.getDate();
     const month = date.getMonth() + 1;

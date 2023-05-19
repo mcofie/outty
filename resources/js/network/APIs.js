@@ -5,5 +5,6 @@ export const APIs = {
     getEventById:'event',
     getPaymentByReference: 'payments',
     getEventsByOrganizer: 'organizer',
-    editEvent:'events'
+    editEvent:'events',
+    qrcode: 'qrcode/',
 }

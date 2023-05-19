@@ -16,7 +16,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-//Route::get('/download-qr', [QrCodeController::class, 'downloadQrCode']);
+Route::get('/get-qr', [QrCodeController::class, 'generateQrCode']);
+Route::get('/download-qr', [QrCodeController::class, 'downloadQrCode']);
+
 //
 //
 //Route::get('/zs', function () {
@@ -35,19 +37,6 @@ use Illuminate\Support\Facades\Route;
 //    return view('payment');
 //});
 //
-//Route::get('/download', function () {
-//    $pdf = App::make('dompdf.wrapper');
-////    $pdf->loadHTML('<h1>Test</h1>');
-//    $data = [
-//        'title' => 'Example PDF',
-//        'content' => 'This is an example PDF generated in Laravel using Dompdf'
-//    ];
-//
-//    $pdf->loadView('payment', $data);
-////    return $pdf->download('outty.pdf');
-//    return $pdf->stream();
-//
-//});
 
 
 //Landing page

@@ -196,7 +196,7 @@
 
                     <div>
                         <div class="row justify-content-center my-4">
-                            <div class="col-md-12">
+                            <div class="col-md-10">
                                 <h3 class="text-center lh-base">
                                     Simply create event line up for your <br>
                                     <div class="btn-group">
@@ -217,31 +217,28 @@
                                     </div>
                                     in minutes
                                 </h3>
-                                <div class="card grey mt-5">
+                                <div class="card mt-5 animate__fadeIn"
+                                     :style="{'background':selectedEvent.backgroundColor, 'color':selectedEvent.textColor, 'background-image':'url(../imgs/forget_me_not.png)'}">
                                     <div class="card-body">
                                         <div class="row justify-content-center">
                                             <div class="col-md-8 text-center position-relative">
                                                 <div
-                                                    class="position-absolute top-0 start-0 d-flex justify-content-start">
+                                                    class="position-absolute top-0 start-0 d-flex justify-content-start d-none">
                                                     <img class="img-fluid w-25 opacity-25"
                                                          src="../imgs/forget_me_not.png"/>
                                                 </div>
-
-<!--                                                <div class="position-absolute top-0 end-0 d-flex justify-content-end">-->
-<!--                                                    <img class="img-fluid w-25 opacity-25"-->
-<!--                                                         src="../imgs/wreath.png"/>-->
-<!--                                                </div>-->
-
                                                 <ul class="list-unstyled mt-5">
                                                     <li>
                                                         <qrcode-vue :value="selectedEvent.slug" :size="qrCode.size"
+                                                                    :background="selectedEvent.backgroundColor"
+                                                                    :foreground="selectedEvent.textColor"
                                                                     level="H"/>
                                                     </li>
                                                     <li class="my-2">
                                                         <h4>{{ selectedEvent.name }} <a target="_blank"
-                                                                                        :href="selectedEvent.slug">
-                                                            <i
-                                                                class="fa-solid fa-arrow-up-right-from-square"></i>
+                                                                                        :href="appURL + selectedEvent.slug">
+                                                            <i :style="{'color':selectedEvent.textColor}"
+                                                               class="fa-solid fa-arrow-up-right-from-square"></i>
                                                         </a></h4>
                                                     </li>
                                                     <li class="mb-3">
@@ -252,26 +249,25 @@
                                                     <li>
                                                         <p>{{ selectedEvent.description }}</p>
                                                     </li>
-
-                                                    <li>
-                                                        <hr/>
-                                                    </li>
-                                                    <li>
-                                                        <div class="d-flex justify-content-evenly">
-                                                            <button type="button"
-                                                                    class="btn btn-primary rounded-5 btn-lg py-3 px-5">
-                                                                QR Code <i class="fa-solid fa-circle-down"></i>
-                                                            </button>
-                                                            <button type="button"
-                                                                    class="btn btn-secondary rounded-5 btn-lg py-3 px-5">
-                                                                Brochure <i class="fa-solid fa-print"></i>
-                                                            </button>
-                                                        </div>
-                                                    </li>
                                                 </ul>
                                             </div>
                                         </div>
                                     </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="justify-content-center row">
+                            <div class="col-md-6 justify-content-center mt-4 mb-5">
+                                <div class="d-flex justify-content-between">
+                                    <button type="button"
+                                            @click="onDownloadQRCode(selectedEvent.slug)"
+                                            class="btn btn-primary rounded-5 btn-lg py-3 px-5">
+                                        QR Code <i class="fa-solid fa-circle-down"></i>
+                                    </button>
+                                    <button type="button"
+                                            class="btn btn-secondary rounded-5 btn-lg py-3 px-5">
+                                        Brochure <i class="fa-solid fa-print"></i>
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -306,50 +302,59 @@
 </template>
 
 <script setup>
-import {ref} from 'vue'
+import {onMounted, ref} from 'vue'
 import QrcodeVue from 'qrcode.vue'
 import {minLength, required} from "@vuelidate/validators";
 import {useVuelidate} from "@vuelidate/core";
+import Requester from "../js/network/Requester";
+import {APIs} from "../js/network/APIs";
+import {appURL} from "../js/helper";
 
 const eventName = ref('')
-const eventCategory = ref('Weddings')
+const categories = ['Parties', 'Meetings', 'Funeral', 'Wedding']
+const eventCategory = ref(categories[0])
 const qrCode = ref({value: "https://outty.co", size: 180})
-const categories = ['Conferences', 'Parties', 'Meetings', 'Funeral', 'Wedding']
 
-const sampleEvents = [{
-    slug: "https://outty.co/edem-weds-mavis",
-    name: "Edem Weds Mavis",
-    description: "Join us in celebrating the joyous union of love and commitment as Edem and Mavis embark on their journey of togetherness.",
-    date: "18th May 2023",
-    category: "wedding"
-},
+
+const sampleEvents = [
     {
-        slug: "https://outty.co/funeral",
-        name: "Rev. Adatsi's Funeral",
-        description: "Please note that this is just a sample lineup and can be customized based on cultural or religious traditions, personal preferences, and the specific arrangements made for the funeral event.",
+        slug: "the-shutdown-party",
+        name: "The Shutdown Party",
+        description: "The event continues with more music, socializing, and a relaxed atmosphere. It provides an opportunity for guests to unwind, exchange contact information, and bid farewell.",
         date: "13th March 2023",
-        category: "conferences"
+        category: "parties",
+        textColor: '#1f70ad',
+        backgroundColor: '#d6fffa',
+        backgroundImage: '',
     },
     {
-        slug: "https://outty.co/funeral",
-        name: "Rev. Adatsi's Funeral",
+        slug: "you-and-your-business-workshop",
+        name: "You and Your Business Workshop",
         description: "Please note that this is just a sample lineup and can be customized based on cultural or religious traditions, personal preferences, and the specific arrangements made for the funeral event.",
         date: "13th March 2023",
-        category: "parties"
+        category: "meetings",
+        textColor: '#222222',
+        backgroundColor: '#f5f5f5',
+        backgroundImage: '',
     },
     {
-        slug: "https://outty.co/funeral",
-        name: "Rev. Adatsi's Funeral",
-        description: "Please note that this is just a sample lineup and can be customized based on cultural or religious traditions, personal preferences, and the specific arrangements made for the funeral event.",
-        date: "13th March 2023",
-        category: "meetings"
-    },
-    {
-        slug: "https://outty.co/rev-adatsis-funeral",
+        slug: "rev-adatsis-funeral",
         name: "Rev. Adatsi's Funeral",
         description: "In loving memory of Rev. Christopher Adatsi, we gather here to honor and celebrate a life well-lived. It is with deep sadness that we announce their passing, and we invite you to join us in bidding a final farewell to a cherished Father, who touched the lives of so many.",
         date: "18th May 2023",
-        category: "funeral"
+        category: "funeral",
+        textColor: '#ff3838',
+        backgroundColor: '#000000',
+        backgroundImage: '',
+    }, {
+        slug: "edem-weds-mavis",
+        name: "Edem Weds Mavis",
+        description: "Join us in celebrating the joyous union of love and commitment as Edem and Mavis embark on their journey of togetherness.",
+        date: "18th May 2023",
+        textColor: '#3d6d37',
+        backgroundColor: '#fff2d6',
+        backgroundImage: '',
+        category: "wedding"
     }]
 
 const selectedEvent = ref(sampleEvents[0])
@@ -362,11 +367,58 @@ const startCreateEvent = () => {
 
 }
 
+const forceFileDownload = (response, title) => {
+    console.log(title)
+    const url = window.URL.createObjectURL(new Blob([response.data]))
+    const link = document.createElement('a')
+    link.href = url
+    link.setAttribute('download', title + ".svg")
+    document.body.appendChild(link)
+    link.click()
+}
+
+
+const onDownloadQRCode = (slug) => {
+    Requester.makeRequest({path: `${APIs.qrcode}${slug}`})
+        .then((response) => {
+            forceFileDownload(response, slug)
+        })
+        .catch((error) => {
+
+        })
+}
+
+let slideCount = 0;
+const getSelectedEvent = () => {
+    setInterval(() => {
+
+        if (slideCount >= categories.length) {
+            slideCount = 0;
+            let y = sampleEvents[slideCount];
+            eventCategory.value = categories[slideCount];
+            selectedEvent.value = y;
+
+            ++slideCount
+        } else {
+            let y = sampleEvents[slideCount];
+            eventCategory.value = categories[slideCount];
+            selectedEvent.value = y
+            ++slideCount
+        }
+    }, 5000)
+}
+
 const onCategoryChanged = ({category}) => {
     const w = sampleEvents.filter(i => i.category.toLowerCase() === category.toLowerCase())
     eventCategory.value = category
     selectedEvent.value = w[0]
 }
+
+onMounted(() => {
+    getSelectedEvent()
+
+});
+
 
 const rules = {
     eventName: {

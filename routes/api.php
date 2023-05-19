@@ -4,6 +4,7 @@ use App\Http\Controllers\EventController;
 use App\Http\Controllers\LineUpController;
 use App\Http\Controllers\OrganizerController;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\QrCodeController;
 use App\Http\Middleware\AuthenticateEventUser;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -69,3 +70,5 @@ Route::get('/qrcode/{data}', function ($data) {
 })->withoutMiddleware([AuthenticateEventUser::class]);
 
 
+//Download QRCode
+Route::get('/qrcode/{data}', [QrCodeController::class, 'downloadQrCode'])->withoutMiddleware([AuthenticateEventUser::class]);

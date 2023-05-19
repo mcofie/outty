@@ -27,6 +27,7 @@
         "@vuepic/vue-datepicker": "^4.2.0",
         "animate.css": "^4.1.1",
         "bootstrap": "^5.2.3",
+        "js-file-download": "^0.4.12",
         "lodash.debounce": "^4.0.8",
         "moment": "^2.29.4",
         "qrcode.vue": "^3.3.3",

@@ -41,7 +41,7 @@ return [
     |
     */
 
-    'debug' => (bool) env('APP_DEBUG', false),
+    'debug' => (bool)env('APP_DEBUG', false),
 
     /*
     |--------------------------------------------------------------------------
@@ -194,6 +194,8 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        SimpleSoftwareIO\QrCode\QrCodeServiceProvider::class,
+
 
     ],
 
@@ -210,6 +212,7 @@ return [
 
     'aliases' => Facade::defaultAliases()->merge([
         // 'ExampleClass' => App\Example\ExampleClass::class,
+        'QrCode' => SimpleSoftwareIO\QrCode\Facades\QrCode::class,
     ])->toArray(),
 
 ];

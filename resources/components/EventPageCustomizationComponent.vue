@@ -98,8 +98,6 @@ import {PrimaryFonts, SecondaryFonts} from "../js/utils";
 import {ComponentEventObject} from "../js/network/Models";
 import LineUpCard from "./sections/LineUpCard";
 import moment from "moment";
-import debounce from "lodash.debounce";
-import {checkIfArrayHasValues} from "../js/helper";
 import {alpha, minLength, required} from "@vuelidate/validators";
 import {useVuelidate} from "@vuelidate/core";
 

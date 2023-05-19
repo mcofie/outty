@@ -3,21 +3,25 @@
     "file": "assets/money.04dd895e.png",
     "src": "resources/imgs/money.png"
   },
-  "resources/imgs/information.png": {
-    "file": "assets/information.67dc0407.png",
-    "src": "resources/imgs/information.png"
-  },
   "resources/imgs/flower.png": {
     "file": "assets/flower.89b542ce.png",
     "src": "resources/imgs/flower.png"
   },
+  "resources/imgs/information.png": {
+    "file": "assets/information.67dc0407.png",
+    "src": "resources/imgs/information.png"
+  },
+  "resources/imgs/forget_me_not.png": {
+    "file": "assets/forget_me_not.2912b3f4.png",
+    "src": "resources/imgs/forget_me_not.png"
+  },
   "resources/js/app.js": {
-    "file": "assets/app.6574075d.js",
+    "file": "assets/app.0ce52d79.js",
     "src": "resources/js/app.js",
     "isEntry": true,
     "imports": [
-      "_store.6c6e0a70.js",
-      "_main.7220f592.js"
+      "_store.a0287074.js",
+      "_main.5aa3c7a7.js"
     ],
     "css": [
       "assets/app.0ba0cd0b.css"
@@ -25,68 +29,69 @@
     "assets": [
       "assets/money.04dd895e.png",
       "assets/flower.89b542ce.png",
-      "assets/information.67dc0407.png"
+      "assets/information.67dc0407.png",
+      "assets/forget_me_not.2912b3f4.png"
     ]
   },
   "resources/js/get-started.js": {
-    "file": "assets/get-started.138d5c99.js",
+    "file": "assets/get-started.22b6f178.js",
     "src": "resources/js/get-started.js",
     "isEntry": true,
     "imports": [
-      "_store.6c6e0a70.js",
-      "__plugin-vue_export-helper.63570c20.js",
-      "_main.7220f592.js"
+      "_store.a0287074.js",
+      "_main.5aa3c7a7.js",
+      "_Footer.2e768c98.js"
     ],
     "css": [
-      "assets/get-started.12d3b7cc.css",
+      "assets/get-started.9c922e14.css",
       "assets/app.0ba0cd0b.css"
     ]
   },
   "resources/js/event.js": {
-    "file": "assets/event.76e9fc54.js",
+    "file": "assets/event.a9cbe3d9.js",
     "src": "resources/js/event.js",
     "isEntry": true,
     "imports": [
-      "_store.6c6e0a70.js",
-      "__plugin-vue_export-helper.63570c20.js"
+      "_store.a0287074.js",
+      "_Footer.2e768c98.js"
     ],
     "css": [
-      "assets/event.a23c3863.css"
+      "assets/event.aa3d1ade.css"
     ]
   },
-  "_store.6c6e0a70.js": {
-    "file": "assets/store.6c6e0a70.js"
+  "_store.a0287074.js": {
+    "file": "assets/store.a0287074.js"
   },
-  "_main.7220f592.js": {
-    "file": "assets/main.7220f592.js",
+  "_main.5aa3c7a7.js": {
+    "file": "assets/main.5aa3c7a7.js",
     "imports": [
-      "_store.6c6e0a70.js"
+      "_store.a0287074.js"
     ],
     "css": [
       "assets/main.9181f7c4.css"
     ]
   },
-  "__plugin-vue_export-helper.63570c20.js": {
-    "file": "assets/_plugin-vue_export-helper.63570c20.js",
+  "_Footer.2e768c98.js": {
+    "file": "assets/Footer.2e768c98.js",
     "imports": [
-      "_store.6c6e0a70.js"
+      "_store.a0287074.js"
     ]
-  },
-  "main.css": {
-    "file": "assets/main.9181f7c4.css",
-    "src": "main.css"
   },
   "resources/css/app.css": {
     "file": "assets/app.0ba0cd0b.css",
     "src": "resources/css/app.css",
     "isEntry": true
   },
+  "main.css": {
+    "file": "assets/main.9181f7c4.css",
+    "src": "main.css"
+  },
   "resources/js/event.css": {
-    "file": "assets/event.a23c3863.css",
+    "file": "assets/event.aa3d1ade.css",
     "src": "resources/js/event.css"
   },
   "resources/js/get-started.css": {
-    "file": "assets/get-started.12d3b7cc.css",
+    "file": "assets/get-started.9c922e14.css",
     "src": "resources/js/get-started.css"
   }
 }

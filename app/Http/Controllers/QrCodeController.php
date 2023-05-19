@@ -2,42 +2,36 @@
 
 namespace App\Http\Controllers;
 
-use BaconQrCode\Renderer\Image\ImagickImageBackEnd;
-use BaconQrCode\Renderer\ImageRenderer;
-use BaconQrCode\Renderer\RendererStyle\RendererStyle;
 use BaconQrCode\Writer;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Response;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 
 class QrCodeController extends Controller
 {
     public function generateQrCode(Request $request)
     {
-        $data = 'www.outty.co';
-        $renderer = new \BaconQrCode\Renderer\Image\ImagickImageBackEnd();
-        $writer = new Writer($renderer);
-        $qrCode = $writer->writeString($data);
 
-        return response($qrCode)->header('Content-Type', 'image/png');
+        $pdf = App::make('dompdf.wrapper');
+        $data = [
+            'title' => 'Example PDF',
+            'content' => 'This is an example PDF generated in Laravel using Dompdf',
+            'qrcode' => QrCode::generate('Welcome to Makitweb')
+        ];
+
+        $pdf->loadView('payment', $data)->setPaper('a6', 'portrait');
+        return $pdf->stream();
+
     }
 
-    public function downloadQrCode(Request $request)
+    public function downloadQrCode($data)
     {
-        $data = "ww.wkkdkdkd.co";
-        $filename = 'qr-code.png';
-        $renderer = $renderer = new ImageRenderer(
-            new RendererStyle(400),
-            new ImagickImageBackEnd()
-        );
-        $writer = new Writer($renderer);
-        $qrCode = $writer->writeString($data);
-
-        dd($qrCode);
-
-//        return Response::make($qrCode, 200, [
-//            'Content-Type' => 'image/png',
-//            'Content-Disposition' => 'attachment; filename=' . $filename,
-//        ]);
+        $qrCode = QrCode::format('svg')->size(200)->generate(env('APP_URL') . $data);
+        $response = Response::make($qrCode, 200);
+        $response->header('Content-Type', 'image/svg');
+        $response->header('Content-Disposition', 'attachment; filename=' . $data . '.svg"');
+        return $response;
     }
 }
