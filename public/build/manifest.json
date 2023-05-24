@@ -16,12 +16,12 @@
     "src": "resources/imgs/forget_me_not.png"
   },
   "resources/js/app.js": {
-    "file": "assets/app.0ce52d79.js",
+    "file": "assets/app.3e0444c4.js",
     "src": "resources/js/app.js",
     "isEntry": true,
     "imports": [
-      "_store.a0287074.js",
-      "_main.5aa3c7a7.js"
+      "_store.1f19bc1b.js",
+      "_main.3a84fcaa.js"
     ],
     "css": [
       "assets/app.0ba0cd0b.css"
@@ -34,13 +34,13 @@
     ]
   },
   "resources/js/get-started.js": {
-    "file": "assets/get-started.22b6f178.js",
+    "file": "assets/get-started.9d3e9462.js",
     "src": "resources/js/get-started.js",
     "isEntry": true,
     "imports": [
-      "_store.a0287074.js",
-      "_main.5aa3c7a7.js",
-      "_Footer.2e768c98.js"
+      "_store.1f19bc1b.js",
+      "_main.3a84fcaa.js",
+      "_Footer.0d301f7e.js"
     ],
     "css": [
       "assets/get-started.9c922e14.css",
@@ -48,33 +48,33 @@
     ]
   },
   "resources/js/event.js": {
-    "file": "assets/event.a9cbe3d9.js",
+    "file": "assets/event.39c7e845.js",
     "src": "resources/js/event.js",
     "isEntry": true,
     "imports": [
-      "_store.a0287074.js",
-      "_Footer.2e768c98.js"
+      "_store.1f19bc1b.js",
+      "_Footer.0d301f7e.js"
     ],
     "css": [
-      "assets/event.aa3d1ade.css"
+      "assets/event.82c3b230.css"
     ]
   },
-  "_store.a0287074.js": {
-    "file": "assets/store.a0287074.js"
+  "_store.1f19bc1b.js": {
+    "file": "assets/store.1f19bc1b.js"
   },
-  "_main.5aa3c7a7.js": {
-    "file": "assets/main.5aa3c7a7.js",
+  "_main.3a84fcaa.js": {
+    "file": "assets/main.3a84fcaa.js",
     "imports": [
-      "_store.a0287074.js"
+      "_store.1f19bc1b.js"
     ],
     "css": [
       "assets/main.9181f7c4.css"
     ]
   },
-  "_Footer.2e768c98.js": {
-    "file": "assets/Footer.2e768c98.js",
+  "_Footer.0d301f7e.js": {
+    "file": "assets/Footer.0d301f7e.js",
     "imports": [
-      "_store.a0287074.js"
+      "_store.1f19bc1b.js"
     ]
   },
   "resources/css/app.css": {
@@ -82,16 +82,16 @@
     "src": "resources/css/app.css",
     "isEntry": true
   },
-  "main.css": {
-    "file": "assets/main.9181f7c4.css",
-    "src": "main.css"
-  },
-  "resources/js/event.css": {
-    "file": "assets/event.aa3d1ade.css",
-    "src": "resources/js/event.css"
-  },
   "resources/js/get-started.css": {
     "file": "assets/get-started.9c922e14.css",
     "src": "resources/js/get-started.css"
+  },
+  "resources/js/event.css": {
+    "file": "assets/event.82c3b230.css",
+    "src": "resources/js/event.css"
+  },
+  "main.css": {
+    "file": "assets/main.9181f7c4.css",
+    "src": "main.css"
   }
 }

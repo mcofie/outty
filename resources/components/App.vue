@@ -229,7 +229,8 @@
                                                 </div>
                                                 <ul class="list-unstyled mt-5">
                                                     <li>
-                                                        <qrcode-vue :value="selectedEvent.slug" :size="qrCode.size"
+                                                        <qrcode-vue :value="appURL+selectedEvent.slug"
+                                                                    :size="qrCode.size"
                                                                     :background="selectedEvent.backgroundColor"
                                                                     :foreground="selectedEvent.textColor"
                                                                     level="H"/>
@@ -405,7 +406,7 @@ const getSelectedEvent = () => {
             selectedEvent.value = y
             ++slideCount
         }
-    }, 5000)
+    }, 10000)
 }
 
 const onCategoryChanged = ({category}) => {

@@ -31,13 +31,15 @@
                         </div>
                     </div>
                     <div class="row">
-                        <component :is="sections[currentSection]"
-                                   @goto="gotoSection"
-                                   @checkout="gotoCheckout"
-                                   @next="onNextSection"
-                                   :event-store="currentEventData"
-                                   :event-response="eventResponse"
-                                   @previous="onPreviousSection"></component>
+                       <keep-alive>
+                           <component :is="sections[currentSection]"
+                                      @goto="gotoSection"
+                                      @checkout="gotoCheckout"
+                                      @next="onNextSection"
+                                      :event-store="currentEventData"
+                                      :event-response="eventResponse"
+                                      @previous="onPreviousSection"></component>
+                       </keep-alive>
                     </div>
                 </div>
             </div>

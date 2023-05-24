@@ -14,7 +14,7 @@
                             <li class="mb-3">
                                 <small>
                                     <span class="badge text-bg-dark">
-                                        {{eventResponse.data.organizer.name}}
+                                        {{ eventResponse.data.organizer.name }}
                                     </span>
                                 </small>
                             </li>
@@ -83,7 +83,7 @@ const hasData = ref(true)
 
 
 onBeforeMount(() => {
-    const slug = location.pathname.replace('/the-outline/', '')
+    const slug = location.pathname.replace('/the-outline/', '').replace('/', '')
     getEvent({slug: slug})
 })
 

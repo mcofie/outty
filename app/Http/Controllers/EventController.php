@@ -59,7 +59,7 @@ class EventController extends Controller
             //TODO: Payment - Abstract this
             $response = Http::withToken(env('PAYSTACK_SECRET_KEY'))
                 ->post(env('PAYSTACK_PAYMENT_URL'), [
-                    'amount' => (1 * env('PAYMENT_DOLLAR_RATE')),
+                    'amount' => 2500,
                     'email' => $request->user['email'],
                     'callback_url' => env('PAYSTACK_PAYMENT_CALLBACK_URL') . "?referenceId=" . $clientReference,
                     'reference' => $clientReference
@@ -116,7 +116,7 @@ class EventController extends Controller
                 $payment->save();
 
                 return new MainResource(["data" => new EventCreationWrapperResource([$events,
-                    ["amount" => (1 * env('PAYMENT_DOLLAR_RATE')),
+                    ["amount" => 25,
                         "payment_url" => $deserialisedResponse->data->authorization_url]]),
                     "message" => "",
                     "status" => 200]);

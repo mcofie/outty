@@ -112,7 +112,7 @@
 </template>
 
 <script setup>
-import {ref, computed, onMounted, watch} from 'vue'
+import {ref, computed, onMounted, watch, onDeactivated, onBeforeUnmount} from 'vue'
 import Editor from '@tinymce/tinymce-vue'
 import debounce from 'lodash.debounce'
 import {useVuelidate} from '@vuelidate/core'
@@ -212,6 +212,8 @@ const rules = {
 }
 
 const v$ = useVuelidate(rules, userData)
+
+onBeforeUnmount(()=>{})
 
 
 </script>
