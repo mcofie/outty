@@ -40,7 +40,7 @@
             <div class="bottom w-100 py-3">
                 <div class="container">
                     <div class="row justify-content-center">
-                        <div class="col-md-7">
+                        <div class="col-md-10 col-lg-9 col-xl-7">
                             <div class="d-flex justify-content-between w-100 mt-4">
                                 <button @click="goToPreviousSection" class="btn btn-secondary btn-lg rounded-1">
                                     <i class="fa-solid fa-caret-left"></i>
@@ -69,29 +69,52 @@
 </template>
 
 <script setup>
-import {ref} from 'vue'
+import {ref, computed} from 'vue'
 import {useStore} from 'vuex'
 
-const store = useStore()
-import {ComponentEventObject} from "../js/network/Models";
+
+import {ComponentEventObject, CreateEventResponse} from "../js/network/Models";
 import {email, minLength, numeric, required} from "@vuelidate/validators";
 import {useVuelidate} from "@vuelidate/core";
+import {useRoute, useRouter} from "vue-router";
+import {slugify} from "../js/utils";
+import moment from "moment";
+import {formatTime} from "../js/helper";
+import Requester from "../js/network/Requester";
+import {APIs} from "../js/network/APIs";
 
-const emit = defineEmits(['checkout', 'previous'])
-const props = defineProps(['eventStore', 'isEdit'])
-const user = props.eventStore.user
+
+const router = useRouter();
+const route = useRoute()
+const store = useStore()
+// const emit = defineEmits(['checkout', 'previous'])
+// const props = defineProps(['eventStore', 'isEdit'])
+// const user = props.eventStore.user
+
+const currentEventData = computed(() => store.state.event)
+
+
+const user = currentEventData.value.user
+
 const isButtonActive = ref(false)
 const isCheckoutSuccessful = ref(false)
 
 
 const userData = ref(
     {
-        name: user.name,
-        email: user.email,
-        phone_number: user.phone_number,
+        name: currentEventData.value.user.name,
+        email: currentEventData.value.user.email,
+        phone_number: currentEventData.value.user.phone_number,
     }
 );
 
+const persistEvent = (data) => {
+    store.commit('storeEventDetails', data)
+}
+
+const paymentUrl = (data) => {
+    store.commit('paymentURL', data)
+}
 
 const persistUserData = () => {
     const obj = ComponentEventObject
@@ -101,10 +124,17 @@ const persistUserData = () => {
 }
 
 const goToNextSection = () => {
-    emit('checkout', persistUserData())
+    // emit('checkout', persistUserData())
+    persistEvent(persistUserData().data)
+    gotoCheckout()
     isCheckoutSuccessful.value = true
 }
-const goToPreviousSection = () => emit('previous', persistUserData())
+const goToPreviousSection = () => {
+    router.go(-1)
+    persistEvent(persistUserData().data)
+    // persistEvent(persistUserData())
+    // emit('previous', persistUserData())
+}
 
 
 const rules = {
@@ -116,6 +146,41 @@ const rules = {
 }
 
 const v$ = useVuelidate(rules, userData)
+
+
+const gotoCheckout = () => {
+    // persistEvent(name.data)
+    currentEventData.value.event.slug = slugify(currentEventData.value.event.name)
+    currentEventData.value.event.date = moment(currentEventData.value.event.date).format("YYYY-MM-DD");
+    currentEventData.value.lineups.map((lineup) => {
+        lineup.start_time = moment(formatTime(lineup.start_time)).format('HH:mm')
+        if (lineup.end_time !== null) {
+            lineup.end_time = moment(formatTime(lineup.end_time)).format('HH:mm')
+        } else {
+            lineup.end_time = null;
+        }
+
+    })
+    createEvent({data: currentEventData.value})
+    //
+}
+
+const createEvent = ({data}) => {
+    Requester.makeRequest({data: data, path: `${APIs.createEvent}`, method: 'POST'})
+        .then((response) => {
+            localStorage.removeItem('eventStore')
+            const url = response.data.data.payment_url
+            const event = response.data.data.event
+
+            paymentUrl(url)
+            router.push({name: 'Payment'})
+
+            // eventResponse.value = Object.assign(CreateEventResponse.data, response.data.data)
+        })
+        .catch((error) => {
+            // console.log(error.response.data)
+        })
+}
 
 
 </script>

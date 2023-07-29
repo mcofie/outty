@@ -1,8 +1,8 @@
 import axios from 'axios';
 
 // const BASEURL = "http://localhost:8000/api/";
-// const BASEURL = "http://localhost/the-outline/api/";
-const BASEURL = "https://outty.co/api/";
+const BASEURL = "http://localhost/the-outline/api/";
+// const BASEURL = "https://outty.co/api/";
 
 let instance = axios;
 // instance.defaults.headers.post['Content-Type'] = 'application/json';

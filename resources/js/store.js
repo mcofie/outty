@@ -7,7 +7,8 @@ import {formatTime, reverseTimeFormat} from "./helper";
 const state = {
     count: 0,
     event: CreateEventLineUp,
-    proposedEventName: ''
+    proposedEventName: '',
+    paymentUrl:''
 }
 
 // mutations are operations that actually mutate the state.
@@ -28,6 +29,9 @@ const mutations = {
     },
     storeProposedEventName(state, name) {
         state.proposedEventName = name
+    },
+    paymentURL(state, url){
+        state.paymentUrl = url
     }
 }
 
@@ -55,6 +59,7 @@ const actions = {
 const getters = {
     evenOrOdd: state => state.count % 2 === 0 ? 'even' : 'odd',
     proposedEventName: state => state.proposedEventName,
+    paymentUrl: state => state.paymentUrl,
     eventStore: state => {
         let store = JSON.parse(localStorage.getItem('eventStore'))
         // if (store) {

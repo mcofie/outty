@@ -19,6 +19,7 @@
 
             <div class="mb-3">
                 <label class="form-label">Description</label>
+                <!--                <textarea cols="5" class="form-control" v-model="userData.description"></textarea>-->
                 <editor
                     api-key="nk8g6c7xozd3yhhs5pd5xdpp0crzp65g5hdxd8fs4oixl2mz"
                     :class="[v$.description.$error ? 'form-control is-invalid' : 'form-control' ]"
@@ -49,7 +50,6 @@
                                    :class="[v$.date.$error ? 'form-control is-invalid' : 'form-control' ]"
                                    :format="format"
                                    :min-date="new Date()"
-                                   :disabled="isEdit"
                                    placeholder="00/00/0000" text-input auto-apply :enable-time-picker="false"/>
                     <InfoTip message="(NB: Event date can't be edited once created!)"/>
                     <br>
@@ -116,7 +116,7 @@ import {ref, computed, onMounted, watch, onDeactivated, onBeforeUnmount} from 'v
 import Editor from '@tinymce/tinymce-vue'
 import debounce from 'lodash.debounce'
 import {useVuelidate} from '@vuelidate/core'
-
+import {useRouter} from 'vue-router'
 import VueDatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css'
 import {ComponentEventObject} from "../js/network/Models";
@@ -129,14 +129,11 @@ import {alpha, minLength, required} from "@vuelidate/validators";
 import InfoTip from "./sections/InfoTip";
 
 const store = useStore()
+const router = useRouter()
 
-
-const emit = defineEmits(['next'])
-const props = defineProps(['eventStore', 'isEdit'])
-const event = props.eventStore.event
-const isEdit = props.isEdit
 
 const currentEventData = computed(() => store.state.event)
+
 const getFile = ref(null)
 const isButtonActive = ref(true)
 const slugLookup = ref({
@@ -144,14 +141,16 @@ const slugLookup = ref({
     state: -1
 })
 
-const userData = ref(
-    {
-        name: event.name,
-        description: event.description,
-        category: event.category,
-        date: event.date
-    }
-);
+
+const userData =
+    ref(
+        {
+            name: currentEventData.value.event.name,
+            description: currentEventData.value.event.description,
+            category: currentEventData.value.event.category,
+            date: currentEventData.value.event.date
+        }
+    );
 
 
 const checkSlugAvailability = debounce((n) => {
@@ -183,7 +182,12 @@ const persistUserData = () => {
     return obj
 }
 
-const goToNextSection = () => emit('next', persistUserData())
+const goToNextSection = () => {
+    router.push({name: 'LineUp'})
+    persistEvent(persistUserData().data)
+    // emit('next', persistUserData())
+}
+
 
 const hasProposedName = () => {
     const urlParams = new URLSearchParams(window.location.search);
@@ -201,6 +205,9 @@ onMounted(() => {
     }
 })
 
+const persistEvent = (data) => {
+    store.commit('storeEventDetails', data)
+}
 
 const rules = {
     name: {
@@ -213,7 +220,8 @@ const rules = {
 
 const v$ = useVuelidate(rules, userData)
 
-onBeforeUnmount(()=>{})
+onBeforeUnmount(() => {
+})
 
 
 </script>

@@ -21,7 +21,7 @@
                                     :style="{width:  100/countDown+'%' }"></div>
                             </div>
                         </li>
-                        <li class="mt-4"><h4>Making Payment to: {{ event.event.name }}</h4></li>
+                        <li class="mt-4"><h4>Making Payment to: {{ event.name }}</h4></li>
                         <li class="mt-1"><p>Create an inclusive event line-up that matter.</p></li>
                         <li>
                             <div class="d-flex justify-content-center text-center">
@@ -29,14 +29,14 @@
                                        ref="input"
                                        class="form-control text-center align-self-center w-50"
                                        disabled
-                                       :value="event.payment_url"/>
+                                       :value="paymentURL"/>
                                 <button class="btn btn-secondary btn-lg rounded-1 mx-2" @click="copyToClipBoard">
                                     <i class="fa-solid fa-copy"></i>
                                 </button>
                             </div>
                         </li>
                         <li>
-                            <a :href="event.payment_url">
+                            <a :href="paymentURL">
                                 <button class="btn btn-primary rounded-2 btn-lg mt-4" type="button">
                                     Make Payment
                                 </button>
@@ -50,21 +50,31 @@
 </template>
 
 <script setup>
-import {onMounted, ref} from 'vue'
+import {onMounted, ref, computed} from 'vue'
+import {useStore} from "vuex";
+import {useRoute} from "vue-router";
 
-const emit = defineEmits(['next'])
-const props = defineProps(['eventResponse'])
-const event = props.eventResponse
+// const emit = defineEmits(['next'])
+// const props = defineProps(['eventResponse'])
+const store = useStore()
+const route = useRoute()
+
+const currentEventData = computed(() => store.state.event)
+
+const paymentURL = computed(() => store.state.paymentUrl)
+
+const event = currentEventData.value.event
 const input = ref(null)
 
 let countDown = ref(5)
 
 onMounted(() => {
+
     setInterval(() => {
         if (countDown.value >= 1) {
             --countDown.value
         } else {
-            window.location.href = event.payment_url;
+            window.location.href = paymentURL.value;
         }
     }, 1000);
 })
@@ -72,9 +82,6 @@ onMounted(() => {
 const copyToClipBoard = () => {
     input.value.select();
     input.value.setSelectionRange(0, 99999); // For mobile devices
-
-    console.log(input.value.value)
-
     navigator.clipboard.writeText(input.value.value)
     alert("Copied the text: " + input.value.value);
 }

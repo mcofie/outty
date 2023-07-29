@@ -100,11 +100,21 @@ import LineUpCard from "./sections/LineUpCard";
 import moment from "moment";
 import {alpha, minLength, required} from "@vuelidate/validators";
 import {useVuelidate} from "@vuelidate/core";
+import {useStore} from "vuex";
+import {useRouter} from "vue-router";
 
 const emit = defineEmits(['next', 'previous'])
-const props = defineProps(['eventStore', 'isEdit'])
-const event = props.eventStore.event
-const lineup = props.eventStore.lineups[0]
+// const props = defineProps(['eventStore', 'isEdit'])
+
+// const event = props.eventStore.event
+// const lineup = props.eventStore.lineups[0]
+const store = useStore();
+const router = useRouter();
+
+
+const currentEventData = computed(() => store.state.event)
+const event = currentEventData.value.event
+const lineup = currentEventData.value.lineups[0]
 
 const userData = ref(
     {
@@ -122,10 +132,24 @@ const persistUserData = () => {
     return obj
 }
 
-const goToNextSection = () => emit('next', persistUserData())
-const goToPreviousSection = () => emit('previous', persistUserData())
+const persistEvent = (data) => {
+    store.commit('storeEventDetails', data)
+}
+
+
+const goToNextSection = () => {
+    router.push({name: 'Organizer'})
+    persistEvent(persistUserData().data)
+    // emit('next', persistUserData())
+}
+const goToPreviousSection = () => {
+    router.go(-1)
+    persistEvent(persistUserData().data)
+    // emit('previous', persistUserData())
+}
 
 const gotoSection = () => {
+    router.push({name: 'Preview'})
     const modified = persistUserData();
     modified.page = "EventPreviewComponent"
     emit('goto', modified)
@@ -151,7 +175,7 @@ const rules = {
 const v$ = useVuelidate(rules, userData)
 
 onMounted(() => {
-    console.log(props.eventStore)
+    // console.log(props.eventStore)
 })
 
 

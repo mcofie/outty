@@ -43,15 +43,22 @@ import {useStore} from 'vuex'
 import LineUpCard from "./sections/LineUpCard";
 import moment from 'moment'
 import Footer from "./sections/Footer";
+import {useRouter} from "vue-router";
 
 
 const store = useStore()
+const router = useRouter()
+const currentEventData = computed(() => store.state.event)
 
-const emit = defineEmits(['previous'])
-const props = defineProps(['eventStore'])
-const event = props.eventStore.event
-const lineups = props.eventStore.lineups
+// const emit = defineEmits(['previous'])
+// const props = defineProps(['eventStore'])
 
+//
+// const event = props.eventStore.event
+// const lineups = props.eventStore.lineups
+
+const event = currentEventData.value.event
+const lineups = currentEventData.value.lineups
 
 const persistUserData = () => {
     const obj = ComponentEventObject
@@ -67,9 +74,11 @@ const eventDate = computed(() => {
     return moment(event.date).format("Do MMMM YYYY")
 })
 
-const goToPreviousSection = () => emit('previous', persistUserData())
+const goToPreviousSection = () => {
+    router.go(-1)
+    emit('previous', persistUserData())
+}
 
-const currentEventData = computed(() => store.state.event)
 
 
 </script>

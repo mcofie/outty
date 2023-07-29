@@ -70,19 +70,21 @@
                                     :class="'form-control'"
                                     v-model="lineup.description"
                                     :init="{
-                         height: 250,
-                         menubar: false,
-                         plugins: [
-                           'advlist autolink lists link image charmap print preview anchor',
-                           'searchreplace visualblocks code fullscreen',
-                           'insertdatetime media table paste code help wordcount'
-                         ],
-                         toolbar:
-                           'undo redo | formatselect | bold italic backcolor | \
-                           alignleft aligncenter alignright alignjustify | \
-                           bullist numlist outdent indent | removeformat | help'
-                       }"
+                                             height: 250,
+                                             menubar: false,
+                                             plugins: [
+                                               'advlist autolink lists link image charmap print preview anchor',
+                                               'searchreplace visualblocks code fullscreen',
+                                               'insertdatetime media table paste code help wordcount'
+                                             ],
+                                             toolbar:
+                                               'undo redo | formatselect | bold italic backcolor | \
+                                               alignleft aligncenter alignright alignjustify | \
+                                               bullist numlist outdent indent | removeformat | help'
+                                           }"
                                 />
+
+                                <!--                                <textarea cols="5" class="form-control" v-model="lineup.description"></textarea>-->
 
                             </div>
                         </div>
@@ -130,12 +132,24 @@ import {ComponentEventObject} from "../js/network/Models";
 import {checkIfArrayHasValues, formatTime} from "../js/helper";
 import {alpha, minLength, required} from "@vuelidate/validators";
 import {useVuelidate} from "@vuelidate/core";
+import {useStore} from 'vuex'
 import Editor from '@tinymce/tinymce-vue'
+import {useRouter} from 'vue-router'
 
 
-const emit = defineEmits(['next', 'previous'])
-const props = defineProps(['eventStore', 'isEdit'])
-const pLineups = props.eventStore.lineups
+const store = useStore();
+const router = useRouter();
+
+
+// const emit = defineEmits(['next', 'previous'])
+// const props = defineProps(['eventStore', 'isEdit'])
+
+const currentEventData = computed(() => store.state.event)
+
+// currentEventData.value.lineups
+
+// const pLineups = props.eventStore.lineups
+const pLineups = currentEventData.value.lineups
 const isButtonActive = ref(true)
 
 const time = {
@@ -166,7 +180,6 @@ const persistUserData = () => {
     const obj = ComponentEventObject
     obj.page = 'LineUpComponent'
     obj.data.lineups = Object.assign(obj.data.lineups, toRaw(lineups.value))
-    console.log(toRaw(lineups.value))
     return obj
 }
 const deleteLineUp = (index) => {
@@ -184,9 +197,18 @@ const deleteLineUp = (index) => {
         });
     }
 }
-const goToNextSection = () => emit('next', persistUserData())
-const goToPreviousSection = () => emit('previous', persistUserData())
+const goToNextSection = () => {
+    router.push({name: 'Customizer'})
+    persistEvent(persistUserData().data)
+}
+const goToPreviousSection = () => {
+    router.back()
+    persistEvent(persistUserData().data)
+}
 
+const persistEvent = (data) => {
+    store.commit('storeEventDetails', data)
+}
 
 const rules = {
     lineups: {
@@ -205,7 +227,7 @@ const rules = {
 const v$ = useVuelidate(rules, {lineups})
 
 onMounted(() => {
-    console.log(props.eventStore)
+    // console.log(props.eventStore)
 })
 
 
