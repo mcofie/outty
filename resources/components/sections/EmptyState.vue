@@ -1,7 +1,7 @@
 <template>
-    <div class="row justify-content-center h-100 align-content-center">
+    <div class="row justify-content-center align-content-center vh-100">
         <div class="col-md-6">
-            <ul class="list-unstyled text-center mt-5">
+            <ul class="list-unstyled text-center">
                 <li><h1>{{ title }}</h1></li>
                 <li><p>{{ message }}</p></li>
             </ul>

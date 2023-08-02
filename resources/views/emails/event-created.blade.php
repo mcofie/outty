@@ -389,7 +389,7 @@
                                             <li>Order Number: {{$orderNumber}}</li>
                                             <li>Product: {{$product}}</li>
                                             <li>Price: ${{$price}}</li>
-                                            <li>Event Name: <a href="https://outty.co/{{$slug}}">{{$event_name}}</a>
+                                            <li>Event: <a href="https://outty.co/{{$slug}}">{{$event_name}}</a>
                                             </li>
                                             <li>Date of Purchase: {{$date}}</li>
                                         </ul>

@@ -19,7 +19,7 @@
                             </div>
                         </nav>
 
-                        <div class="col-md-12 mb-5">
+                        <div class="col-md-12 mb-5 d-none">
                             <div class="progress" role="progressbar" aria-label="Basic example"
                                  aria-valuenow="15"
                                  aria-valuemin="0" aria-valuemax="100">
@@ -29,7 +29,15 @@
                     </div>
 
                     <div class="row">
-                        <router-view/>
+                        <router-view v-slot="{ Component, route }">
+                            <!-- Use any custom transition and  to `fade` -->
+                            <transition :name="route.meta.transition || 'fade'">
+                                <component :is="Component" />
+                            </transition>
+                        </router-view>
+
+
+<!--                        <router-view/>-->
                     </div>
                 </div>
             </div>
@@ -38,15 +46,20 @@
 </template>
 
 <script setup>
-import {ref, onMounted, computed} from 'vue'
-import {useRouter} from 'vue-router'
+import {ref, onMounted, computed, onUpdated} from 'vue'
+import {useRouter, useRoute} from 'vue-router'
 import {useStore} from 'vuex'
 
 
 const store = useStore()
 const router = useRouter()
+const route = useRoute();
 
-router.push({name: 'Event'})
+
+onMounted(() => {
+    router.push({name: 'Event'})
+    // console.log(route.name)
+})
 
 
 const pageProgress = ref(20)

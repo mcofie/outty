@@ -97,10 +97,10 @@
                             <div
                                 class="d-flex justify-content-lg-end justify-content-md-end justify-content-center w-100 mt-4">
                                 <button @click="goToNextSection"
-                                        :class="[!v$.$invalid && slugLookup.state !== 0 ? '' : 'disabled','btn btn-primary btn-lg flex-sm-grow-0 px-5 justify-content-lg-end flex-fill flex-sm-fill rounded-2']"
+                                        :class="[!v$.$invalid && slugLookup.state !== 0 ? '' : 'disabled','btn rounded-5 px-5 py-2 btn-primary btn-lg flex-sm-grow-0 font-bold  justify-content-lg-end flex-fill flex-sm-fill rounded-2']"
                                 >
-                                    Next
-                                    <i class="fa-solid fa-caret-right"></i>
+                                    NEXT
+<!--                                    <i class="fa-solid fa-caret-right"></i>-->
                                 </button>
                             </div>
                         </div>

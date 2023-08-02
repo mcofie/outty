@@ -147,6 +147,7 @@ class EventController extends Controller
 
     public function show($id)
     {
+        $id = trim($id);
         $events = Event::where('slug', $id)->where('status', '1')->first();
         return $this->return_event_found($events);
     }

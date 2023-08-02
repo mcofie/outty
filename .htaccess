@@ -5,6 +5,8 @@
 
     RewriteEngine On
 
+    RewriteBase /the-outline/
+
     # Handle Authorization Header
     RewriteCond %{HTTP:Authorization} .
     RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
@@ -18,7 +20,22 @@
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^ index.php [L]
+    RewriteRule ^index\.html$ - [L]
+#    RewriteRule . /index.html [L]
 </IfModule>
+
+#<IfModule mod_negotiation.c>
+#  Options -MultiViews
+#</IfModule>
+
+#<IfModule mod_rewrite.c>
+#  RewriteEngine On
+#  RewriteBase /
+#  RewriteRule ^index\.html$ - [L]
+#  RewriteCond %{REQUEST_FILENAME} !-f
+#  RewriteCond %{REQUEST_FILENAME} !-d
+#  RewriteRule . /index.html [L]
+#</IfModule>
 
 #Options -MultiViews -Indexes
 #RewriteEngine On

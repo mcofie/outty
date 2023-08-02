@@ -74,12 +74,13 @@
                                     <i class="fa-solid fa-caret-left"></i>
                                 </button>
                                 <div>
-                                    <button @click="gotoSection" class="btn btn-secondary btn-lg rounded-1 mx-2">
-                                        <i class="fa-regular fa-eye"></i>
+                                    <button @click="gotoSection"
+                                            class="btn btn-secondary btn-lg rounded-1 mx-2 rounded-5 px-4 py-2 font-bold">
+                                        PREVIEW
                                     </button>
                                     <button @click="goToNextSection"
-                                            :class="[!v$.$invalid ? '' : 'disabled','btn btn-primary btn-lg px-5 rounded-2']">
-                                        Next <i class="fa-solid fa-caret-right"></i>
+                                            :class="[!v$.$invalid ? '' : 'disabled','btn btn-primary btn-lg rounded-5 px-5 py-2 font-bold']">
+                                        NEXT
                                     </button>
                                 </div>
                             </div>

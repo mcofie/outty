@@ -47,9 +47,9 @@
                                 </button>
 
                                 <button v-if="!isCheckoutSuccessful" @click="goToNextSection"
-                                        :class="[ !v$.$invalid ? '' : 'disabled','btn btn-primary btn-lg px-5 rounded-2']"
+                                        :class="[ !v$.$invalid ? '' : 'disabled','btn btn-primary btn-lg rounded-5 px-5 py-2 font-bold']"
                                 >
-                                    Checkout <i class="fa-solid fa-caret-right"></i>
+                                    Checkout
                                 </button>
 
                                 <button v-else-if="isCheckoutSuccessful" class="btn btn-primary btn-lg" type="button"

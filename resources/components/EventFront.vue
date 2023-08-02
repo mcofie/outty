@@ -4,7 +4,7 @@
             <div v-if="hasData">
                 <div class="row justify-content-center mt-5 mb-3">
                     <div class="col-md-8 col-lg-8 col-xl-6 col-md-7 col-11 text-center">
-                        <div class="d-flex justify-content-end">
+                        <div class="d-flex justify-content-end d-none">
                             <i class="fa-solid fa-language fs-2"></i>
                         </div>
                         <ul class="list-unstyled" :style="{color:eventResponse.data.text_color }">

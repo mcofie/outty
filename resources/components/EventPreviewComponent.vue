@@ -1,9 +1,9 @@
 <template>
     <div>
         <div class="my-5">
-            <div class="d-flex justify-content-start w-100 mt-4">
+            <div class="d-flex justify-content-end w-100 mt-4">
                 <button @click="goToPreviousSection" class="btn btn-secondary btn-lg rounded-1">
-                    <i class="fa-solid fa-caret-left"></i>
+                    <i class="fa-solid fa-xmark"></i>
                 </button>
             </div>
         </div>

@@ -1,11 +1,13 @@
 import {defineConfig} from 'vite';
 import laravel from 'laravel-vite-plugin';
+import pluginRewriteAll from 'vite-plugin-rewrite-all';
 import vue from '@vitejs/plugin-vue'
 import path from 'path'
 
 
 export default defineConfig({
     plugins: [
+        pluginRewriteAll(),
         laravel({
             // input: ['resources/css/app.css', 'resources/js/app.js'],
             input: ['resources/css/app.css', 'resources/js/app.js', 'resources/js/get-started.js', 'resources/js/event.js'],

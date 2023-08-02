@@ -7,91 +7,237 @@
     "file": "assets/money.04dd895e.png",
     "src": "resources/imgs/money.png"
   },
-  "resources/imgs/information.png": {
-    "file": "assets/information.67dc0407.png",
-    "src": "resources/imgs/information.png"
-  },
-  "resources/imgs/forget_me_not.png": {
-    "file": "assets/forget_me_not.2912b3f4.png",
-    "src": "resources/imgs/forget_me_not.png"
-  },
   "resources/js/app.js": {
-    "file": "assets/app.d146ebd6.js",
+    "file": "assets/app.46653bc2.js",
     "src": "resources/js/app.js",
     "isEntry": true,
     "imports": [
-      "_store.aaf64c50.js",
-      "_main.2302e0e9.js"
+      "_store.daaa27a6.js",
+      "_index.4b5c6699.js",
+      "_APIs.5158d473.js",
+      "_helper.161ad076.js",
+      "_main.7cd3055a.js"
     ],
     "css": [
-      "assets/app.0ba0cd0b.css"
+      "assets/app.262430a4.css"
     ],
     "assets": [
       "assets/money.04dd895e.png",
-      "assets/flower.89b542ce.png",
-      "assets/information.67dc0407.png",
-      "assets/forget_me_not.2912b3f4.png"
+      "assets/flower.89b542ce.png"
     ]
   },
   "resources/js/get-started.js": {
-    "file": "assets/get-started.5bbdd663.js",
+    "file": "assets/get-started.bba1adc5.js",
     "src": "resources/js/get-started.js",
     "isEntry": true,
     "imports": [
-      "_store.aaf64c50.js",
-      "_Footer.1643fe2d.js",
-      "_main.2302e0e9.js"
+      "_store.daaa27a6.js",
+      "_vue-router.6c8a7ed6.js"
+    ],
+    "dynamicImports": [
+      "resources/components/EventComponent.vue",
+      "resources/components/LineUpComponent.vue",
+      "resources/components/EventOrganizerComponent.vue",
+      "resources/components/EventPageCustomizationComponent.vue",
+      "resources/components/PaymentRedirectionComponent.vue",
+      "resources/components/EventPreviewComponent.vue"
     ],
     "css": [
-      "assets/get-started.aae9b561.css",
-      "assets/app.0ba0cd0b.css"
+      "assets/get-started.e8f23879.css",
+      "assets/app.262430a4.css"
     ]
   },
   "resources/js/event.js": {
-    "file": "assets/event.867ba7f7.js",
+    "file": "assets/event.2a4b8e6e.js",
     "src": "resources/js/event.js",
     "isEntry": true,
     "imports": [
-      "_store.aaf64c50.js",
-      "_Footer.1643fe2d.js"
+      "_store.daaa27a6.js",
+      "_vue-router.6c8a7ed6.js",
+      "_APIs.5158d473.js",
+      "_Footer.e9973709.js",
+      "_helper.161ad076.js",
+      "__plugin-vue_export-helper.cdc0426e.js"
     ],
     "css": [
-      "assets/event.82c3b230.css"
+      "assets/event.2c9d87bf.css"
     ]
   },
-  "_store.aaf64c50.js": {
-    "file": "assets/store.aaf64c50.js"
+  "_store.daaa27a6.js": {
+    "file": "assets/store.daaa27a6.js"
   },
-  "_main.2302e0e9.js": {
-    "file": "assets/main.2302e0e9.js",
+  "_main.7cd3055a.js": {
+    "file": "assets/main.7cd3055a.js",
     "imports": [
-      "_store.aaf64c50.js"
+      "_store.daaa27a6.js"
     ],
     "css": [
       "assets/main.9181f7c4.css"
     ]
   },
-  "_Footer.1643fe2d.js": {
-    "file": "assets/Footer.1643fe2d.js",
+  "_index.4b5c6699.js": {
+    "file": "assets/index.4b5c6699.js",
     "imports": [
-      "_store.aaf64c50.js"
+      "_store.daaa27a6.js"
     ]
   },
-  "resources/css/app.css": {
-    "file": "assets/app.0ba0cd0b.css",
-    "src": "resources/css/app.css",
-    "isEntry": true
+  "_APIs.5158d473.js": {
+    "file": "assets/APIs.5158d473.js",
+    "imports": [
+      "_store.daaa27a6.js"
+    ]
   },
-  "resources/js/event.css": {
-    "file": "assets/event.82c3b230.css",
-    "src": "resources/js/event.css"
+  "_helper.161ad076.js": {
+    "file": "assets/helper.161ad076.js",
+    "imports": [
+      "_store.daaa27a6.js"
+    ]
+  },
+  "_vue-router.6c8a7ed6.js": {
+    "file": "assets/vue-router.6c8a7ed6.js",
+    "imports": [
+      "_store.daaa27a6.js"
+    ]
+  },
+  "_Footer.e9973709.js": {
+    "file": "assets/Footer.e9973709.js",
+    "imports": [
+      "__plugin-vue_export-helper.cdc0426e.js",
+      "_store.daaa27a6.js"
+    ]
+  },
+  "__plugin-vue_export-helper.cdc0426e.js": {
+    "file": "assets/_plugin-vue_export-helper.cdc0426e.js"
+  },
+  "resources/components/EventComponent.vue": {
+    "file": "assets/EventComponent.26450f9e.js",
+    "src": "resources/components/EventComponent.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "_store.daaa27a6.js",
+      "_Editor.8ffecc16.js",
+      "_index.4b5c6699.js",
+      "_vue-router.6c8a7ed6.js",
+      "_main.7cd3055a.js",
+      "_utils.392776ca.js",
+      "_helper.161ad076.js",
+      "_APIs.5158d473.js"
+    ]
+  },
+  "_Editor.8ffecc16.js": {
+    "file": "assets/Editor.8ffecc16.js",
+    "imports": [
+      "_store.daaa27a6.js"
+    ]
+  },
+  "_utils.392776ca.js": {
+    "file": "assets/utils.392776ca.js"
+  },
+  "resources/components/LineUpComponent.vue": {
+    "file": "assets/LineUpComponent.4c7108f9.js",
+    "src": "resources/components/LineUpComponent.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "_store.daaa27a6.js",
+      "_main.7cd3055a.js",
+      "_index.4b5c6699.js",
+      "_Editor.8ffecc16.js",
+      "_vue-router.6c8a7ed6.js"
+    ]
+  },
+  "resources/components/EventOrganizerComponent.vue": {
+    "file": "assets/EventOrganizerComponent.5b9dc871.js",
+    "src": "resources/components/EventOrganizerComponent.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "_store.daaa27a6.js",
+      "_index.4b5c6699.js",
+      "_vue-router.6c8a7ed6.js",
+      "_utils.392776ca.js",
+      "_helper.161ad076.js",
+      "_APIs.5158d473.js"
+    ]
+  },
+  "resources/components/EventPageCustomizationComponent.vue": {
+    "file": "assets/EventPageCustomizationComponent.83193420.js",
+    "src": "resources/components/EventPageCustomizationComponent.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "_store.daaa27a6.js",
+      "_utils.392776ca.js",
+      "_LineUpCard.606fafd1.js",
+      "_index.4b5c6699.js",
+      "_vue-router.6c8a7ed6.js",
+      "__plugin-vue_export-helper.cdc0426e.js",
+      "_helper.161ad076.js"
+    ],
+    "css": [
+      "assets/EventPageCustomizationComponent.238ac4ac.css"
+    ]
+  },
+  "_LineUpCard.606fafd1.js": {
+    "file": "assets/LineUpCard.606fafd1.js",
+    "imports": [
+      "_store.daaa27a6.js",
+      "_helper.161ad076.js",
+      "__plugin-vue_export-helper.cdc0426e.js"
+    ],
+    "css": [
+      "assets/LineUpCard.e3b0c442.css"
+    ]
+  },
+  "resources/components/PaymentRedirectionComponent.vue": {
+    "file": "assets/PaymentRedirectionComponent.246e0512.js",
+    "src": "resources/components/PaymentRedirectionComponent.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "_store.daaa27a6.js",
+      "_vue-router.6c8a7ed6.js"
+    ]
+  },
+  "resources/components/EventPreviewComponent.vue": {
+    "file": "assets/EventPreviewComponent.327c46ba.js",
+    "src": "resources/components/EventPreviewComponent.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "_store.daaa27a6.js",
+      "_LineUpCard.606fafd1.js",
+      "_Footer.e9973709.js",
+      "_vue-router.6c8a7ed6.js",
+      "__plugin-vue_export-helper.cdc0426e.js",
+      "_helper.161ad076.js"
+    ],
+    "css": [
+      "assets/EventPreviewComponent.1c1c13f8.css"
+    ]
   },
   "main.css": {
     "file": "assets/main.9181f7c4.css",
     "src": "main.css"
   },
+  "LineUpCard.css": {
+    "file": "assets/LineUpCard.e3b0c442.css",
+    "src": "LineUpCard.css"
+  },
+  "resources/components/EventPageCustomizationComponent.css": {
+    "file": "assets/EventPageCustomizationComponent.238ac4ac.css",
+    "src": "resources/components/EventPageCustomizationComponent.css"
+  },
+  "resources/js/event.css": {
+    "file": "assets/event.2c9d87bf.css",
+    "src": "resources/js/event.css"
+  },
+  "resources/components/EventPreviewComponent.css": {
+    "file": "assets/EventPreviewComponent.1c1c13f8.css",
+    "src": "resources/components/EventPreviewComponent.css"
+  },
+  "resources/css/app.css": {
+    "file": "assets/app.262430a4.css",
+    "src": "resources/css/app.css",
+    "isEntry": true
+  },
   "resources/js/get-started.css": {
-    "file": "assets/get-started.aae9b561.css",
+    "file": "assets/get-started.e8f23879.css",
     "src": "resources/js/get-started.css"
   }
 }

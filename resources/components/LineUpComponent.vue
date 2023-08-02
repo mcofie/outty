@@ -3,13 +3,6 @@
         <form @submit.prevent="$event.preventDefault()">
             <div v-for="(lineup,index) in lineups" class="mb-2">
                 <div class="row justify-content-center">
-                    <!--                    <div class="col-12 text-start col-lg-1 col-xl-1 col-md-1 d-none d-sm-block">-->
-                    <!--                        <button class="btn btn-outline-secondary btn-lg border-3 rounded-1 w-100"-->
-                    <!--                                style="height: 50px;">-->
-                    <!--                            <h4>{{ index + 1 }}</h4>-->
-                    <!--                        </button>-->
-                    <!--                    </div>-->
-
                     <div class="d-flex justify-content-evenly">
                         <h4 class="text-start py-2">#{{ index + 1 }}</h4>
 
@@ -108,12 +101,12 @@
                         <div class="col-md-10 col-lg-9 col-xl-7">
                             <h6 class="">Programme Lineup</h6>
                             <div class="d-flex justify-content-between w-100 mt-4">
-                                <button @click="goToPreviousSection" class="btn btn-secondary btn-lg rounded-1">
+                                <button @click="goToPreviousSection" class="btn btn-secondary btn-lg rounded-5" style="padding:5px 19px;">
                                     <i class="fa-solid fa-caret-left"></i>
                                 </button>
                                 <button @click="goToNextSection"
-                                        :class="[!v$.$invalid ? '' : 'disabled','btn btn-primary btn-lg px-5 rounded-2']">
-                                    Next <i class="fa-solid fa-caret-right"></i>
+                                        :class="[!v$.$invalid ? '' : 'disabled','btn btn-primary btn-lg px-5 rounded-5 px-5 py-2 font-bold']">
+                                    NEXT
                                 </button>
                             </div>
                         </div>

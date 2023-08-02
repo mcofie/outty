@@ -39,7 +39,7 @@
                                     </div>
                                 </div>
 
-                                <div class="row justify-content-center">
+                                <div class="row justify-content-center d-none">
                                     <div class="col-md-10">
                                         <div class="d-flex justify-content-center mt-3">
                                             <button type="button" class="btn btn-primary btn-lg mx-3">Download
@@ -59,16 +59,19 @@
                                                 <div class="row justify-content-center">
                                                     <div class="col-md-10 text-center">
                                                         <ul class="list-unstyled mt-2">
+                                                            <li>
+                                                                <h1 style="font-size: 5rem;">
+                                                                    🎊
+                                                                </h1>
+                                                            </li>
                                                             <li class="mb-3">
-                                                                <h4>Lorem ipsum dolor sit ametdolor sit amet,</h4>
+                                                                <h4>Thank you for your purchase!</h4>
                                                             </li>
                                                             <li>
-                                                                <p>Lorem ipsum dolor sit ametdolor sit amet,Lorem ipsum
-                                                                    dolor
-                                                                    sit
-                                                                    ametdolor sit amet,Lorem ipsum dolor sit ametdolor
-                                                                    sit
-                                                                    amet</p>
+                                                                <p>An email will be sent to you once the payment is
+                                                                    received. This email confirms receipt and
+                                                                    affords you the chance to edit and share event
+                                                                    details.</p>
                                                             </li>
                                                         </ul>
                                                     </div>

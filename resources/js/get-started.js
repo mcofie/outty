@@ -1,8 +1,6 @@
 import './bootstrap';
 import '../css/app.css';
 import {createApp} from 'vue';
-import VueMoment from 'vue-moment'
-// import moment from 'moment-timezone'
 import VueSweetalert2 from "vue-sweetalert2";
 import 'sweetalert2/dist/sweetalert2.min.css';
 
@@ -11,6 +9,7 @@ import store from "./store";
 
 // import router functions
 import {createRouter, createWebHistory} from 'vue-router'
+
 const basePath = '/the-outline'
 // const basePath = ''
 
@@ -22,12 +21,14 @@ const router = createRouter({
         {
             path: `${basePath}/get-started/event`,
             name: 'Event',
-            component: () => import('../components/EventComponent')
+            component: () => import('../components/EventComponent'),
+            meta: {transition: 'slide-right'},
         },
         {
             path: `${basePath}/get-started/lineup`,
             name: 'LineUp',
-            component: () => import('../components/LineUpComponent')
+            component: () => import('../components/LineUpComponent'),
+            meta: {transition: 'slide-right'},
         },
         {
             path: `${basePath}/get-started/organizer`,
@@ -54,7 +55,7 @@ const router = createRouter({
 })
 
 createApp(App)
-    .use(store)
     .use(router)
+    .use(store)
     .use(VueSweetalert2)
     .mount("#getstarted")
