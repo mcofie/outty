@@ -24,7 +24,7 @@ class PaymentController extends Controller
         $clientReferenceId = $request['data']['reference'];
         $payment = Payment::where('reference_id', $clientReferenceId)->first();
 
-        $payment->amount = $request['data']['amount'];
+        $payment->amount = $request['data']['amount'] * 0.01;
         $payment->payment_type = $request['data']['channel'];
         $payment->phone_number = $request['data']['customer']['phone'];
         $payment->transaction_id = "";

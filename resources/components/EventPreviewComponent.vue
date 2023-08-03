@@ -2,7 +2,7 @@
     <div>
         <div class="my-5">
             <div class="d-flex justify-content-end w-100 mt-4">
-                <button @click="goToPreviousSection" class="btn btn-secondary btn-lg rounded-1">
+                <button @click="goToPreviousSection" class="btn btn-secondary btn-lg rounded-5" style="padding:12px 22px">
                     <i class="fa-solid fa-xmark"></i>
                 </button>
             </div>

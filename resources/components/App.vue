@@ -25,15 +25,15 @@
                             <div class="my-5 pt-3">
                                 <ul class="list-unstyled text-center">
                                     <li class="mb-4 text-center">
-                                        <h1 style="font-size: 5.3rem;">Bring live to your <br/> physical
+                                        <h1 class="loud-fonts">Bring live to your physical
                                             events!
                                         </h1>
                                     </li>
                                     <li>
-                                        <p>
+                                        <p class="mx-4 mx-xl-5 mx-lg-5">
                                             Streamline your event planning and elevate the attendee
                                             experience with
-                                            our <br/>Digital Event Lineup software!
+                                            our Digital Event Lineup software!
                                         </p>
                                     </li>
                                 </ul>
@@ -64,7 +64,7 @@
                             <button
                                 :class="[!v$.$invalid ? 'btn btn-primary rounded-5 btn-lg w-100 py-3 font-bold': 'btn btn-primary rounded-5 disabled w-100 btn-lg py-3 font-bold']"
                                 @click="startCreateEvent" type="button">
-                                Create Event
+                                CREATE EVENT
                             </button>
                         </div>
                         <div class="w-100 text-start">
@@ -77,7 +77,7 @@
 
                 <div class="features-section">
                     <div class="row justify-content-center">
-                        <div class="col-md-12 col-sm-9 col-xl-6 col-lg-6 col-xxl-6 col-11 my-3">
+                        <div class="col-md-6 col-sm-9 col-xl-6 col-lg-6 col-xxl-6 col-11 my-3">
                             <div class="card primary-color primary-color-border h-100">
                                 <div class="card-body my-4 text-center text-white">
                                     <ul class="list-unstyled">
@@ -90,7 +90,7 @@
                                             </div>
                                         </li>
                                         <li class="mb-3">
-                                            <h1 class="text-start" style="font-size:4rem;">Cut down the
+                                            <h1 class="text-start sub-fonts">Cut down the
                                                 cost
                                                 of
                                                 printing</h1>
@@ -110,7 +110,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-12 col-sm-9 col-xl-6 col-lg-6 col-xxl-6 col-11 my-3">
+                        <div class="col-md-6 col-sm-9 col-xl-6 col-lg-6 col-xxl-6 col-11 my-3">
                             <div class="card accent-color accent-color-border h-100">
                                 <div class="card-body my-4 text-center justify-content-center">
                                     <ul class="list-unstyled">
@@ -123,7 +123,8 @@
                                             </div>
                                         </li>
                                         <li class="mb-3">
-                                            <h1 class="text-start" style="font-size:4rem;">Organize an all-inclusive event</h1>
+                                            <h1 class="text-start sub-fonts">Organize an all-inclusive
+                                                event</h1>
                                         </li>
                                         <li>
                                             <p class="text-start d-">
@@ -149,7 +150,7 @@
                                         <div class="col-md-12">
                                             <ul class="list-unstyled">
                                                 <li class="mb-3">
-                                                    <h1 style="font-size:4rem;">Collect contact details
+                                                    <h1 class="sub-fonts">Collect contact details
                                                         of
                                                         attendees
                                                         & foster
@@ -187,8 +188,8 @@
                                 </h1>
                             </li>
                             <li><h3>Get this at the price of pop.</h3></li>
-                            <li class="mx-5 my-3  justify-content-center row">
-                                <p class="col-7">
+                            <li class="mx-lg-0 mx-3 mx-md-1 my-3  justify-content-center row">
+                                <p class="col-lg-7 col-xl-7 col-12 col-md-9 col-sm-10">
                                     Please note that this is just a sample lineup and can be customized based on
                                     cultural or religious traditions, personal preferences, and the specific
                                     arrangements made for the funeral event.
@@ -213,9 +214,9 @@
             <div class="col-md-12 col-sm-9 col-xl-12 col-lg-12 col-xxl-12 col-11">
                 <div>
                     <div class="row justify-content-center my-4">
-                        <div class="col-md-10 col-lg-8 col-xxl-8 col-sm-8">
-                            <h3 class="text-center lh-base" style="font-size: 2.5rem;">
-                                Simply create event line up for your <br>
+                        <div class="col-md-10 col-lg-8 col-xxl-8 col-sm-12">
+                            <h3 class="text-center lh-base mx-lg-5 mx-2 mx-xl-5 mx-xxl-5 mx-md-5" style="font-size: 2.3rem;">
+                                Simply create event line up for your
                                 <div class="btn-group">
                                     <button type="button" class="btn btn-dark rounded-5 px-3 border-5 dropdown-toggle"
                                             data-bs-toggle="dropdown" data-bs-display="static"
@@ -239,7 +240,7 @@
                                 <div class="card-body">
                                     <div class="row justify-content-center">
                                         <div class="col-md-8 text-center position-relative">
-                                            <ul class="list-unstyled my-5 py-3">
+                                            <ul class="list-unstyled my-lg-5 py-lg-3 my-xl-5 py-xl-3">
                                                 <li>
                                                     <qrcode-vue :value="appURL+selectedEvent.slug"
                                                                 :size="qrCode.size"
@@ -254,13 +255,8 @@
                                                            class="fa-solid fa-link"></i>
                                                     </a></h2>
                                                 </li>
-                                                <li class="mb-3">
-                                                    <small>
-                                                        {{ selectedEvent.date }}
-                                                    </small>
-                                                </li>
                                                 <li>
-                                                    <p>{{ selectedEvent.description }}</p>
+                                                    <p class="text-center">{{ selectedEvent.description }}</p>
                                                 </li>
                                             </ul>
                                         </div>
@@ -300,7 +296,7 @@
         </div>
 
         <div class="row justify-content-center">
-            <div class="col-lg-10 col-xl-8 col-md-12 col-sm-12">
+            <div class="col-lg-10 col-xl-8 col-md-10 col-sm-10 col-11">
                 <footer class="my-4 py-4">
                     <div class="d-flex justify-content-between">
                         <small>&copy; 2023 outty.co</small>
@@ -337,7 +333,7 @@ const sampleEvents = [
     {
         slug: "the-shutdown-party",
         name: "The Shutdown Party",
-        description: "Please note that this is just a sample lineup and can be customized based on cultural or religious traditions, personal preferences, and the specific arrangements made for the funeral event.",
+        description: "Please note that this is just a sample lineup and can be customized based on cultural or religious traditions.",
         date: "13th March 2023",
         category: "parties",
         textColor: '#1f70ad',
@@ -347,7 +343,7 @@ const sampleEvents = [
     {
         slug: "you-and-your-business-workshop",
         name: "You and Your Business Workshop",
-        description: "Please note that this is just a sample lineup and can be customized based on cultural or religious traditions, personal preferences, and the specific arrangements made for the funeral event.",
+        description: "Please note that this is just a sample lineup and can be customized based on cultural or religious traditions.",
         date: "13th March 2023",
         category: "meetings",
         textColor: '#222222',
@@ -357,7 +353,7 @@ const sampleEvents = [
     {
         slug: "rev-adatsis-funeral",
         name: "Rev. Adatsi's Funeral",
-        description: "Please note that this is just a sample lineup and can be customized based on cultural or religious traditions, personal preferences, and the specific arrangements made for the funeral event.",
+        description: "Please note that this is just a sample lineup and can be customized based on cultural or religious traditions.",
         date: "18th May 2023",
         category: "funeral",
         textColor: '#ff3838',
@@ -366,7 +362,7 @@ const sampleEvents = [
     }, {
         slug: "edem-weds-mavis",
         name: "Edem Weds Mavis",
-        description: "Please note that this is just a sample lineup and can be customized based on cultural or religious traditions, personal preferences, and the specific arrangements made for the funeral event.",
+        description: "Please note that this is just a sample lineup and can be customized based on cultural or religious traditions.",
         date: "18th May 2023",
         textColor: '#3d6d37',
         backgroundColor: '#fff2d6',
@@ -447,3 +443,32 @@ const v$ = useVuelidate(rules, {eventName})
 
 
 </script>
+
+<style scoped>
+.sub-fonts {
+    font-size: 4.0rem;
+}
+
+.loud-fonts {
+    font-size: 5.5rem;
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+    .loud-fonts {
+        font-size: 4.5rem;
+    }
+}
+
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+    .loud-fonts {
+        font-size: 3.7rem;
+    }
+
+    .sub-fonts {
+        font-size: 3rem;
+    }
+}
+</style>

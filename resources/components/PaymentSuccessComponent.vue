@@ -39,14 +39,14 @@
                                     </div>
                                 </div>
 
-                                <div class="row justify-content-center d-none">
+                                <div class="row justify-content-center">
                                     <div class="col-md-10">
-                                        <div class="d-flex justify-content-center mt-3">
-                                            <button type="button" class="btn btn-primary btn-lg mx-3">Download
-                                                QR Code
-                                            </button>
-                                            <button type="button" class="btn btn-secondary btn-lg mx-3">Download
-                                                QR PDF
+                                        <div class="d-flex justify-content-center mt-2">
+                                            <button type="button"
+                                                    @click="onDownloadQRCode(event.slug)"
+                                                    class="btn btn-primary rounded-5 py-3 px-4 btn-lg mx-3 font-bold">
+                                                DOWNLOAD
+                                                QR CODE
                                             </button>
                                         </div>
                                     </div>
@@ -84,7 +84,8 @@
                         </div>
                     </div>
                     <div v-else>
-                        <EmptyState title="No data" message=""></EmptyState>
+                        <EmptyState title="No data"
+                                    message="Oops! It seems like the content you're looking for isn't available at the moment. We apologize for any inconvenience caused. "></EmptyState>
                     </div>
                 </div>
                 <div v-else class="d-flex justify-content-center">
@@ -115,6 +116,26 @@ const qrCode = ref({value: "https://outty.co", size: 180})
 onMounted(() => {
     getEventByReference()
 })
+
+const onDownloadQRCode = (slug) => {
+    console.log(slug)
+    Requester.makeRequest({path: `${APIs.qrcode}${slug}`})
+        .then((response) => {
+            forceFileDownload(response, slug)
+        })
+        .catch((error) => {
+
+        })
+}
+
+const forceFileDownload = (response, title) => {
+    const url = window.URL.createObjectURL(new Blob([response.data]))
+    const link = document.createElement('a')
+    link.href = url
+    link.setAttribute('download', title + ".svg")
+    document.body.appendChild(link)
+    link.click()
+}
 
 const getReferenceId = () => {
     const urlParams = new URLSearchParams(window.location.search);

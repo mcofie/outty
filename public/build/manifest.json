@@ -1,25 +1,31 @@
 {
-  "resources/imgs/flower.png": {
-    "file": "assets/flower.89b542ce.png",
-    "src": "resources/imgs/flower.png"
-  },
   "resources/imgs/money.png": {
     "file": "assets/money.04dd895e.png",
     "src": "resources/imgs/money.png"
   },
+  "resources/imgs/flower.png": {
+    "file": "assets/flower.89b542ce.png",
+    "src": "resources/imgs/flower.png"
+  },
+  "resources/imgs/folder.png": {
+    "file": "assets/folder.89c5ca2c.png",
+    "src": "resources/imgs/folder.png"
+  },
   "resources/js/app.js": {
-    "file": "assets/app.46653bc2.js",
+    "file": "assets/app.b4677d2f.js",
     "src": "resources/js/app.js",
     "isEntry": true,
     "imports": [
-      "_store.daaa27a6.js",
-      "_index.4b5c6699.js",
-      "_APIs.5158d473.js",
-      "_helper.161ad076.js",
-      "_main.7cd3055a.js"
+      "_store.84468d9e.js",
+      "_index.1e20ea30.js",
+      "_APIs.2268ad4c.js",
+      "_helper.5faabcce.js",
+      "__plugin-vue_export-helper.cdc0426e.js",
+      "_main.288c6c6e.js"
     ],
     "css": [
-      "assets/app.262430a4.css"
+      "assets/app.8ab9a951.css",
+      "assets/app.38679fca.css"
     ],
     "assets": [
       "assets/money.04dd895e.png",
@@ -27,12 +33,12 @@
     ]
   },
   "resources/js/get-started.js": {
-    "file": "assets/get-started.bba1adc5.js",
+    "file": "assets/get-started.1942ec6d.js",
     "src": "resources/js/get-started.js",
     "isEntry": true,
     "imports": [
-      "_store.daaa27a6.js",
-      "_vue-router.6c8a7ed6.js"
+      "_store.84468d9e.js",
+      "_vue-router.06e21f23.js"
     ],
     "dynamicImports": [
       "resources/components/EventComponent.vue",
@@ -44,142 +50,145 @@
     ],
     "css": [
       "assets/get-started.e8f23879.css",
-      "assets/app.262430a4.css"
+      "assets/app.38679fca.css"
     ]
   },
   "resources/js/event.js": {
-    "file": "assets/event.2a4b8e6e.js",
+    "file": "assets/event.5512584a.js",
     "src": "resources/js/event.js",
     "isEntry": true,
     "imports": [
-      "_store.daaa27a6.js",
-      "_vue-router.6c8a7ed6.js",
-      "_APIs.5158d473.js",
-      "_Footer.e9973709.js",
-      "_helper.161ad076.js",
+      "_store.84468d9e.js",
+      "_vue-router.06e21f23.js",
+      "_APIs.2268ad4c.js",
+      "_Footer.eaac97f7.js",
+      "_helper.5faabcce.js",
       "__plugin-vue_export-helper.cdc0426e.js"
     ],
     "css": [
-      "assets/event.2c9d87bf.css"
+      "assets/event.1feb5d3c.css"
+    ],
+    "assets": [
+      "assets/folder.89c5ca2c.png"
     ]
   },
-  "_store.daaa27a6.js": {
-    "file": "assets/store.daaa27a6.js"
+  "_store.84468d9e.js": {
+    "file": "assets/store.84468d9e.js"
   },
-  "_main.7cd3055a.js": {
-    "file": "assets/main.7cd3055a.js",
+  "_main.288c6c6e.js": {
+    "file": "assets/main.288c6c6e.js",
     "imports": [
-      "_store.daaa27a6.js"
+      "_store.84468d9e.js"
     ],
     "css": [
       "assets/main.9181f7c4.css"
     ]
   },
-  "_index.4b5c6699.js": {
-    "file": "assets/index.4b5c6699.js",
+  "_index.1e20ea30.js": {
+    "file": "assets/index.1e20ea30.js",
     "imports": [
-      "_store.daaa27a6.js"
+      "_store.84468d9e.js"
     ]
   },
-  "_APIs.5158d473.js": {
-    "file": "assets/APIs.5158d473.js",
+  "_APIs.2268ad4c.js": {
+    "file": "assets/APIs.2268ad4c.js",
     "imports": [
-      "_store.daaa27a6.js"
+      "_store.84468d9e.js"
     ]
   },
-  "_helper.161ad076.js": {
-    "file": "assets/helper.161ad076.js",
+  "_helper.5faabcce.js": {
+    "file": "assets/helper.5faabcce.js",
     "imports": [
-      "_store.daaa27a6.js"
-    ]
-  },
-  "_vue-router.6c8a7ed6.js": {
-    "file": "assets/vue-router.6c8a7ed6.js",
-    "imports": [
-      "_store.daaa27a6.js"
-    ]
-  },
-  "_Footer.e9973709.js": {
-    "file": "assets/Footer.e9973709.js",
-    "imports": [
-      "__plugin-vue_export-helper.cdc0426e.js",
-      "_store.daaa27a6.js"
+      "_store.84468d9e.js"
     ]
   },
   "__plugin-vue_export-helper.cdc0426e.js": {
     "file": "assets/_plugin-vue_export-helper.cdc0426e.js"
   },
+  "_vue-router.06e21f23.js": {
+    "file": "assets/vue-router.06e21f23.js",
+    "imports": [
+      "_store.84468d9e.js"
+    ]
+  },
+  "_Footer.eaac97f7.js": {
+    "file": "assets/Footer.eaac97f7.js",
+    "imports": [
+      "__plugin-vue_export-helper.cdc0426e.js",
+      "_store.84468d9e.js"
+    ]
+  },
   "resources/components/EventComponent.vue": {
-    "file": "assets/EventComponent.26450f9e.js",
+    "file": "assets/EventComponent.f4fc4519.js",
     "src": "resources/components/EventComponent.vue",
     "isDynamicEntry": true,
     "imports": [
-      "_store.daaa27a6.js",
-      "_Editor.8ffecc16.js",
-      "_index.4b5c6699.js",
-      "_vue-router.6c8a7ed6.js",
-      "_main.7cd3055a.js",
+      "_store.84468d9e.js",
+      "_Editor.4cce21e4.js",
+      "_index.1e20ea30.js",
+      "_vue-router.06e21f23.js",
+      "_main.288c6c6e.js",
       "_utils.392776ca.js",
-      "_helper.161ad076.js",
-      "_APIs.5158d473.js"
+      "_helper.5faabcce.js",
+      "_APIs.2268ad4c.js"
     ]
   },
-  "_Editor.8ffecc16.js": {
-    "file": "assets/Editor.8ffecc16.js",
+  "_Editor.4cce21e4.js": {
+    "file": "assets/Editor.4cce21e4.js",
     "imports": [
-      "_store.daaa27a6.js"
+      "_store.84468d9e.js"
     ]
   },
   "_utils.392776ca.js": {
     "file": "assets/utils.392776ca.js"
   },
   "resources/components/LineUpComponent.vue": {
-    "file": "assets/LineUpComponent.4c7108f9.js",
+    "file": "assets/LineUpComponent.a4e4bad6.js",
     "src": "resources/components/LineUpComponent.vue",
     "isDynamicEntry": true,
     "imports": [
-      "_store.daaa27a6.js",
-      "_main.7cd3055a.js",
-      "_index.4b5c6699.js",
-      "_Editor.8ffecc16.js",
-      "_vue-router.6c8a7ed6.js"
+      "_store.84468d9e.js",
+      "_main.288c6c6e.js",
+      "_index.1e20ea30.js",
+      "_Editor.4cce21e4.js",
+      "_vue-router.06e21f23.js"
     ]
   },
   "resources/components/EventOrganizerComponent.vue": {
-    "file": "assets/EventOrganizerComponent.5b9dc871.js",
+    "file": "assets/EventOrganizerComponent.64c92c4a.js",
     "src": "resources/components/EventOrganizerComponent.vue",
     "isDynamicEntry": true,
     "imports": [
-      "_store.daaa27a6.js",
-      "_index.4b5c6699.js",
-      "_vue-router.6c8a7ed6.js",
+      "_store.84468d9e.js",
+      "_index.1e20ea30.js",
+      "_vue-router.06e21f23.js",
       "_utils.392776ca.js",
-      "_helper.161ad076.js",
-      "_APIs.5158d473.js"
+      "_helper.5faabcce.js",
+      "_APIs.2268ad4c.js"
     ]
   },
   "resources/components/EventPageCustomizationComponent.vue": {
-    "file": "assets/EventPageCustomizationComponent.83193420.js",
+    "file": "assets/EventPageCustomizationComponent.443f0446.js",
     "src": "resources/components/EventPageCustomizationComponent.vue",
     "isDynamicEntry": true,
     "imports": [
-      "_store.daaa27a6.js",
+      "_store.84468d9e.js",
       "_utils.392776ca.js",
-      "_LineUpCard.606fafd1.js",
-      "_index.4b5c6699.js",
-      "_vue-router.6c8a7ed6.js",
+      "_LineUpCard.6fe3fb31.js",
+      "_index.1e20ea30.js",
+      "_vue-router.06e21f23.js",
       "__plugin-vue_export-helper.cdc0426e.js",
-      "_helper.161ad076.js"
+      "_helper.5faabcce.js"
     ],
     "css": [
-      "assets/EventPageCustomizationComponent.238ac4ac.css"
+      "assets/EventPageCustomizationComponent.1cf9a419.css"
     ]
   },
-  "_LineUpCard.606fafd1.js": {
-    "file": "assets/LineUpCard.606fafd1.js",
+  "_LineUpCard.6fe3fb31.js": {
+    "file": "assets/LineUpCard.6fe3fb31.js",
     "imports": [
-      "_store.daaa27a6.js",
-      "_helper.161ad076.js",
+      "_store.84468d9e.js",
+      "_helper.5faabcce.js",
       "__plugin-vue_export-helper.cdc0426e.js"
     ],
     "css": [
@@ -187,54 +196,58 @@
     ]
   },
   "resources/components/PaymentRedirectionComponent.vue": {
-    "file": "assets/PaymentRedirectionComponent.246e0512.js",
+    "file": "assets/PaymentRedirectionComponent.2f6cab94.js",
     "src": "resources/components/PaymentRedirectionComponent.vue",
     "isDynamicEntry": true,
     "imports": [
-      "_store.daaa27a6.js",
-      "_vue-router.6c8a7ed6.js"
+      "_store.84468d9e.js",
+      "_vue-router.06e21f23.js"
     ]
   },
   "resources/components/EventPreviewComponent.vue": {
-    "file": "assets/EventPreviewComponent.327c46ba.js",
+    "file": "assets/EventPreviewComponent.2ccb40c2.js",
     "src": "resources/components/EventPreviewComponent.vue",
     "isDynamicEntry": true,
     "imports": [
-      "_store.daaa27a6.js",
-      "_LineUpCard.606fafd1.js",
-      "_Footer.e9973709.js",
-      "_vue-router.6c8a7ed6.js",
+      "_store.84468d9e.js",
+      "_LineUpCard.6fe3fb31.js",
+      "_Footer.eaac97f7.js",
+      "_vue-router.06e21f23.js",
       "__plugin-vue_export-helper.cdc0426e.js",
-      "_helper.161ad076.js"
+      "_helper.5faabcce.js"
     ],
     "css": [
-      "assets/EventPreviewComponent.1c1c13f8.css"
+      "assets/EventPreviewComponent.e1eaa128.css"
     ]
+  },
+  "resources/js/app.css": {
+    "file": "assets/app.8ab9a951.css",
+    "src": "resources/js/app.css"
   },
   "main.css": {
     "file": "assets/main.9181f7c4.css",
     "src": "main.css"
+  },
+  "resources/js/event.css": {
+    "file": "assets/event.1feb5d3c.css",
+    "src": "resources/js/event.css"
   },
   "LineUpCard.css": {
     "file": "assets/LineUpCard.e3b0c442.css",
     "src": "LineUpCard.css"
   },
   "resources/components/EventPageCustomizationComponent.css": {
-    "file": "assets/EventPageCustomizationComponent.238ac4ac.css",
+    "file": "assets/EventPageCustomizationComponent.1cf9a419.css",
     "src": "resources/components/EventPageCustomizationComponent.css"
   },
-  "resources/js/event.css": {
-    "file": "assets/event.2c9d87bf.css",
-    "src": "resources/js/event.css"
-  },
-  "resources/components/EventPreviewComponent.css": {
-    "file": "assets/EventPreviewComponent.1c1c13f8.css",
-    "src": "resources/components/EventPreviewComponent.css"
-  },
   "resources/css/app.css": {
-    "file": "assets/app.262430a4.css",
+    "file": "assets/app.38679fca.css",
     "src": "resources/css/app.css",
     "isEntry": true
+  },
+  "resources/components/EventPreviewComponent.css": {
+    "file": "assets/EventPreviewComponent.e1eaa128.css",
+    "src": "resources/components/EventPreviewComponent.css"
   },
   "resources/js/get-started.css": {
     "file": "assets/get-started.e8f23879.css",

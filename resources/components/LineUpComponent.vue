@@ -101,11 +101,11 @@
                         <div class="col-md-10 col-lg-9 col-xl-7">
                             <h6 class="">Programme Lineup</h6>
                             <div class="d-flex justify-content-between w-100 mt-4">
-                                <button @click="goToPreviousSection" class="btn btn-secondary btn-lg rounded-5" style="padding:5px 19px;">
+                                <button @click="goToPreviousSection" class="btn btn-secondary btn-lg rounded-5" style="padding:10px 26px">
                                     <i class="fa-solid fa-caret-left"></i>
                                 </button>
                                 <button @click="goToNextSection"
-                                        :class="[!v$.$invalid ? '' : 'disabled','btn btn-primary btn-lg px-5 rounded-5 px-5 py-2 font-bold']">
+                                        :class="[!v$.$invalid ? '' : 'disabled','btn btn-primary btn-lg px-5 rounded-5 px-5 py-3 font-bold']">
                                     NEXT
                                 </button>
                             </div>

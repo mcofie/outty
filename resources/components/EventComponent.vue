@@ -95,9 +95,9 @@
                         <div class="col-md-10 col-lg-9 col-xl-7">
                             <h6 class="mx-0">Event Details</h6>
                             <div
-                                class="d-flex justify-content-lg-end justify-content-md-end justify-content-center w-100 mt-4">
+                                class="d-flex justify-content-lg-end justify-content-md-end justify-content-center justify-content-sm-end w-100 mt-4">
                                 <button @click="goToNextSection"
-                                        :class="[!v$.$invalid && slugLookup.state !== 0 ? '' : 'disabled','btn rounded-5 px-5 py-2 btn-primary btn-lg flex-sm-grow-0 font-bold  justify-content-lg-end flex-fill flex-sm-fill rounded-2']"
+                                        :class="[!v$.$invalid && slugLookup.state !== 0 ? '' : 'disabled','btn rounded-5 px-5 py-3 btn-primary btn-lg flex-sm-grow-0 font-bold  justify-content-lg-end flex-fill flex-sm-fill rounded-2']"
                                 >
                                     NEXT
 <!--                                    <i class="fa-solid fa-caret-right"></i>-->

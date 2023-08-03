@@ -388,7 +388,7 @@
                                         <ul>
                                             <li>Order Number: {{$orderNumber}}</li>
                                             <li>Product: {{$product}}</li>
-                                            <li>Price: ${{$price}}</li>
+                                            <li>Price: $1.99</li>
                                             <li>Event: <a href="https://outty.co/{{$slug}}">{{$event_name}}</a>
                                             </li>
                                             <li>Date of Purchase: {{$date}}</li>
@@ -432,7 +432,7 @@
                     <table role="presentation" border="0" cellpadding="0" cellspacing="0">
                         <tr>
                             <td class="content-block">
-                                <span class="apple-link">Company Inc, 3 Abbey Road, San Francisco CA 94102</span>
+                                <span class="apple-link">F 393/4 Otswe, Osu Ako-Adjei, Accra Ghana</span>
                                 <br> Made in Ghana 🇬🇭 with ❤️
                             </td>
                         </tr>

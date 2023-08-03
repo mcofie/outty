@@ -38,9 +38,13 @@
                     </div>
                 </div>
             </div>
-            <div v-else class="align-middle">
-                <EmptyState title="No data"
-                            message="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."></EmptyState>
+            <div v-else>
+                <div class="row justify-content-center">
+                    <div class="col-xl-6 col-lg-8 col-md-8 col-sm-8 col-10">
+                        <EmptyState title="No data"
+                                    message="Oops! It seems like the content you're looking for isn't available at the moment. We apologize for any inconvenience caused. "></EmptyState>
+                    </div>
+                </div>
             </div>
         </div>
         <div v-else class="d-flex justify-content-center">
@@ -63,23 +67,12 @@ import Footer from "./sections/Footer";
 import {APIs} from "../js/network/APIs";
 import EmptyState from "./sections/EmptyState";
 import LineUpCardAlt from "./sections/LineUpCardAlt";
-// import { useMeta } from 'vue-meta';
-
 
 const eventResponse = ref(GetEvent)
 const isLoading = ref(true)
 const route = useRoute()
 const router = useRouter()
 const hasData = ref(true)
-// const metaInfo = useMeta();
-
-
-// Set the meta tags
-// metaInfo.value.title = 'Page Title';
-// metaInfo.value.metaTags.push({
-//     name: 'description',
-//     content: 'Page description',
-// });
 
 
 onBeforeMount(() => {
