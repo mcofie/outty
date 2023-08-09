@@ -21,6 +21,8 @@ class EventWrapperResource extends JsonResource
             'theme_color' => $this[0]->event_theme_color,
             'background_color' => $this[0]->background_color,
             'text_color' => $this[0]->text_color,
+            'registers_guests' =>$this[0]->registers_guests,
+            'template_id' =>$this[0]->template_id,
             'slug' => $this[0]->slug,
             'primary_typeface' => $this[0]->primary_typeface,
             'secondary_typeface' => $this[0]->secondary_typeface,

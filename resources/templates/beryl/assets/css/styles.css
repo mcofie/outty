@@ -1,0 +1,11 @@
+.hero {
+  width: 100%;
+  float: left;
+}
+
+.nav-item .active {
+  background-color: transparent;
+  font-weight: bold;
+}
+
+/*# sourceMappingURL=styles.css.map */

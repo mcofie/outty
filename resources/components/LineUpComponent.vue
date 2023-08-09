@@ -39,7 +39,6 @@
                 </div>
                 <div class="row justify-content-center my-3">
                     <div class="col-12">
-                        <!--                        <label class="form-label">Title</label>-->
                         <input type="text" placeholder="Programme title" v-model="lineup.title" class="form-control"
                                required>
                     </div>
@@ -51,7 +50,6 @@
                             <button class="accordion-button px-0" type="button" data-bs-toggle="collapse"
                                     :data-bs-target="`#collapse${index}`" aria-expanded="true"
                                     aria-controls="collapseOne">
-                                <!--                                Description-->
                             </button>
                         </h2>
                         <div :id="`collapse${index}`" class="accordion-collapse collapse" aria-labelledby="headingOne"
@@ -76,9 +74,6 @@
                                                bullist numlist outdent indent | removeformat | help'
                                            }"
                                 />
-
-                                <!--                                <textarea cols="5" class="form-control" v-model="lineup.description"></textarea>-->
-
                             </div>
                         </div>
                     </div>
@@ -87,7 +82,7 @@
             </div>
 
             <div class="d-flex justify-content-end">
-                <button @click="addLineUp" class="btn btn-secondary btn-lg rounded-1">
+                <button @click="addLineUp" class="btn accent-color btn-lg btn-lg rounded-5" style="padding:13px 20px">
                     <i class="fa-solid fa-plus"></i>
                 </button>
             </div>
@@ -101,7 +96,8 @@
                         <div class="col-md-10 col-lg-9 col-xl-7">
                             <h6 class="">Programme Lineup</h6>
                             <div class="d-flex justify-content-between w-100 mt-4">
-                                <button @click="goToPreviousSection" class="btn btn-secondary btn-lg rounded-5" style="padding:10px 26px">
+                                <button @click="goToPreviousSection" class="btn btn-secondary btn-lg rounded-5"
+                                        style="padding:10px 26px">
                                     <i class="fa-solid fa-caret-left"></i>
                                 </button>
                                 <button @click="goToNextSection"

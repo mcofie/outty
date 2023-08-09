@@ -37,7 +37,8 @@
                         </li>
                         <li>
                             <a :href="paymentURL">
-                                <button class="btn btn-primary rounded-2 btn-lg mt-4" type="button">
+                                <button class="btn btn-primary rounded-2 btn-lg mt-4 rounded-5 px-5 py-3 font-bold"
+                                        type="button">
                                     Make Payment
                                 </button>
                             </a>

@@ -2,7 +2,7 @@
     <div class="">
         <form @submit.prevent="$event.preventDefault()">
             <div class="mb-3">
-                <label for="exampleFormControlInput1" class="form-label">Organized By:</label>
+                <label for="exampleFormControlInput1" class="form-label">Organized by</label>
                 <input type="text" v-model="userData.name"
                        :class="[v$.name.$error ? 'form-control is-invalid' : 'form-control' ]"
                        id="exampleFormControlInput1"
@@ -82,14 +82,10 @@ import moment from "moment";
 import {formatTime} from "../js/helper";
 import Requester from "../js/network/Requester";
 import {APIs} from "../js/network/APIs";
-
-
 const router = useRouter();
 const route = useRoute()
 const store = useStore()
-// const emit = defineEmits(['checkout', 'previous'])
-// const props = defineProps(['eventStore', 'isEdit'])
-// const user = props.eventStore.user
+
 
 const currentEventData = computed(() => store.state.event)
 
@@ -124,7 +120,6 @@ const persistUserData = () => {
 }
 
 const goToNextSection = () => {
-    // emit('checkout', persistUserData())
     persistEvent(persistUserData().data)
     gotoCheckout()
     isCheckoutSuccessful.value = true
@@ -132,8 +127,6 @@ const goToNextSection = () => {
 const goToPreviousSection = () => {
     router.go(-1)
     persistEvent(persistUserData().data)
-    // persistEvent(persistUserData())
-    // emit('previous', persistUserData())
 }
 
 
@@ -149,7 +142,6 @@ const v$ = useVuelidate(rules, userData)
 
 
 const gotoCheckout = () => {
-    // persistEvent(name.data)
     currentEventData.value.event.slug = slugify(currentEventData.value.event.name)
     currentEventData.value.event.date = moment(currentEventData.value.event.date).format("YYYY-MM-DD");
     currentEventData.value.lineups.map((lineup) => {
@@ -171,11 +163,8 @@ const createEvent = ({data}) => {
             localStorage.removeItem('eventStore')
             const url = response.data.data.payment_url
             const event = response.data.data.event
-
             paymentUrl(url)
             router.push({name: 'Payment'})
-
-            // eventResponse.value = Object.assign(CreateEventResponse.data, response.data.data)
         })
         .catch((error) => {
             // console.log(error.response.data)

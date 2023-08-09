@@ -5,6 +5,8 @@ use App\Http\Controllers\LineUpController;
 use App\Http\Controllers\OrganizerController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\QrCodeController;
+use App\Http\Controllers\RegistryController;
+use App\Http\Controllers\TemplateController;
 use App\Http\Middleware\AuthenticateEventUser;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -60,6 +62,14 @@ Route::get('payments/{client_reference_id}', [PaymentController::class, 'payment
 Route::post('lineups', [LineUpController::class, 'store']);
 Route::put('lineups/{id}', [LineUpController::class, 'update']);
 Route::delete('lineups/{id}', [LineUpController::class, 'destroy']);
+
+
+//template
+Route::get('template/{id}', [TemplateController::class, 'show'])->withoutMiddleware([AuthenticateEventUser::class]);
+Route::post('template', [TemplateController::class, 'store'])->withoutMiddleware([AuthenticateEventUser::class]);
+
+//Registry
+Route::post('registry', [RegistryController::class, 'store'])->withoutMiddleware([AuthenticateEventUser::class]);
 
 
 //Qr Code Demo

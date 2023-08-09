@@ -1,0 +1,16 @@
+//Colors for the template
+$secondaryColor: #eeeeee;
+
+.hero {
+    width: 100%;
+    float: left;
+}
+
+.nav-item {
+    & {
+        .active {
+            background-color: transparent;
+            font-weight: bold;
+        }
+    }
+}

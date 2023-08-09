@@ -17,7 +17,6 @@ use App\Models\Organizer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
-use SimpleSoftwareIO\QrCode\Generator;
 use stdClass;
 
 class EventController extends Controller
@@ -59,7 +58,7 @@ class EventController extends Controller
             //TODO: Payment - Abstract this
             $response = Http::withToken(env('PAYSTACK_SECRET_KEY'))
                 ->post(env('PAYSTACK_PAYMENT_URL'), [
-                    'amount' => 2500,
+                    'amount' => 100,
                     'email' => $request->user['email'],
                     'callback_url' => env('PAYSTACK_PAYMENT_CALLBACK_URL') . "?referenceId=" . $clientReference,
                     'reference' => $clientReference

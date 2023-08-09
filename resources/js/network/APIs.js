@@ -2,9 +2,11 @@ export const APIs = {
     slug: 'events/slug-lookup/',
     createEvent: 'events',
     getEvent: 'events',
-    getEventById:'event',
+    getTemplates: 'template',
+    getEventById: 'event',
     getPaymentByReference: 'payments',
     getEventsByOrganizer: 'organizer',
-    editEvent:'events',
+    editEvent: 'events',
     qrcode: 'qrcode/',
+    registry: 'registry'
 }

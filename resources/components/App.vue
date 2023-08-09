@@ -29,11 +29,11 @@
                                             events!
                                         </h1>
                                     </li>
-                                    <li>
-                                        <p class="mx-4 mx-xl-5 mx-lg-5">
+                                    <li class="mt-5">
+                                        <p class="mx-4 mx-xl-5 mx-lg-5 px-lg-5">
                                             Streamline your event planning and elevate the attendee
                                             experience with
-                                            our Digital Event Lineup software!
+                                            our light weight digital event management solution.
                                         </p>
                                     </li>
                                 </ul>
@@ -90,20 +90,13 @@
                                             </div>
                                         </li>
                                         <li class="mb-3">
-                                            <h1 class="text-start sub-fonts">Cut down the
-                                                cost
-                                                of
-                                                printing</h1>
+                                            <h1 class="text-start sub-fonts">Cut down on the
+                                                cost of printing.</h1>
                                         </li>
                                         <li>
                                             <p class="text-start">
-                                                One of the most effective ways to cut down on printing
-                                                costs
-                                                is to
-                                                create a digital program lineup that attendees can
-                                                access on
-                                                their
-                                                mobile devices.
+                                                Emphasizing this aspect in event planning can significantly reduce
+                                                expenses related to printing materials.
                                             </p>
                                         </li>
                                     </ul>
@@ -124,17 +117,12 @@
                                         </li>
                                         <li class="mb-3">
                                             <h1 class="text-start sub-fonts">Organize an all-inclusive
-                                                event</h1>
+                                                event.</h1>
                                         </li>
                                         <li>
                                             <p class="text-start d-">
-                                                One of the most effective ways to cut down on printing
-                                                costs
-                                                is to
-                                                create a digital program lineup that attendees can
-                                                access on
-                                                their
-                                                mobile devices.
+                                                Creating an all-inclusive event is essential to ensure that every
+                                                participant feels valued, represented, and engaged.
                                             </p>
                                         </li>
                                     </ul>
@@ -150,11 +138,8 @@
                                         <div class="col-md-12">
                                             <ul class="list-unstyled">
                                                 <li class="mb-3">
-                                                    <h1 class="sub-fonts">Collect contact details
-                                                        of
-                                                        attendees
-                                                        & foster
-                                                        engagement </h1>
+                                                    <h1 class="sub-fonts">Gather attendee contact information and
+                                                        promote interaction.</h1>
                                                 </li>
                                             </ul>
                                         </div>
@@ -177,7 +162,7 @@
         <div class="row justify-content-center">
             <div class="pricing-section my-5" data-bs-spy="scroll" id="pricing">
                 <div class="row justify-content-center">
-                    <div class="col-md-8 col-lg-8 text-center my-5 py-5">
+                    <div class="col-md-10 col-sm-8 col-lg-10 text-center my-5 py-5">
                         <ul class="list-unstyled">
                             <li>
                                 <h4>PRICING</h4>
@@ -187,12 +172,13 @@
                                     $1.99
                                 </h1>
                             </li>
-                            <li><h3>Get this at the price of pop.</h3></li>
+                            <li><h3>Get this for the price of soda.</h3></li>
                             <li class="mx-lg-0 mx-3 mx-md-1 my-3  justify-content-center row">
                                 <p class="col-lg-7 col-xl-7 col-12 col-md-9 col-sm-10">
-                                    Please note that this is just a sample lineup and can be customized based on
-                                    cultural or religious traditions, personal preferences, and the specific
-                                    arrangements made for the funeral event.
+                                    Get this for a price comparable to that of a refreshing soda. This
+                                    budget-friendly offer allows you to enjoy the benefits of the product without
+                                    straining your wallet. Just like sipping on a fizzy beverage, this deal provides a
+                                    satisfying and affordable experience.
                                 </p>
                             </li>
                             <li>
@@ -215,13 +201,16 @@
                 <div>
                     <div class="row justify-content-center my-4">
                         <div class="col-md-10 col-lg-8 col-xxl-8 col-sm-12">
-                            <h3 class="text-center lh-base mx-lg-5 mx-2 mx-xl-5 mx-xxl-5 mx-md-5" style="font-size: 2.3rem;">
-                                Simply create event line up for your
-                                <div class="btn-group">
-                                    <button type="button" class="btn btn-dark rounded-5 px-3 border-5 dropdown-toggle"
+                            <h3 class="text-center lh-base mx-lg-5 mx-2 mx-xl-5 mx-xxl-5 mx-md-5 fs-1">
+                                In minutes, you can design <br/> an event lineup for your <span
+                                :style="{color:selectedEvent.textColor}"> #{{
+                                    eventCategory
+                                }}</span>
+                                <div class="btn-group d-none">
+                                    <button type="button" class="btn btn-dark rounded-5 px-5 border-5 dropdown-toggle"
                                             data-bs-toggle="dropdown" data-bs-display="static"
                                             aria-expanded="false">
-                                        <h3> #{{ eventCategory }}</h3>
+
                                     </button>
                                     <ul class="dropdown-menu dropdown-menu-lg-end">
                                         <li v-for="(category,index) in categories">
@@ -233,7 +222,6 @@
                                         </li>
                                     </ul>
                                 </div>
-                                in minutes
                             </h3>
                             <div class="card mt-5 animate__animated animate__fadeIn"
                                  :style="{'background':selectedEvent.backgroundColor, 'color':selectedEvent.textColor, 'background-image':'url(../imgs/forget_me_not.png)'}">
@@ -299,7 +287,7 @@
             <div class="col-lg-10 col-xl-8 col-md-10 col-sm-10 col-11">
                 <footer class="my-4 py-4">
                     <div class="d-flex justify-content-between">
-                        <small>&copy; 2023 outty.co</small>
+                        <small>&copy; {{ new Date().getFullYear() }} outty.co</small>
                         <ul class="list-inline">
                             <li class="list-inline-item"><a href="#">privacy</a></li>
                             <li class="list-inline-item"><a href="#">terms</a></li>

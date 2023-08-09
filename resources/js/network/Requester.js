@@ -1,22 +1,18 @@
 import axios from 'axios';
 
 // const BASEURL = "http://localhost:8000/api/";
-const BASEURL = "http://localhost/the-outline/api/";
-// const BASEURL = "https://outty.co/api/";
+// const BASEURL = "http://localhost/the-outline/api/";
+const BASEURL = "https://outty.co/api/";
 
 let instance = axios;
-// instance.defaults.headers.post['Content-Type'] = 'application/json';
-// instance.defaults.headers.common['X-Requested-With'] = 'hubtel';
 
-//Get the consumer authToken
-// const authToken = hubtel.consumer_token;
 
 
 const getRequestType = (method = "GET", basePath, relativePath, data, authorization, token, type) => {
 
 
     // if (authorization) {
-        instance.defaults.headers.common['token'] =  token;
+    instance.defaults.headers.common['token'] = token;
     // }
 
     if (type.toLowerCase() === "url-encoded") {

@@ -9,9 +9,9 @@
                                 <div class="d-flex justify-content-start text-start w-100">
                                     <ul class="list-unstyled pb-0 mb-0">
                                         <li class="mb-1">
-                                            <h4><a class="navbar-brand fs-3 text-center"
-                                                   href="/" target="_blank"> <i class="fa-solid fa-caret-right"></i>
-                                                outty.co</a>
+                                            <h4><RouterLink class="navbar-brand fs-3 text-center"
+                                                   to="/" target="_blank"> <i class="fa-solid fa-caret-right"></i>
+                                                outty.co</RouterLink>
                                             </h4>
                                         </li>
                                     </ul>
@@ -35,9 +35,6 @@
                                 <component :is="Component" />
                             </transition>
                         </router-view>
-
-
-<!--                        <router-view/>-->
                     </div>
                 </div>
             </div>
@@ -58,7 +55,6 @@ const route = useRoute();
 
 onMounted(() => {
     router.push({name: 'Event'})
-    // console.log(route.name)
 })
 
 

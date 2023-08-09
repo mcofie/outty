@@ -88,6 +88,8 @@ export const GetEvent = {
             name: "",
             description: "",
             slug: "",
+            template_id: "",
+            registers_guests: '',
             background_color: "#FFFFFF",
             text_color: "#222222",
             primary_typeface: "",
@@ -108,6 +110,14 @@ export const GetEvent = {
     },
     message: "Event details successfully retrieved",
     status: 200
+}
+
+export const GetTemplate = {
+    data: {
+        id: '',
+        directory: '',
+        name: ''
+    }
 }
 
 
